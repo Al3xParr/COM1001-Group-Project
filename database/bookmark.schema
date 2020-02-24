@@ -1,0 +1,49 @@
+CREATE TABLE users (
+
+userId INTEGER NOT NULL,
+username TEXT NOT NULL,
+password TEXT NOT NULL,
+admin INTEGER NOT NULL,
+PRIMARY KEY (userId),
+UNIQUE(username)
+);
+
+CREATE TABLE bookmarks (
+
+bookmarkId INTEGER NOT NULL,
+createdAt TEXT,
+title TEXT,
+description TEXT,
+resource TEXT NOT NULL,
+archived INTEGER,
+userId INTEGER,
+PRIMARY KEY (bookmarkId),
+UNIQUE(resource)
+);
+
+CREATE TABLE favourites (
+
+favouriteId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+PRIMARY KEY (favouriteId),
+UNIQUE(bookmarkId, userId)
+);
+
+CREATE TABLE tags (
+
+tagId INTEGER NOT NULL,
+description TEXT NOT NULL,
+bookmarkId INTEGER NOT NULL,
+PRIMARY KEY (tagId),
+UNIQUE(description, bookmarkId)
+);
+
+CREATE TABLE comments (
+
+commentId INTEGER NOT NULL,
+content TEXT NOT NULL,
+bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+PRIMARY KEY (commentId)
+);
