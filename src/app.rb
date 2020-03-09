@@ -3,11 +3,12 @@
 # author    Luke Suckling
 
 require 'sinatra'
+require 'sinatra/reloader'
 
-#========================================
-# Here is where the required controllers should be added.
-#
-# Example;
-#
-# require_relative 'controllers/FILE_ONE'
-# require_relative 'controllers/FILE_TWO'
+require_relative 'controllers/Admin'
+require_relative 'controllers/Bookmark'
+require_relative 'controllers/Index'
+require_relative 'controllers/Login'
+
+set :bind, '0.0.0.0'
+
