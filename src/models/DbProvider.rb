@@ -6,28 +6,20 @@ require "sequel"
 
 class DbProvider
 
-    def initialize(tableName = nil)
+    DB = Sequel.sqlite('../database/bookmarksDatabase.db')
 
-        @db = Sequel.sqlite('../database/bookmarksDatabase.db')
+    def self.getTable(tableName)
 
-        if tableName != nil then
-            return getTable(tableName)
-        end
-
-    end
-
-    def getTable(tableName)
-
-        if @db[tableName] != nil then
-            return @db[tableName]
+        if DB[tableName] != nil then
+            return DB[tableName]
         else
             raise "The requested table doesn't exist."
         end
     end
 
-    def getDatabase()
+    def self.getDatabase()
 
-        return @db
+        return DB
 
     end
 end
