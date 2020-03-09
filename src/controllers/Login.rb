@@ -1,3 +1,7 @@
+# Login.rb
+# Author: Luke Suckling
+# Date: 09/03/2020
+
 require 'sinatra'
 require 'sinatra/reloader'
 
