@@ -15,6 +15,6 @@ post '/login' do
 end
 
 # logout the currently logged in user
-post '/login/logout'
+post '/login/logout' do
 
 end
