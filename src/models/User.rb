@@ -14,7 +14,7 @@ class User
         @userId = userId
         @username = username
         @password = password
-        @admin = admin  
+        @admin = admin
     end
     
     # Set getters and setters for all our properties
