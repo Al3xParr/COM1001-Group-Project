@@ -44,3 +44,23 @@ h5 {
 p {
     font-size: 1em;
 }
+nav {
+  height: 32px;
+  border-top: solid 2px white;
+  padding-bottom: 0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+li a:hover {
+  background: white;
+  color: black;
+}
