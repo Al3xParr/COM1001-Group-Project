@@ -8,13 +8,13 @@ require 'sinatra/reloader'
 # show all avaliable bookmarks
 # /bookmarks/all
 get '/bookmarks/all' do
-
+    
 end
 
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-
+    
 end
 
 #post search form data and perform search using values
