@@ -29,6 +29,7 @@ post '/login' do
     end
         
     @loginError = "Username or password isn't correct."
+        
     redirect '/login'
 end
 
