@@ -18,7 +18,7 @@ class Bookmark
         @archived = archived
         @createdAt = createdAt
         @userId = userId
-);
+    )
     end
     
     def bookmarkId= bookmarkId
@@ -80,7 +80,7 @@ class Bookmark
         
         for bookmark in result do
             
-            bookmarkObj = Bookmark.new(user[0], user[1], user[2], user[3], user[4], user[5], user[6])
+            bookmarkObj = Bookmark.new(bookmark[0], bookmark[1], bookmark[2], bookmark[3], bookmark[4], bookmark[5], bookmark[6])
             toReturn.push(bookmarkObj)
             
         end

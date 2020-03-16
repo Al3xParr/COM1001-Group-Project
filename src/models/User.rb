@@ -14,7 +14,14 @@ class User
         @userId = userId
         @username = username
         @password = password
-        @admin = admin
+
+        if admin == 0 then
+            @admin = false
+        elsif admin == 1 then
+            @admin = true
+        else
+            @admin = admin
+        end
     end
     
     # Set getters and setters for all our properties
@@ -92,6 +99,38 @@ class User
         end
         
         return toReturn 
+    end
+
+    def self.getById(userId)
+
+        query = "SELECT * from USERS where userId = ?;"
+
+        result = DB.execute query, userId
+
+        if result == "" || result == nil || result[0] == nil then
+            return nil
+        else
+            result = result[0]
+            return User.new(result[0], result[1], result[2], result[3])
+        end
+
+        return nil
+    end
+
+    def self.getByUsername(username)
+
+        query = "SELECT * from USERS where username = ?;"
+
+        result = DB.execute query, username
+
+        if result == "" || result == nil || result[0] == nil then
+            return nil
+        else
+            result = result[0]
+            return User.new(result[0], result[1], result[2], result[3])
+        end
+
+        return nil
     end
     
     # Add a new user to the database

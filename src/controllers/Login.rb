@@ -23,8 +23,11 @@ post '/login' do
     success = User.authenticate(@username, @password)
     
     if success then
+        user = User.getByUsername(@username)
+
         session[:loggedIn] = true
-        session[:username] = @username
+        session[:username] = user.username
+        session[:admin] = user.admin
         redirect '/bookmarks/all'
     end
         
@@ -36,5 +39,7 @@ end
 # logout the currently logged in user
 get '/login/logout' do
     session[:loggedIn] = false
+    session[:username] = nil
+    session[:admin] = nil
     redirect '/login'
 end

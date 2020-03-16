@@ -25,6 +25,30 @@ header {
     color: red;
 }
 
+.container {
+    width: 70%;
+    margin-left: 15%;
+}
+@media only screen and (max-width: 992px) {
+    .container {
+        width: 95%;
+        margin-left: 2.5%;
+    }
+}
+.center-align {
+    text-align: center;
+}
+.left-align {
+    float: left;
+}
+.right-align {
+    float: right;
+}
+/*This selector selects all children regardless of type*/
+.vert-align > *{
+    vertical-align: middle;
+}
+
 h1 {
     font-size: 2em;
     margin-bottom: 0.4em;
