@@ -47,7 +47,7 @@ p {
 nav {
   height: 32px;
   border-top: solid 2px white;
-  padding-bottom: 0;
+  margin-bottom: 0.4em;
 }
 
 li {
