@@ -24,17 +24,17 @@ post '/login' do
     
     if success then
         session[:loggedIn] = true
-        redirect '/bookmarks'
+        session[:username] = @username
+        redirect '/bookmarks/all'
     end
         
     @loginError = "Username or password isn't correct."
         
-    redirect '/login'
+    erb :"Login/index"
 end
 
 # logout the currently logged in user
-post '/login/logout' do
-    
+get '/login/logout' do
     session[:loggedIn] = false
     redirect '/login'
 end

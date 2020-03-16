@@ -21,6 +21,10 @@ header {
     color: white;
 }
 
+.error-message {
+    color: red;
+}
+
 h1 {
     font-size: 2em;
     margin-bottom: 0.4em;

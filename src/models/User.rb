@@ -63,11 +63,8 @@ class User
         query = "SELECT password FROM users WHERE username = ?;"
         
         result = DB.execute query, username
-        
-        puts result
-        puts result.class
 
-        if result == "" || result == nil then
+        if result == "" || result == nil || result[0] == nil then
             return false
         else
             if passwordCheck(password, result[0][0]) == false then  

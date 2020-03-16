@@ -12,8 +12,13 @@
         <nav class="black-bg">
             <ul class="white-fg">
                 <li><a href="/bookmarks/all">Bookmarks</a></li>
-                <li><a href="controllers/Admin">Admin</a></li>
-                <li><a href="controllers/Login">Log In</a></li>
+                <li><a href="/Admin">Admin</a></li>
+                <% if session[:loggedIn] == true then %>
+                    <li><a href="/login/logout">Logout</a></li>
+                    <li><a href="">Currently logged in as: <%= session[:username] %></a></li>
+                <% else %> 
+                    <li><a href="/login">Log In</a></li>
+                <% end %>
             </ul>
         </nav>
         <div class="content-wrapper">
