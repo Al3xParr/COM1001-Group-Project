@@ -5,7 +5,14 @@ require_relative '../models/User'
 
 class UserTests < Minitest::Test
     def setup
+        
         @db = SQLite3::Database.new 'database.db'
+        
+        @db.execute "DELETE FROM users"
+        
+        @db.execute "INSERT INTO users(username, password, admin) VALUES('Adam', 'apple', 1);"
+        @db.execute "INSERT INTO users(username, password, admin) VALUES('Jeff', 'amazon', 0);"
+        
     end
 
     def test_new_user
@@ -21,8 +28,10 @@ class UserTests < Minitest::Test
     end
 
     def test_authenticate_user
-
-        successExpected = User.authenticate("Bob", "secure")
+        
+        resultBob = User.newUser("Bob", "secure12", 0);
+        
+        successExpected = User.authenticate("Bob", "secure12")
 
         assert_equal true, successExpected
 
@@ -40,9 +49,6 @@ class UserTests < Minitest::Test
 
         users = User.getAll()
 
-        puts users.class
-        puts users[0].class
-
         assert_equal 2, users.length
 
     end
@@ -55,15 +61,15 @@ class UserTests < Minitest::Test
 
     def test_get_user_by_username
 
-        bob = User.getByUsername("Bob")
+        bob = User.getByUsername("Adam")
 
-        assert_equal "Bob", bob.username
-        assert_equal false, bob.admin
+        assert_equal "Adam", bob.username
+        assert_equal true, bob.admin
 
-        bill = User.getByUsername("Bill")
+        bill = User.getByUsername("Jeff")
 
-        assert_equal "Bill", bill.username
-        assert_equal true, bill.admin
+        assert_equal "Jeff", bill.username
+        assert_equal false, bill.admin
 
     end
 

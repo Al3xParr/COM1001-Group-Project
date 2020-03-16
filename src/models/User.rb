@@ -103,7 +103,7 @@ class User
 
     def self.getById(userId)
 
-        query = "SELECT * from USERS where userId = ?;"
+        query = "SELECT * FROM users WHERE userId = ?;"
 
         result = DB.execute query, userId
 
@@ -119,7 +119,7 @@ class User
 
     def self.getByUsername(username)
 
-        query = "SELECT * from USERS where username = ?;"
+        query = "SELECT * FROM users WHERE username = ?;"
 
         result = DB.execute query, username
 
