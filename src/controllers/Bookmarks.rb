@@ -14,7 +14,7 @@ end
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    
+    erb :"Bookmarks/bookmark"
 end
 
 #post search form data and perform search using values
