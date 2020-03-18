@@ -8,10 +8,6 @@ require_relative '../models/User'
 
 # return the login page
 get '/login' do
-<<<<<<< HEAD
-    
-=======
->>>>>>> 98c5a79b8bc9b6b8e9d46a8b12623ff96fc02c39
     erb :"Login/index"
 end
 
