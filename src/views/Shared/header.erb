@@ -7,16 +7,27 @@
     <head>
     <body>
         <header class="black-bg">
-            <h1 class="white-fg">This is the app</h1>
+            <div class="container">
+                <h1 class="white-fg center-align">bookmarks</h1>
+            </div>
         </header>
         <nav class="black-bg">
-            <ul class="white-fg">
-                <li><a href="/bookmarks/all">Bookmarks</a></li>
-                <li><a href="controllers/Admin">Admin</a></li>
-                <li><a href="controllers/Login">Log In</a></li>
-            </ul>
+            <div class="container">
+                <ul class="white-fg">
+                    <li><a href="/bookmarks/all">Bookmarks</a></li>
+                    <% if session[:admin] == true then%>
+                        <li><a href="/admin">Admin</a></li>
+                    <% end %>
+                    <% if session[:loggedIn] == true then %>
+                        <li class="right-align"><a href="">Logged in as: <%= session[:username] %></a></li>
+                        <li class="right-align"><a href="/login/logout">Logout</a></li>
+                    <% else %> 
+                        <li class="right-align"><a href="/login">Log In</a></li>
+                    <% end %>
+                </ul>
+            </div>
         </nav>
-        <div class="content-wrapper">
+        <div class="content-wrapper container">
           
           
         

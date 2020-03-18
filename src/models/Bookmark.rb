@@ -9,15 +9,23 @@ class Bookmark
     
     DB = SQLite3::Database.new 'database.db'
     
-    def initialize(title, description, resource, archived, createdAt, userId)
+    def initialize(bookmarkId, createdAt, title, description, resource, archived, userId)
         
+        @bookmarkId = bookmarkId
         @title = title
         @description = description
         @resource = resource
         @archived = archived
         @createdAt = createdAt
         @userId = userId
-        
+    )
+    end
+    
+    def bookmarkId= bookmarkId
+        @bookmarkId = bookmarkId
+    end
+    def bookmarkId
+        return @bookmarkId
     end
     
     def title= title
@@ -60,6 +68,24 @@ class Bookmark
     end
     def userId
         return @userId
+    end
+    
+    # Return all the known bookmarks in the database as Bookmark objects
+    # Returns: an array of Bookmark objects
+    def self.getAll
+        
+        toReturn = []
+        
+        result = DB.execute "SELECT * FROM bookmarks;"
+        
+        for bookmark in result do
+            
+            bookmarkObj = Bookmark.new(bookmark[0], bookmark[1], bookmark[2], bookmark[3], bookmark[4], bookmark[5], bookmark[6])
+            toReturn.push(bookmarkObj)
+            
+        end
+        
+        return toReturn
     end
     
 end

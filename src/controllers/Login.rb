@@ -4,12 +4,11 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require_relative 'models/User'
+require_relative '../models/User'
 
 # return the login page
 get '/login' do
-    
-    erb: "Login/index.erb"
+    erb :"Login/index"
 end
 
 # post login form data, evaluate and set session values as required
@@ -24,18 +23,23 @@ post '/login' do
     success = User.authenticate(@username, @password)
     
     if success then
+        user = User.getByUsername(@username)
+
         session[:loggedIn] = true
-        redirect '/bookmarks'
+        session[:username] = user.username
+        session[:admin] = user.admin
+        redirect '/bookmarks/all'
     end
         
     @loginError = "Username or password isn't correct."
         
-    redirect '/login'
+    erb :"Login/index"
 end
 
 # logout the currently logged in user
-post '/login/logout' do
-    
+get '/login/logout' do
     session[:loggedIn] = false
+    session[:username] = nil
+    session[:admin] = nil
     redirect '/login'
 end
