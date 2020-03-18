@@ -7,9 +7,8 @@
     <input type="text" name="username"><br><br>
     <label for="password">Password</label><br>
     <input type="password" name="password"><br><br>
+    <p class="error-message"><%= @loginError %></p>
     <input type="submit" value="Login">
 </form><br>
-
-<p class="error-message"><%= @loginError %></p>
 
 <%= erb :"Shared/footer" %>

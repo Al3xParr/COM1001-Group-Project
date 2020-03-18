@@ -92,3 +92,20 @@ li a:hover {
   background: white;
   color: black;
 }
+
+form input[type="text"], input[type="password"] {
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: solid black 1px;
+}
+form input[type="submit"] {
+    padding: 7.5px 15px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}
+form p {
+    margin-bottom: 5px;
+}
