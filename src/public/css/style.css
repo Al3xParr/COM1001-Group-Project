@@ -1,49 +1,48 @@
 body {
-  font-family: 'Sen' !important;
+    font-family: 'Sen' !important;
 }
 
 header {
-  width: 100vw;
-  height: 125px;
+    width: 100vw;
+    height: 125px;
 }
 
 .black-bg {
-  background: black;
+    background: black;
 }
 .black-fg {
-  color: black;
+    color: black;
 }
 
 .white-bg {
-  background: white;
+    background: white;
 }
 .white-fg {
-  color: white;
+    color: white;
 }
 
 h1 {
-  margin-top: 0.4em;
-  font-size: 2em;
-  margin-bottom: 0.4em;
+    font-size: 2em;
+    margin-bottom: 0.4em;
 }
 h2 {
-  font-size: 1.8em;
-  margin-bottom: 0.36em;
+    font-size: 1.8em;
+    margin-bottom: 0.36em;
 }
 h3 {
-  font-size: 1.6em;
-  margin-bottom: 0.32em;
+    font-size: 1.6em;
+    margin-bottom: 0.32em;
 }
 h4 {
-  font-size: 1.4em;
-  margin-bottom: 0.28em;
+    font-size: 1.4em;
+    margin-bottom: 0.28em;
 }
 h5 {
-  font-size: 1.2em;
-  margin-bottom: 0.24em;
+    font-size: 1.2em;
+    margin-bottom: 0.24em;
 }
 p {
-  font-size: 1em;
+    font-size: 1em;
 }
 nav {
   height: 32px;

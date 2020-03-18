@@ -4,12 +4,12 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require_relative '../models/User'
+require_relative 'models/User'
 
 # return the login page
 get '/login' do
     
-    erb :"Login/index"
+    erb: "Login/index.erb"
 end
 
 # post login form data, evaluate and set session values as required
