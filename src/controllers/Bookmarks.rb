@@ -8,7 +8,7 @@ require 'sinatra/reloader'
 # show all avaliable bookmarks
 # /bookmarks/all
 get '/bookmarks/all' do
-    erb :"Bookmarks/index"
+    
 end
 
 # search bookmarks using parameters

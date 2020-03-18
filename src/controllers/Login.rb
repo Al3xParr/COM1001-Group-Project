@@ -8,10 +8,7 @@ require_relative '../models/User'
 
 # return the login page
 get '/login' do
-<<<<<<< HEAD
     
-=======
->>>>>>> 98c5a79b8bc9b6b8e9d46a8b12623ff96fc02c39
     erb :"Login/index"
 end
 
@@ -27,23 +24,18 @@ post '/login' do
     success = User.authenticate(@username, @password)
     
     if success then
-        user = User.getByUsername(@username)
-
         session[:loggedIn] = true
-        session[:username] = user.username
-        session[:admin] = user.admin
-        redirect '/bookmarks/all'
+        redirect '/bookmarks'
     end
         
     @loginError = "Username or password isn't correct."
         
-    erb :"Login/index"
+    redirect '/login'
 end
 
 # logout the currently logged in user
-get '/login/logout' do
+post '/login/logout' do
+    
     session[:loggedIn] = false
-    session[:username] = nil
-    session[:admin] = nil
     redirect '/login'
 end

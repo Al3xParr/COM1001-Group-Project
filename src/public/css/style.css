@@ -21,34 +21,6 @@ header {
   color: white;
 }
 
-.error-message {
-    color: red;
-}
-
-.container {
-    width: 70%;
-    margin-left: 15%;
-}
-@media only screen and (max-width: 992px) {
-    .container {
-        width: 95%;
-        margin-left: 2.5%;
-    }
-}
-.center-align {
-    text-align: center;
-}
-.left-align {
-    float: left;
-}
-.right-align {
-    float: right;
-}
-/*This selector selects all children regardless of type*/
-.vert-align > *{
-    vertical-align: middle;
-}
-
 h1 {
   margin-top: 0.4em;
   font-size: 2em;
@@ -76,7 +48,7 @@ p {
 nav {
   height: 32px;
   border-top: solid 2px white;
-  margin-bottom: 0.4em;
+  padding-bottom: 0;
 }
 
 li {
