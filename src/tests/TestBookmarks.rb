@@ -10,14 +10,15 @@ class BookmarksTests < Minitest::Test
         
         @db.execute "DELETE FROM bookmarks"
         
-        @db.execute "INSERT INTO bookmarks(createdAt, title, description, resource, archived) VALUES('18 March', 'apple', 'something',
-                     'something', 1);"
-        @db.execute "INSERT INTO bookmarks(createdAt, title, description, resource, archived) VALUES('16 March', 'amazon', 'anything',
+        @db.execute "INSERT INTO bookmarks(bookmarkId,createdAt, title, description, resource, archived, userId) VALUES(1,'18 March', 'apple', 'something',
+                     'something', 1,1);"
+
+ @db.execute "INSERT INTO bookmarks(createdAt, title, description, resource, archived) VALUES('16 March', 'amazon', 'anything',
                      'anything', 0);"
         @db.execute "INSERT INTO bookmarks(createdAt, title, description, resource, archived) VALUES('10 March', 'books', 'action',
                      'nothing', 1);"
         @db.execute "INSERT INTO bookmarks(createdAt, title, description, resource, archived) VALUES('13 March', 'movies', 'anything',
-                     'none', 0);"
+                     'none', 0);" 
         
     end
 
@@ -26,12 +27,17 @@ class BookmarksTests < Minitest::Test
         bookmarks = Bookmark.getAll()
 
         assert_equal 4, bookmarks.length
+        
 
     end
 
-    def test_get_bookmark_by_id
-
-        skip "To do..."
+    def test_get_all_bookmark_details
+        
+        array= []
+        array.push(Bookmark.new(1,'18 March', 'apple', 'something','something', 1,1))
+        bookmarks = Bookmark.getAll()
+        
+        assert_equal array, puts(bookmarks[0])
 
     end
 
