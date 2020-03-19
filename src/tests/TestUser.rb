@@ -1,3 +1,7 @@
+# TestUser.rb
+# Author: Luke Suckling
+# Date: 16/03/2020
+
 require 'minitest/autorun'
 require 'sqlite3'
 require 'securerandom'

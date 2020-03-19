@@ -15,6 +15,8 @@ class User
         @username = username
         @password = password
 
+
+        #This is to handle / convert SQLite 1 / 0 to true and false values
         if admin == 0 then
             @admin = false
         elsif admin == 1 then

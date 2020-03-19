@@ -15,10 +15,20 @@ class Bookmark
         @title = title
         @description = description
         @resource = resource
-        @archived = archived
+
+        
+        #This is to handle / convert SQLite 1 / 0 to true and false values
+        if archived == 0 then
+            @archived = false
+        elsif archived == 1 then
+            @archived = true
+        else
+            @archived = archived
+        end
+
+
         @createdAt = createdAt
         @userId = userId
-    )
     end
     
     def bookmarkId= bookmarkId
