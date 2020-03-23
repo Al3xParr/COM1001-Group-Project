@@ -4,28 +4,40 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+def getAllBookmarks
+    bookmarks = Bookmark.getAll()
+end
+
+before do
+    @db = SQLITE3::Database.new './database/database.sqlite'
+end
 
 # show all avaliable bookmarks
 # /bookmarks/all
 get '/bookmarks/all' do
+    # assuming the bookmarks table will be called bookmarks
+    @TITLE = @db.execute "SELECT title, createdAt FROM bookmarks ORDER BY createdAt ASC"
     erb :"Bookmarks/index"
 end
 
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
+    erb :"Bookmarks/search"
     
 end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
-    
+    redirect '/bookmarks/search'
 end
 
 # return edit page for defined bookmark paramter
 # /bookmarks/edit?id={bookmark id}
 get '/bookmarks/edit' do
-
+    erb :"Bookmarks/edit"
 end
 
 # update the defined bookmark with the parsed post data
@@ -37,7 +49,7 @@ end
 # view the bookmarks own page
 # /bookmarks/view?id={bookmark id}
 get '/bookmarks/view' do
-
+    erb :"Bookmarks/view"
 end
 
 # create a comment on the bookmark
