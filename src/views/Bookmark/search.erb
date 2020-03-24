@@ -1,0 +1,22 @@
+       
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bookmarks Search</title>
+    </head>
+    <body>
+        <%= erb :"Shared/header" %>
+        <h1>This is the bookmarks search</h1>
+        <form method="get" action="/bookmarks/search">
+            <input type="text" name="<%= session[:search] %>" value="Type to search...">
+            <input type="submit" value="Search">
+        </form>
+        <table>
+            <tr><th>Number</th><th>Title</th></tr>
+            <% @SEARCH_RESULTS.each do |x, y| %>
+            <tr><td><%= x %></td><td><%= @SEARCH_RESULTS[y] %></td></tr>
+            <% end %>            
+        </table>
+        <%= erb :"Shared/footer" %>        
+    </body>
+</html>

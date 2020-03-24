@@ -1,0 +1,18 @@
+       
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bookmarks</title>
+    </head>
+    <body>
+        <%= erb :"Shared/header" %>
+        <h1>This is the bookmarks index</h1>
+        <table>
+            <tr><th>Number</th><th>Title</th></tr>
+            <% @TITLES.each do |x, y| %>
+            <tr><td><%= x %></td><td><%= @TITLES[y] %></td></tr>
+            <% end %>
+        </table>
+        <%= erb :"Shared/footer" %>        
+    </body>
+</html>

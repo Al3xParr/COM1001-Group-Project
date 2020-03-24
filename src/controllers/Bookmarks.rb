@@ -17,21 +17,24 @@ end
 # show all avaliable bookmarks
 # /bookmarks/all
 get '/bookmarks/all' do
-    # assuming the bookmarks table will be called bookmarks
+    #lists the title and date of creation in order of date of creation
     @TITLE = @db.execute "SELECT title, createdAt FROM bookmarks ORDER BY createdAt ASC"
-    erb :"Bookmarks/index"
+    erb :"Bookmark/index"
 end
 
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
+    @SEARCH = session[:search]
+    if @SEARCH != ''
+        @SEARCH_RESULTS = db.exercute "SELECT title FROM bookmarks WHERE title LIKE " + @SEARCH + " ORDER BY createdAt ASC"
+    end
     erb :"Bookmarks/search"
-    
 end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
-    redirect '/bookmarks/search'
+    redirect '/bookmarks/search'    
 end
 
 # return edit page for defined bookmark paramter
