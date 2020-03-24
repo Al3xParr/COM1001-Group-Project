@@ -8,6 +8,9 @@
         <%= erb :"Shared/header" %>
         <h1>This is the bookmarks search</h1>
         <form method="get" action="/bookmarks/search">
+            <input type="submit" value="View all bookmarks">
+        </form>
+        <form method="get" action="/bookmarks/search">
             <input type="text" name="<%= session[:search] %>" value="Type to search...">
             <input type="submit" value="Search">
         </form>
