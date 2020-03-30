@@ -132,11 +132,12 @@ class Bookmark
             
     # Return all the known bookmark including the search term @SEARCH
     # Returns: an array of Bookmark objects
-    def self.search(@SEARCH)
+    def self.search(term)
         toReturn = []
         
-        result = DB.execute "SELECT title FROM bookmarks WHERE title LIKE " + @SEARCH + " ORDER BY createdAt ASC;"
-        
+        query =  "SELECT title FROM bookmarks WHERE title LIKE ? ORDER BY createdAt ASC;"
+        result = DB.execute query, '%' + term + '%'
+
         for bookmark in result do
             
             bookmarkObj = Bookmark.new(bookmark[0], nil, nil, nil, nil, nil, nil)
