@@ -5,13 +5,16 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
+require_relative '../models/Bookmark'
+set :bind, '0.0.0.0'
+enable :sessions
 
 def getAllBookmarks
     bookmarks = Bookmark.getAll()
 end
 
 before do
-    @db = SQLITE3::Database.new './database/database.sqlite'
+    @db = SQLITE3::Database.new 'database.db'
 end
 
 # show all avaliable bookmarks
@@ -25,8 +28,9 @@ end
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    @SEARCH = session[:search]
-    if @SEARCH != ''
+    @SEARCH = session[:search] #takes the search work from the search form
+    if @SEARCH != '' #if search form is not empty, searches database
+        #search database for words like the one in the search form
         @SEARCH_RESULTS = db.exercute "SELECT title FROM bookmarks WHERE title LIKE " + @SEARCH + " ORDER BY createdAt ASC"
     end
     erb :"Bookmarks/search"
