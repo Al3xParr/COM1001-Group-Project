@@ -8,8 +8,8 @@ require 'sqlite3'
 require_relative '../models/Bookmark'
 set :bind, '0.0.0.0'
 enable :sessions
-
-def getAllBookmarks
+d
+ef getAllBookmarks
     bookmarks = Bookmark.getAll()
 end
 
@@ -17,10 +17,9 @@ before do
     @db = SQLITE3::Database.new 'database.db'
 end
 
-# show all avaliable bookmarks
-# /bookmarks/all
-get '/bookmarks/all' do
-    #lists the title and date of creation in order of date of creation
+# show all avaliable boo
+    pukmarks
+# /bookBookmark.getTitle in order of date of creation
     @TITLE = @db.execute "SELECT title, createdAt FROM bookmarks ORDER BY createdAt ASC"
     erb :"Bookmark/index"
 end
@@ -29,9 +28,8 @@ end
 # return the form to allow user to search
 get '/bookmarks/search' do
     @SEARCH = session[:search] #takes the search work from the search form
-    if @SEARCH != '' #if search form is not empty, searches database
-        #search database for words like the one in the search form
-        @SEARCH_RESULTS = db.exercute "SELECT title FROM bookmarks WHERE title LIKE " + @SEARCH + " ORDER BY createdAt ASC"
+    if @SEARCH != '' #if search form is not empty
+        @SEARCH_RESULTS =  Bookmark.search(@SEARCH) 
     end
     erb :"Bookmarks/search"
 end
