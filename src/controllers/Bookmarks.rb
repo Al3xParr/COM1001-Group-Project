@@ -14,9 +14,10 @@ enable :sessions
 # /bookBookmark.getTitle in order of date of creation
 get '/bookmarks/all' do
     #$TITLE = ["APPLE", "BANANA", "PEAR"]
-    
+    # gets all info about the bookmark
     $TITLE = Bookmark.getAll
-    $TITLE_LENGTH = (0..$TITLE.length-1).to_a
+    # numbers each bookmark
+    $TITLE_LENGTH = (0...$TITLE.length).to_a
     erb :"Bookmark/index"
 end
 
