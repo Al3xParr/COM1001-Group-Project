@@ -7,20 +7,16 @@ require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Bookmark'
 set :bind, '0.0.0.0'
+set :views, '../views'
 enable :sessions
-d
-ef getAllBookmarks
-    bookmarks = Bookmark.getAll()
-end
 
-before do
-    @db = SQLITE3::Database.new 'database.db'
-end
-
-# show all avaliable boo
-    pukmarks
+# show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
-    @TITLE = @db.execute "SELECT title, createdAt FROM bookmarks ORDER BY createdAt ASC"
+get '/bookmarks/all' do
+    #$TITLE = ["APPLE", "BANANA", "PEAR"]
+    
+    $TITLE = Bookmark.getAll
+    $TITLE_LENGTH = (0..$TITLE.length-1).to_a
     erb :"Bookmark/index"
 end
 
@@ -48,7 +44,9 @@ end
 # update the defined bookmark with the parsed post data
 # /bookmarks/edit
 post '/bookmarks/edit' do
-
+    @BOOKMARK = session[:bookmarkId]
+    @DESCRIPTION = session[:edit]
+    @UPDATED = Bookmark.updateDescription(@DESCRIPTION, @BOOKMARK)
 end
 
 # view the bookmarks own page

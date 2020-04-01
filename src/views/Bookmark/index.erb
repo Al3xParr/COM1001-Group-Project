@@ -7,15 +7,16 @@
     <body>
         <%= erb :"Shared/header" %>
         <h1>This is the bookmarks index</h1>
-        <form method="get" action="/bookmarks/search">
+        <form method="post" action="/bookmarks/search">
             <input type="submit" value="Go to Search Page">
         </form>
+        <!--- prints number and title of bookmark --->
         <table>
             <tr><th>Number</th><th>Title</th></tr>
-            <% @TITLES.each do |x, y| %>
-            <tr><td><%= x %></td><td><%= @TITLES[y] %></td></tr>
+            <% $TITLE_LENGTH.each do |title| %>
+            <tr><td><%= $TITLE_LENGTH[title]+1 %></td><td><%= $TITLE[title] %></td></tr>
             <% end %>
-        </table>
-        <%= erb :"Shared/footer" %>        
+        </table>     
+        <%= erb :"Shared/footer" %>              
     </body>
 </html>

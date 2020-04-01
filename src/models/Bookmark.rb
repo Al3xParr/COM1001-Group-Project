@@ -7,7 +7,7 @@ require 'bcrypt'
 
 class Bookmark
     
-    DB = SQLite3::Database.new 'database.db'
+    DB = SQLite3::Database.new '../database/bookmarks.sqlite'
     
     def initialize(bookmarkId, createdAt, title, description, resource, archived, userId)
         
@@ -30,7 +30,12 @@ class Bookmark
         @createdAt = createdAt
         @userId = userId
     end
-    
+            
+    def to_s
+        "Bookmark ID: #{@bookmarkId} | Created at: #{@createdAt} | Title: #{@title} | Description: #{@description} | Resource: #{@resource} | Archived: #{@archived} | User ID: #{@userId}"
+    end
+            
+            
     def bookmarkId= bookmarkId
         @bookmarkId = bookmarkId
     end
@@ -79,6 +84,8 @@ class Bookmark
     def userId
         return @userId
     end
+            
+    
     
     # Return all the known bookmarks in the database as Bookmark objects
     # Returns: an array of Bookmark objects
@@ -141,6 +148,23 @@ class Bookmark
         for bookmark in result do
             
             bookmarkObj = Bookmark.new(bookmark[0], nil, nil, nil, nil, nil, nil)
+            toReturn.push(bookmarkObj)
+            
+        end
+        return toReturn
+    end
+            
+    # Updates bookmark column by setting the description based on bookmarkId
+    # Returns: an array of Bookmark object(s)
+    def self.updateDescription(desc, bookId)
+        toReturn = []
+        
+        query =  "UPDATE bookmarks SET description = ? WHERE bookmarkId = ?;"
+        result = DB.execute query, '%' + desc + '%', '%' + bookId + '%'
+
+        for bookmark in result do
+            
+            bookmarkObj = Bookmark.new(bookmark[0], nil, nil, bookmark[3], nil, nil, nil)
             toReturn.push(bookmarkObj)
             
         end
