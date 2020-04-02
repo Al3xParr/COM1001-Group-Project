@@ -24,22 +24,24 @@ end
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    @SEARCH = session[:search] #takes the search work from the search form
-    if @SEARCH != '' #if search form is not empty
-        @SEARCH_RESULTS =  Bookmark.search(@SEARCH) 
-    end
-    erb :"Bookmarks/search"
+    erb :"Bookmark/search"
 end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
-    redirect '/bookmarks/search'    
+    session[:search] = params[:search]
+    $SEARCH = session[:search] #takes the search work from the search form
+    if $SEARCH != '' #if search form is not empty
+        $SEARCH_RESULTS = Bookmark.search($SEARCH) 
+        $SEARCH_LENGTH = (0...$SEARCH_RESULTS.length).to_a
+    end
+    erb :"Bookmark/search_results"  
 end
 
 # return edit page for defined bookmark paramter
 # /bookmarks/edit?id={bookmark id}
 get '/bookmarks/edit' do
-    erb :"Bookmarks/edit"
+    erb :"Bookmark/edit"
 end
 
 # update the defined bookmark with the parsed post data
@@ -53,7 +55,7 @@ end
 # view the bookmarks own page
 # /bookmarks/view?id={bookmark id}
 get '/bookmarks/view' do
-    erb :"Bookmarks/view"
+    erb :"Bookmark/view"
 end
 
 # create a comment on the bookmark
