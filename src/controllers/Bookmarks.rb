@@ -10,7 +10,7 @@ set :bind, '0.0.0.0'
 set :views, '../views'
 enable :sessions
 
-@BOOKMARK_ID = Bookmark.getAllId
+
 
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
@@ -30,30 +30,35 @@ end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
-    session[:search] = params[:search] 
+    session[:search] = params[:search].strip
     session[:bookmarkId] = params[:bookmarkId]
     @SEARCH = session[:search] #takes the search work from the search form
     if @SEARCH != '' #if search form is not empty
         @SEARCH_RESULTS = Bookmark.search(@SEARCH) 
-        @SEARCH_LENGTH = (0...@SEARCH_RESULTS.length).to_a
     end
     erb :"Bookmark/search_results"  
 end
 
 # return edit page for defined bookmark paramter
 # /bookmarks/edit?id={bookmark id}
-get '/bookmarks/edit' do
+get '/bookmarks/edit/:bookmarkId' do
+    session[:bookmarkId] = params[:bookmarkId]
+    $BOOKMARK_ID = session[:bookmarkId]
     erb :"Bookmark/edit"
 end
 
 # update the defined bookmark with the parsed post data
 # /bookmarks/edit
 post '/bookmarks/edit' do
-    session[:edit] = params[:edit]
-    session[:bookmarkId] = params[:bookmarkId]
-    @BOOKMARK = session[:bookmarkId]
-    @DESCRIPTION = session[:edit]
-    @UPDATED = Bookmark.updateDescription(@DESCRIPTION, @BOOKMARK)
+    if params[:title] != ''
+        @TITLE = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+    end
+    if params[:edit] != ''
+        @DESCRIPTION = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
+    end
+    if params[:resource] != ''
+        @RESOURCE = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
+    end
     #erb :"Bookmark/edit_results"
     redirect "bookmarks/all"
 end
