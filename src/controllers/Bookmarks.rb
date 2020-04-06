@@ -13,11 +13,14 @@ require_relative '../models/Bookmark'
 # /bookBookmark.getTitle in order of date of creation
 get '/bookmarks/all' do
     # gets all info about the bookmark
-    @title = Bookmark.getAll
-    # numbers each bookmark
-    @title_length = (0...@title.length).to_a
+    @bookmarks = Bookmark.getAll()
 
-    erb :"Bookmark/index"
+    erb :"Bookmarks/index"
+end
+
+get '/bookmarks/view/:bookmarkId' do
+
+    erb :"/Bookmarks/all"
 end
 
 # search bookmarks using parameters
@@ -48,7 +51,7 @@ post '/bookmarks/search' do
             @search_results = Bookmark.searchByUserId(@search)
         end
     end
-    erb :"Bookmark/search_results"  
+    erb :"Bookmarks/search_results"  
 end
 
 # return edit page for defined bookmark paramter
@@ -56,7 +59,7 @@ end
 get '/bookmarks/edit/:bookmarkId' do
     session[:bookmarkId] = params[:bookmarkId]
     $BOOKMARK_ID = session[:bookmarkId]
-    erb :"Bookmark/edit"
+    erb :"Bookmarks/edit"
 end
 
 # update the defined bookmark with the parsed post data
@@ -86,7 +89,7 @@ get '/bookmarks/view/:bookmarkId' do
     @view_bookmark_row_titles = ["Created at: ", "Title: ", "Description: ", "Resource: ", "Archived: ", "User ID: "]
     @view_bookmark = Bookmark.getInfo(params[:bookmarkId])
     @view_bookmark_length = (0...@view_bookmark.length).to_a
-    erb :"Bookmark/view"
+    erb :"Bookmarks/view"
 end
 
 # create a comment on the bookmark

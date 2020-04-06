@@ -109,3 +109,41 @@ form input[type="submit"] {
 form p {
     margin-bottom: 5px;
 }
+form {
+    margin-bottom: 0.4em;
+}
+
+table tbody tr td.btn-col {
+    
+    background-color: black;
+    text-align: center;
+    position: relative;
+}
+table tbody tr td a {
+    color: white !important;
+    text-decoration: none;
+    background-color: black;
+    position: absolute;
+    top: 3px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+table tbody tr td {
+    border: solid black 1px;
+    padding: 4px 10px;
+}
+table tbody tr th {
+    border: solid black 1px;
+    padding: 4px 10px;
+    text-align: left;
+}
+table {
+    margin-bottom: 0.4em;
+    width: 100%;
+}
+
+
+a.btn {
+    
+}

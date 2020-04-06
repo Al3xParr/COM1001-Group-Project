@@ -29,12 +29,7 @@ class Bookmark
 
         @createdAt = createdAt
         @userId = userId
-    end
-            
-    def to_s
-        "Bookmark ID: #{@bookmarkId} | Created at: #{@createdAt} | Title: #{@title} | Description: #{@description} | Resource: #{@resource} | Archived: #{@archived} | User ID: #{@userId}"
-    end
-            
+    end   
             
     def bookmarkId= bookmarkId
         @bookmarkId = bookmarkId
@@ -84,8 +79,23 @@ class Bookmark
     def userId
         return @userId
     end
+
+    def to_s
+        return "Bookmark ID: #{@bookmarkId} | Created at: #{@createdAt} | Title: #{@title} | Description: #{@description} | Resource: #{@resource} | Archived: #{@archived} | User ID: #{@userId}"
+    end
             
-    
+    def self.newBookmark(title, description, resource, archived, userId)
+
+        query = "INSERT INTO bookmarks('title', 'description', 'resource', 'archived', 'userId', 'createdAt') VALUES(?, ?, ?, ?, ?, ?);"      
+
+        begin
+            DB.execute query, title, description, resource, archived, userId, Time.now.inspect
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+    end
     
     # Return all the known bookmarks in the database as Bookmark objects
     # Returns: an array of Bookmark objects

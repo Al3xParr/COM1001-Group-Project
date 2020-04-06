@@ -1,3 +1,4 @@
 require_relative 'models/User'
+require_relative 'models/Bookmark'
 
-puts User.newUser("Luke", "password", 1)
+puts Bookmark.newBookmark("Test", "Test description", "https://google.co.uk/", 0, 1)
