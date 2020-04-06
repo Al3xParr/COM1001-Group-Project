@@ -1,9 +1,7 @@
 <%= erb :"Shared/header" %>
 
-<h1>This is the bookmarks index</h1>
-<form method="post" action="/bookmarks/search">
-    <input type="submit" value="Go to Search Page">
-</form>
+<h1>All bookmarks</h1>
+<hr />
 <% if @bookmarks.length > 0 then %>
 <div class="container">
     <table>
