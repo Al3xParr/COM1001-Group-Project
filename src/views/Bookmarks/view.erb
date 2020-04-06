@@ -1,0 +1,33 @@
+<%= erb :"Shared/header" %>
+
+<div class="row">
+    <div class="col three-quart">
+        <h1>
+            <%= @bookmark.title %>
+        </h1>
+
+        <hr />
+
+        <h3>
+            <%= @bookmark.description %>
+        </h3>
+
+        <h5>Resource</h5>
+        <p><%= @bookmark.resource %></p>
+    </div>
+    <div class="col quart">
+        <h5>
+            Information
+        </h5>
+        <p>Author <span class="right-align"><%= @user.username %></span></p>
+        <p>Date <span class="right-align"><%= @bookmark.createdAt %></span></p>
+
+        <br>
+
+        <p>Favourite</p>
+        <p>Report</p>
+
+    </div>
+</div>
+
+<%= erb :"Shared/footer" %>

@@ -20,7 +20,12 @@ end
 
 get '/bookmarks/view/:bookmarkId' do
 
-    erb :"/Bookmarks/all"
+    #fetch bookmark object
+    @bookmark = Bookmark.getById(params[:bookmarkId])
+
+    @user = User.getById(@bookmark.userId)
+
+    erb :"/Bookmarks/view"
 end
 
 # search bookmarks using parameters

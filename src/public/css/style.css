@@ -44,6 +44,22 @@ header {
 .right-align {
     float: right;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    margin: 0.2em;
+}
+.col {
+    margin: 0.4em;
+    width: 50%;
+}
+.col.quart {
+    width: 25%;
+}
+.col.three-quart{
+    width: 75%;
+}
 /*This selector selects all children regardless of type*/
 .vert-align > *{
     vertical-align: middle;
@@ -141,9 +157,4 @@ table tbody tr th {
 table {
     margin-bottom: 0.4em;
     width: 100%;
-}
-
-
-a.btn {
-    
 }

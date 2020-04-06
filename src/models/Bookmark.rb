@@ -117,7 +117,7 @@ class Bookmark
             
     # Return all the known bookmark  in the database as Bookmark objects
     # Returns: an array of Bookmark objects
-    def self.getTitle
+    def self.getByTitle
         toReturn = []
         
         result = DB.execute "SELECT title, createdAt FROM bookmarks ORDER BY createdAt ASC;"
@@ -133,18 +133,23 @@ class Bookmark
             
     # Return all the known bookmark IDs in the database as Bookmark objects
     # Returns: an array of Bookmark objects
-    def self.getId
-        toReturn = []
+    def self.getById(bookmarkId)
         
-        result = DB.execute "SELECT bookmarkId FROM bookmarks;"
+        query =  "SELECT * FROM bookmarks WHERE bookmarkId=?;"
+
+        result = DB.execute query, bookmarkId
         
-        for bookmark in result do
-            
-            bookmarkObj = Bookmark.new(bookmark[0], nil, nil, nil, nil, nil, nil)
-            toReturn.push(bookmarkObj)
-            
+        if result == "" || result == nil || result[0] == nil then
+
+            return nil
+        else
+
+            result = result[0]
+
+            return Bookmark.new(result[0], result[1], result[2], result[3], result[4], result[5], result[6])
         end
-        return toReturn
+
+        return nil
     end
             
     # Return all the known bookmark including the search term @SEARCH
