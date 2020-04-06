@@ -6,9 +6,6 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Bookmark'
-set :bind, '0.0.0.0'
-set :views, '../views'
-enable :sessions
 
 @search_options = ['Ti' => 'Title', 'Ta' => 'Tags', 'B' => 'Bookmark ID', 'U' => 'User ID']
 
@@ -19,6 +16,7 @@ get '/bookmarks/all' do
     @title = Bookmark.getAll
     # numbers each bookmark
     @title_length = (0...@title.length).to_a
+
     erb :"Bookmark/index"
 end
 
@@ -30,11 +28,17 @@ end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
+
     session[:search] = params[:search]
+
     @search_option = params[:search_option]
+
     @search = session[:search] #takes the search work from the search form
-    if @search != '' #if search form is not empty
+
+    #if search form is not empty
+    if @search != ''
         if @search_option == "Title"
+            
             @search_results = Bookmark.searchByTitle(@search) 
 #         elsif @search_option == "Tags"
 #             @search_results = Bookmark.searchByTags(@search)

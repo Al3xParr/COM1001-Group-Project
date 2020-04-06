@@ -5,9 +5,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require_relative '../models/User'
-set :bind, '0.0.0.0'
-set :views, '../views'
-enable :sessions
 
 # return the login page
 get '/login' do

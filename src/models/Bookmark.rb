@@ -7,7 +7,7 @@ require 'bcrypt'
 
 class Bookmark
     
-    DB = SQLite3::Database.new '../database/bookmarks.sqlite'
+    DB = SQLite3::Database.new 'database.db'
     
     def initialize(bookmarkId, createdAt, title, description, resource, archived, userId)
         
