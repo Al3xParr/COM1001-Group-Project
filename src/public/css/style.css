@@ -88,25 +88,33 @@ h5 {
 p {
     font-size: 1em;
 }
+.sub-font {
+    font-size: 0.8em;
+}
 nav {
   height: 32px;
   border-top: solid 2px white;
   margin-bottom: 0.4em;
 }
 
-li {
+nav li {
   float: left;
 }
 
-li a {
+nav li a {
   display: block;
   padding: 8px;
   text-decoration: none;
   color: inherit;
 }
-li a:hover {
-  background: white;
-  color: black;
+nav li a:hover {
+    transition: 0.2s;
+    background: white;
+    color: black;
+}
+
+.side-nav ul li {
+    margin-bottom: 25px;
 }
 
 form input[type="text"], input[type="password"] {
@@ -116,11 +124,22 @@ form input[type="text"], input[type="password"] {
     border-bottom: solid black 1px;
 }
 form input[type="submit"] {
+    font-family: 'Sen';
+    font-size: 16px;
     padding: 7.5px 15px;
     color: white;
     background-color: black;
-    border: none;
+    border: black 1px solid;
     cursor: pointer;
+}
+form input[type="submit"]:hover {
+    transition: 0.2s;
+    background-color: white;
+    color: black;
+}
+form textarea {
+    width: 100%;
+    margin: 10px 0;
 }
 form p {
     margin-bottom: 5px;
@@ -157,4 +176,21 @@ table tbody tr th {
 table {
     margin-bottom: 0.4em;
     width: 100%;
+}
+
+a.btn {
+    padding: 5px 15px;
+    cursor: pointer;
+    background: black;
+    color: white;
+}
+a.btn.favourite:hover {
+    transition: 0.2s;
+    background-color: #FBC02D;
+    color: white;
+}
+a.btn.report:hover {
+    transition: 0.2s;
+    background-color: #f86e6e;
+    color: white;
 }

@@ -8,14 +8,24 @@
 
         <hr />
 
-        <h3>
-            <%= @bookmark.description %>
-        </h3>
+        <h4>
+            Description <span class="right-align sub-font"><%= @bookmark.description %></span>
+        </h4>
 
-        <h5>Resource</h5>
-        <p><%= @bookmark.resource %></p>
+        <h4>
+            Resource <span class="right-align sub-font"><%= @bookmark.resource %></span>
+        </h4>
+        <br/>
+        <h3>Comments</h3>
+        <hr />
+        <form action="" method="">
+            <textarea name="comment" rows="5"></textarea>
+            <br>
+            <input type="submit" value="Comment" class="right-align">
+        </form>
+
     </div>
-    <div class="col quart">
+    <div class="col quart side-nav">
         <h5>
             Information
         </h5>
@@ -23,10 +33,10 @@
         <p>Date <span class="right-align"><%= @bookmark.createdAt %></span></p>
 
         <br>
-
-        <p>Favourite</p>
-        <p>Report</p>
-
+        <ul>
+            <li><a class="btn favourite">Favourite</a></li>
+            <li><a class="btn report">Report</a></li>
+        </ul>
     </div>
 </div>
 
