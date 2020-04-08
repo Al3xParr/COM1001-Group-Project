@@ -27,6 +27,7 @@ post '/login' do
 
         session[:loggedIn] = true
         session[:username] = user.username
+        session[:userId] = user.userId
         session[:admin] = user.admin
         redirect '/bookmarks/all'
     end

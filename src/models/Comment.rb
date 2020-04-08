@@ -5,6 +5,8 @@
 require 'sqlite3'
 
 class Comment
+
+    DB = SQLite3::Database.new 'database.db'
     
     def initialize(commentId, content, bookmarkId, userId)
         
@@ -41,6 +43,58 @@ class Comment
     end
     def userId
         return @userId
+    end
+
+    def self.newComment(content, bookmarkId, userId)
+        
+        query = "INSERT INTO comments('content, 'bookmarkId', 'userid') VALUES(?, ?, ?);"
+
+        begin
+            DB.execute query, content, bookmarkid, userId
+        rescue SQLite3::Exception
+            return false
+        end
+
+        return true
+
+    end
+
+    def self.getAll()
+
+        toReturn = []
+        
+        result = DB.execute "SELECT * FROM comments;"
+        
+        for comment in result do
+            
+            commentObj = Comment.new(comment[0], comment[1], comment[2], comment[3])
+            toReturn.push(commentObj)
+            
+        end
+        
+        return toReturn
+
+    end
+
+    def self.getByBookmarkId(bookmarkId)
+
+        toReturn = []
+        
+        query = "SELECT * FROM comments WHERE bookmarkId=?;"
+
+        result = DB.execute query, bookmarkId
+
+        puts result[0].class
+        
+        for comment in result do
+            
+            commentObj = Comment.new(comment[0], comment[1], comment[2], comment[3])
+            toReturn.push(commentObj)
+            
+        end
+        
+        return toReturn
+
     end
     
 end

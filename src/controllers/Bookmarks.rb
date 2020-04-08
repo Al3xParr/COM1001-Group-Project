@@ -6,6 +6,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Bookmark'
+require_relative '../models/Comment'
 
 @search_options = ['Ti' => 'Title', 'Ta' => 'Tags', 'B' => 'Bookmark ID', 'U' => 'User ID']
 
@@ -24,6 +25,8 @@ get '/bookmarks/view/:bookmarkId' do
     @bookmark = Bookmark.getById(params[:bookmarkId])
 
     @user = User.getById(@bookmark.userId)
+
+    @comments = Comment.getByBookmarkId(params[:bookmarkId])
 
     erb :"/Bookmarks/view"
 end

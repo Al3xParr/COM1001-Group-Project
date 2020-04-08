@@ -22,8 +22,25 @@
             <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
             <textarea name="comment" rows="5"></textarea>
             <br>
-            <input type="submit" value="Comment" class="right-align">
+            <input type="submit" value="Comment">
         </form>
+        
+        <%
+            if @comments.length > 0 then
+                for comment in @comments 
+        %>
+            <div class="comment">
+                <p><%= comment.content %></p>
+                <a class="btn report">Delete</a>
+            </div>
+        <%
+                end
+            else
+        %>
+            <p>No comments yet.</p>
+        <%
+            end
+        %>
 
     </div>
     <div class="col quart side-nav">
