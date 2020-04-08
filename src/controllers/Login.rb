@@ -38,8 +38,6 @@ end
 
 # logout the currently logged in user
 get '/login/logout' do
-    session[:loggedIn] = false
-    session[:username] = nil
-    session[:admin] = nil
+    session.clear
     redirect '/login'
 end
