@@ -183,14 +183,25 @@ a.btn {
     cursor: pointer;
     background: black;
     color: white;
+    border: solid 1px black;
+}
+a.btn:hover {
+    transition: 0.2s;
+    color: black;
+    background-color: white;
+}
+a.btn.edit:hover {
+    background-color: #77dd77;
+    border: solid 1px #77dd77;
+    color: white;
 }
 a.btn.favourite:hover {
-    transition: 0.2s;
     background-color: #FBC02D;
+    border: solid 1px #FBC02D;
     color: white;
 }
 a.btn.report:hover {
-    transition: 0.2s;
     background-color: #f86e6e;
+    border: solid 1px #f86e8e;
     color: white;
 }
