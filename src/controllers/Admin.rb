@@ -8,5 +8,10 @@ require 'sinatra/reloader'
 # fetch the admin 'homepage'
 # /admin
 get '/admin' do
-
+    
+    if session[:admin] then
+        "hello mr admin"
+    else
+        status 404
+    end
 end
