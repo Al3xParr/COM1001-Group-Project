@@ -47,10 +47,12 @@ class Comment
 
     def self.newComment(content, bookmarkId, userId)
         
-        query = "INSERT INTO comments('content, 'bookmarkId', 'userid') VALUES(?, ?, ?);"
+        query = "INSERT INTO comments('content', 'bookmarkId', 'userId') VALUES(?, ?, ?);"
+
+        DB.execute query, content, bookmarkId, userId
 
         begin
-            DB.execute query, content, bookmarkid, userId
+            
         rescue SQLite3::Exception
             return false
         end
@@ -83,8 +85,6 @@ class Comment
         query = "SELECT * FROM comments WHERE bookmarkId=?;"
 
         result = DB.execute query, bookmarkId
-
-        puts result[0].class
         
         for comment in result do
             

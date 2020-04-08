@@ -5,11 +5,13 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
-require_relative '../models/Comments'
+require_relative '../models/Comment'
 
-post 'comments/create' do
+post '/comments/create' do
 
     result = Comment.newComment(params[:comment], params[:bookmarkId], session[:userId])
+
+    puts "HELLO FROM COMMENTS CONTOLLERS"
 
     if result then
         redirect "/bookmarks/view/#{params[:bookmarkId]}"
@@ -19,10 +21,10 @@ post 'comments/create' do
 
 end
 
-post 'comments/edit/:commentId' do
+post '/comments/edit/:commentId' do
 
 end
 
-post 'comments/delete/:commentId' do
+post '/comments/delete/:commentId' do
 
 end

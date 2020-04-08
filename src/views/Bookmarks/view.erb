@@ -18,7 +18,7 @@
         <br/>
         <h3>Comments</h3>
         <hr />
-        <form action="" method="">
+        <form method="post" action="/comments/create">
             <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
             <textarea name="comment" rows="5"></textarea>
             <br>
@@ -31,7 +31,10 @@
         %>
             <div class="comment">
                 <p><%= comment.content %></p>
-                <a class="btn report">Delete</a>
+                <hr />
+                <div align="right">
+                    <a class="btn report">Delete</a>
+                </div>
             </div>
         <%
                 end

@@ -206,3 +206,10 @@ a.btn.report:hover {
     border: solid 1px #f86e8e;
     color: white;
 }
+
+.comment p {
+    margin-top: 1em;
+}
+.comment hr {
+    margin-bottom: 0.8em;
+}
