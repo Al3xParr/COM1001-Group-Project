@@ -9,6 +9,7 @@ require_relative 'controllers/Admin'
 require_relative 'controllers/Bookmarks'
 require_relative 'controllers/Index'
 require_relative 'controllers/Login'
+require_relative 'controllers/Errors'
 
 set :bind, '0.0.0.0'
 enable :sessions
