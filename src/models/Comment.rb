@@ -49,10 +49,8 @@ class Comment
         
         query = "INSERT INTO comments('content', 'bookmarkId', 'userId') VALUES(?, ?, ?);"
 
-        DB.execute query, content, bookmarkId, userId
-
         begin
-            
+            DB.execute query, content, bookmarkId, userId
         rescue SQLite3::Exception
             return false
         end
