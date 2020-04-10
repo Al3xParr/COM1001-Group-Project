@@ -11,7 +11,6 @@ post '/comments/create' do
 
     result = Comment.newComment(params[:comment], params[:bookmarkId], session[:userId])
 
-    puts "HELLO FROM COMMENTS CONTOLLERS"
 
     if result then
         redirect "/bookmarks/view/#{params[:bookmarkId]}"
