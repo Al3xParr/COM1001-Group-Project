@@ -213,3 +213,26 @@ a.btn.report:hover {
 .comment hr {
     margin-bottom: 0.8em;
 }
+
+.tags-container a {
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    padding: 6px 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 12px;
+}
+.tags-container div {
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    padding: 6px 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 12px;
+}
