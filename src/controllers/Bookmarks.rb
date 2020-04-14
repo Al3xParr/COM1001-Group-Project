@@ -88,7 +88,10 @@ post '/bookmarks/edit' do
     redirect "bookmarks/all"
 end
 
-
+#creating a new bookmark page
+get '/bookmarks/new' do
+    erb :"Bookmarks/new"
+end
 
 
 # view the bookmarks own page
