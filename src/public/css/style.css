@@ -214,25 +214,29 @@ a.btn.report:hover {
     margin-bottom: 0.8em;
 }
 
-.tags-container a {
+
+.tags-container .chip {
     background-color: black;
     color: white;
     border-radius: 12px;
-    padding: 6px 20px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 6px 10px;
     font-size: 12px;
+    display: inline-block;
 }
-.tags-container div {
-    background-color: black;
-    color: white;
-    border-radius: 12px;
-    padding: 6px 20px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 12px;
+.tags-container .chip a {
+    margin-left: 10px;
+    font-size: 10px;
+    line-height: 14px;
+    cursor: pointer;
+}
+
+.tags-container .chip.new {
+    border: 1px black solid;
+    color: black;
+    background: white;
+}
+.tags-container .chip.new a {
+    font-size: inherit;
+    line-height: inherit;
+    margin-left: inherit;
 }
