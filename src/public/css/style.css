@@ -118,7 +118,8 @@ nav li a:hover {
 }
 
 form input[type="text"], input[type="password"] {
-    padding: 10px 0;
+    font-size: 14px;
+    padding: 5px 0;
     background: transparent;
     border: none;
     border-bottom: solid black 1px;
@@ -138,6 +139,7 @@ form input[type="submit"]:hover {
     color: black;
 }
 form textarea {
+    font-size: 14px;
     width: 100%;
     margin: 10px 0;
 }
@@ -205,6 +207,11 @@ a.btn.report:hover {
     background-color: #f86e6e;
     border: solid 1px #f86e8e;
     color: white;
+}
+
+#title {
+  font-size: 2em;
+  margin-bottom: 0.4em;
 }
 
 .comment p {

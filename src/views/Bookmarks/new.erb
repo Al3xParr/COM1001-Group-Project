@@ -2,8 +2,19 @@
 
 <h1>New Bookmark</h1>
 
-<hr />
+<p>Please fill out the form below to create a new bookmark</p>
 
+<hr/>
 
+<form method="post" action="/bookmarks/new">
+  <label for="title"><h4>Title</h4></label>
+  <input type="text" name="title" required="required"><br><br>
+  <label for="resource"><h4>Resource</h4></label>
+  <input type="text" name="resource"><br><br>
+  <label for="description"><h4>Description</h4></label>
+  <textarea name="comment" rows="5"></textarea><br><br>
+  <input type="submit" value="Create Bookmark">
+</form>
+<br>
 <%= erb :"Shared/footer" %>
 
