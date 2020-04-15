@@ -54,6 +54,9 @@ header {
     margin: 0.4em;
     width: 50%;
 }
+.col.half {
+    width: 50%;
+}
 .col.quart {
     width: 25%;
 }
@@ -136,6 +139,11 @@ form input[type="submit"]:hover {
     transition: 0.2s;
     background-color: white;
     color: black;
+}
+form select {
+    padding: 7.5px 15px;
+    border: none;
+    border-bottom: 1px black solid;
 }
 form textarea {
     width: 100%;
@@ -239,4 +247,12 @@ a.btn.report:hover {
     font-size: inherit;
     line-height: inherit;
     margin-left: inherit;
+}
+.new-tags-container {
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: max-height 0.2s;
+}
+.new-tags-container.active {
+    max-height: 128px;
 }

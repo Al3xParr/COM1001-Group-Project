@@ -28,11 +28,37 @@
                 Test Two
                 <a class="right-align">&#10006;</a>
             </div>
-            <div class="chip new">
-                <a>New tag</a>
+            <div class="chip new right-align">
+                <a id="toggle-dropdown">New tag</a>
             </div>
         </div>
-        <br/>
+        
+        <div class="new-tags-container">
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <form>
+                        <label for="tag">New tag</label><br>
+                        <input type="text" name="tag">
+                        <input type="submit" value="Create">
+                    </form>
+                </div>
+                <div class="col">
+                    <form>
+                        <label for="tag-list">Tag</label><br>
+                        <select name="tag-list">
+                            <option value="2">Hello 2</option>
+                            <option value="4">Hello 4</option>
+                            <option value="1">Hello 1</option>
+                            <option value="9">Hello 9</option>
+                        </select>
+                        <input type="submit" name="add_btn" value="Add">
+                        <input type="submit" name="delete_btn" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
         <h3>Comments</h3>
         <hr />
         <form method="post" action="/comments/create">
@@ -80,3 +106,14 @@
 </div>
 
 <%= erb :"Shared/footer" %>
+
+<script>
+    var elem = document.getElementById('toggle-dropdown');
+
+    elem.onclick = function () {
+        
+        var dropElem = document.querySelector('.new-tags-container');
+
+        dropElem.classList.toggle('active');
+    };
+</script>
