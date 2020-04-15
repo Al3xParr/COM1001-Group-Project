@@ -33,10 +33,18 @@ UNIQUE(bookmarkId, userId)
 CREATE TABLE tags (
 
 tagId INTEGER NOT NULL,
-description TEXT NOT NULL,
-bookmarkId INTEGER NOT NULL,
+tag TEXT NOT NULL,
 PRIMARY KEY (tagId),
-UNIQUE(description, bookmarkId)
+UNIQUE(tag)
+);
+
+CREATE TABLE bookmarks_to_tags (
+
+linkId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+tagId INTEGER NOT NULL,
+PRIMARY KEY(linkId),
+UNIQUE(bookmarkId, tagId)
 );
 
 CREATE TABLE comments (
