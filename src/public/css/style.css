@@ -251,6 +251,7 @@ a.btn.report:hover {
     margin-left: inherit;
 }
 .new-tags-container {
+    width: 100%;
     max-height: 0px;
     overflow-y: hidden;
     transition: max-height 0.2s;

@@ -94,6 +94,8 @@ class Tag
         return true
     end
 
+    private
+
     def self.createTag(tag)
 
         query = "INSERT INTO tags('tag') VALUES(?);"
