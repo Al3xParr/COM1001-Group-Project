@@ -11,6 +11,7 @@ require_relative 'controllers/Index'
 require_relative 'controllers/Login'
 require_relative 'controllers/Errors'
 require_relative 'controllers/Comments'
+require_relative 'controllers/Tags'
 
 set :bind, '0.0.0.0'
 enable :sessions

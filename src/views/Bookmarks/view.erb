@@ -20,14 +20,25 @@
         </h3>
         <hr />
         <div class="tags-container">
-            <div class="chip">
-                Test
-                <a class="right-align">&#10006;</a>
-            </div>
-            <div class="chip">
-                Test Two
-                <a class="right-align">&#10006;</a>
-            </div>
+            <%
+                if @tags.length > 0 then
+                    for tag in @tags 
+            %>
+                <div class="chip">
+                    <%= tag.tag %>
+                    <a class="right-align" href="/tags/delete/<%= tag.tagId %>/<%= @bookmark.bookmarkId %>">&#10006;</a>
+                </div>
+            <%
+                    end
+                else
+            %>
+                <div class="chip">
+                    No tags yet
+                </div>
+            <%
+                end
+            %>
+
             <div class="chip new right-align">
                 <a id="toggle-dropdown">New tag</a>
             </div>
@@ -35,7 +46,7 @@
         
         <div class="new-tags-container">
             <hr />
-            <form>
+            <form method="post" action="/tags/add">
                 <label for="tag">New tag</label><br>
                 <input type="text" name="tag">
                 <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
