@@ -1,1 +1,5 @@
-# Scenarios go here!
+
+Feature: login
+
+    Scenario: Correct password entered
+        
