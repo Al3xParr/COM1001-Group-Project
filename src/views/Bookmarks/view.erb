@@ -35,28 +35,12 @@
         
         <div class="new-tags-container">
             <hr />
-            <div class="row">
-                <div class="col">
-                    <form>
-                        <label for="tag">New tag</label><br>
-                        <input type="text" name="tag">
-                        <input type="submit" value="Create">
-                    </form>
-                </div>
-                <div class="col">
-                    <form>
-                        <label for="tag-list">Tag</label><br>
-                        <select name="tag-list">
-                            <option value="2">Hello 2</option>
-                            <option value="4">Hello 4</option>
-                            <option value="1">Hello 1</option>
-                            <option value="9">Hello 9</option>
-                        </select>
-                        <input type="submit" name="add_btn" value="Add">
-                        <input type="submit" name="delete_btn" value="Delete">
-                    </form>
-                </div>
-            </div>
+            <form>
+                <label for="tag">New tag</label><br>
+                <input type="text" name="tag">
+                <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
+                <input type="submit" value="Add">
+            </form>
         </div>
         <br>
         <h3>Comments</h3>
