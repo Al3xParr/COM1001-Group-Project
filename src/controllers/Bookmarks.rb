@@ -93,6 +93,11 @@ get '/bookmarks/new' do
     erb :"Bookmarks/new"
 end
 
+post '/boomarks/new' do
+  @title = params[:title]
+  @resource = params[:resource]
+  @description = params[:description]
+end
 
 # view the bookmarks own page
 # /bookmarks/view?id={bookmark id}

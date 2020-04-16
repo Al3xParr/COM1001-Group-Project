@@ -117,13 +117,14 @@ nav li a:hover {
     margin-bottom: 25px;
 }
 
-form input[type="text"], input[type="password"] {
+form input[type="text"], input[type="password"], input[type="url"] {
     font-size: 14px;
     padding: 5px 0;
     background: transparent;
     border: none;
     border-bottom: solid black 1px;
 }
+
 form input[type="submit"] {
     font-family: 'Sen';
     font-size: 16px;
