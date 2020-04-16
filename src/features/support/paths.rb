@@ -9,7 +9,19 @@ module NavigationHelpers
     case page_name
 
     when /the home\s?page/
-      '/'
+        '/'
+    when /the login\spage/
+        '/login'
+    when /the logout\spage/
+        '/login/logout'
+    when /the bookmark\shome\spage/
+        '/bookmarks/all'
+    when /the view\sbookmark\s?page/
+        'bookmarks/view/:bookmarkId'
+    when /the search\spage/
+        '/bookmarks/search'
+    when /the edit\spage/
+        '/bookmarks/edit'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
