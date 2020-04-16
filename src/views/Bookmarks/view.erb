@@ -15,7 +15,45 @@
         <h4>
             Resource <span class="right-align sub-font"><%= @bookmark.resource %></span>
         </h4>
-        <br/>
+        <h3>
+            Tags
+        </h3>
+        <hr />
+        <div class="tags-container">
+            <%
+                if @tags.length > 0 then
+                    for tag in @tags 
+            %>
+                <div class="chip">
+                    <%= tag.tag %>
+                    <a class="right-align" href="/tags/delete/<%= tag.tagId %>/<%= @bookmark.bookmarkId %>">&#10006;</a>
+                </div>
+            <%
+                    end
+                else
+            %>
+                <div class="chip">
+                    No tags yet
+                </div>
+            <%
+                end
+            %>
+
+            <div class="chip new right-align">
+                <a id="toggle-dropdown">New tag</a>
+            </div>
+        </div>
+        
+        <div class="new-tags-container">
+            <hr />
+            <form method="post" action="/tags/add">
+                <label for="tag">New tag</label><br>
+                <input type="text" name="tag">
+                <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <br>
         <h3>Comments</h3>
         <hr />
         <form method="post" action="/comments/create">
@@ -63,3 +101,14 @@
 </div>
 
 <%= erb :"Shared/footer" %>
+
+<script>
+    var elem = document.getElementById('toggle-dropdown');
+
+    elem.onclick = function () {
+        
+        var dropElem = document.querySelector('.new-tags-container');
+
+        dropElem.classList.toggle('active');
+    };
+</script>
