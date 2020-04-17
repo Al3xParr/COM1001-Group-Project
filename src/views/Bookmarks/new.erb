@@ -1,0 +1,22 @@
+<%= erb :"Shared/header" %>
+
+<h1>New Bookmark</h1>
+
+<p>Please fill out the form below to create a new bookmark</p>
+
+<hr/>
+
+<form method="post" action="/bookmarks/new">
+  <label for="title"><h4>Title</h4></label>
+  <input type="text" name="title" required="required"><br><br>
+  <label for="resource"><h4>Resource</h4></label>
+  <input type="url" name="resource" required="required"><br><br>
+  <label for="description"><h4>Description</h4></label>
+  <textarea name="description" rows="5" required="required"></textarea><br><br>
+  <p class="error-message"><%= @bookmarkError %></p>
+  <p class="success-message"><%= @bookmarkSuccess %></p>
+  <input type="submit" value="Create Bookmark">
+</form>
+<br>
+<%= erb :"Shared/footer" %>
+

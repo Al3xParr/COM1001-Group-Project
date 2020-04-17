@@ -25,6 +25,10 @@ header {
     color: red;
 }
 
+.success-message {
+  color: green;
+}
+
 .container {
     width: 70%;
     margin-left: 15%;
@@ -120,12 +124,14 @@ nav li a:hover {
     margin-bottom: 25px;
 }
 
-form input[type="text"], input[type="password"] {
-    padding: 10px 0;
+form input[type="text"], input[type="password"], input[type="url"] {
+    font-size: 14px;
+    padding: 5px 0;
     background: transparent;
     border: none;
     border-bottom: solid black 1px;
 }
+
 form input[type="submit"] {
     font-family: 'Sen';
     font-size: 16px;
@@ -146,6 +152,7 @@ form select {
     border-bottom: 1px black solid;
 }
 form textarea {
+    font-size: 14px;
     width: 100%;
     margin: 10px 0;
 }
@@ -213,6 +220,11 @@ a.btn.report:hover {
     background-color: #f86e6e;
     border: solid 1px #f86e8e;
     color: white;
+}
+
+#title {
+  font-size: 2em;
+  margin-bottom: 0.4em;
 }
 
 .comment p {
