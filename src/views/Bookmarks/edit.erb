@@ -1,0 +1,21 @@
+<%= erb :"Shared/header" %>
+
+<h1>Edit the Bookmark</h1>
+
+<p>Please fill out the form below to edit the current bookmark. If you wish to only change one thing, fill in with the current characteristics.</p>
+
+<hr/>
+
+<form method="post" action="/bookmarks/edit/">
+  <label for="title"><h4>New Title</h4></label>
+  <input type="text" name="title" required="required"><br><br>
+  <label for="edit"><h4>New Description</h4></label>
+    <textarea name="edit" rows="5" required="required"></textarea><br><br>
+  <label for="resource"><h4>New Resource</h4></label>
+  <input type="url" name="resource" required="required"><br><br>
+  <p class="error-message"><%= @bookmarkError %></p>
+  <p class="success-message"><%= @bookmarkSuccess %></p>
+  <input type="submit" value="Update Bookmark">
+</form>
+<br>
+<%= erb :"Shared/footer" %>

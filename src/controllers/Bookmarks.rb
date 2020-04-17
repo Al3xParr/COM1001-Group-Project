@@ -73,22 +73,30 @@ get '/bookmarks/edit/:bookmarkId' do
     erb :"Bookmarks/edit"
 end
 
+
 # update the defined bookmark with the parsed post data
 # /bookmarks/edit
-post '/bookmarks/edit' do
+post '/bookmarks/edit/:bookmarkId' do
     # assigned to variable in case we want to display edited
     # somewhere in the future as confirmation page
-    if params[:title] != ''
-        @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+    if session[:loggedIn] != true then
+        @bookmarkError = "User not logged in."
+        erb :"Bookmarks/edit"
+    else
+        if params[:title] != ''
+            @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+        end
+        if params[:edit] != ''
+            @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
+        end
+        if params[:resource] != ''
+            @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
+        end
+        
+        @bookmarkSuccess = "Bookmark updated."
+        #erb :"Bookmark/edit_results"
+        redirect "bookmarks/all"
     end
-    if params[:edit] != ''
-        @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
-    end
-    if params[:resource] != ''
-        @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
-    end
-    #erb :"Bookmark/edit_results"
-    redirect "bookmarks/all"
 end
 
 #creating a new bookmark page
