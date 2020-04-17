@@ -93,10 +93,27 @@ get '/bookmarks/new' do
     erb :"Bookmarks/new"
 end
 
-post '/boomarks/new' do
-  @title = params[:title]
-  @resource = params[:resource]
-  @description = params[:description]
+post '/bookmarks/new' do
+  
+  if session[:loggedIn] != true then
+    @bookmarkError = "User not logged in"
+    erb :"Bookmarks/new"
+  else
+    @title = params[:title]
+    @resource = params[:resource]
+    @description = params[:description]
+    @userId = session[:userId]
+
+    success = User.newBookmark(@title,@description,@resource,0,@userId)
+
+    if success then
+      @bookmarkSuccess = "Bookmark successfully created"
+    else
+      @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
+    end
+
+    erb :"Bookmarks/new"
+  end
 end
 
 # view the bookmarks own page

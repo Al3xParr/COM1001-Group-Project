@@ -25,6 +25,10 @@ header {
     color: red;
 }
 
+.success-message {
+  color: green;
+}
+
 .container {
     width: 70%;
     margin-left: 15%;
