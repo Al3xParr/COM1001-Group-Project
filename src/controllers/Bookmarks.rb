@@ -107,7 +107,7 @@ post '/bookmarks/new' do
     @description = params[:description]
     @userId = session[:userId]
 
-    success = User.newBookmark(@title,@description,@resource,0,@userId)
+    success = Bookmark.newBookmark(@title,@description,@resource,0,@userId)
 
     if success then
       @bookmarkSuccess = "Bookmark successfully created"
