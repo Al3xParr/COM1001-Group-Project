@@ -17,7 +17,7 @@ module NavigationHelpers
     when /the bookmark\shomepage/
         '/bookmarks/all'
     when /the view\sbookmark\s?page/
-        'bookmarks/view/:bookmarkId'
+        '/bookmarks/view/1'
     when /the search\spage/
         '/bookmarks/search'
     when /the edit\spage/
