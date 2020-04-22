@@ -15,3 +15,4 @@ require_relative 'controllers/Tags'
 
 set :bind, '0.0.0.0'
 enable :sessions
+set :views, 'views'
