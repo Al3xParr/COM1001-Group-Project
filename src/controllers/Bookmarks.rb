@@ -51,18 +51,17 @@ post '/bookmarks/search' do
     @search_option = params[:search_option]
 
     @search = session[:search] #takes the search work from the search form
-
+    @search_results = []
     #if search form is not empty
-    if @search != ''
+    if @search != '' then
         if @search_option == "Title"
-
-            @search_results = Bookmark.searchByTitle(@search) 
-        elsif @search_option == "Tags"
-            @search_results = Bookmark.searchByTags(@search)
-        elsif @search_option == "Bookmark ID"
-            @search_results = Bookmark.searchByBookmarkId(@search)
-        elsif @search_option == "User ID"
-            @search_results = Bookmark.searchByUserId(@search)
+            @search_results = Bookmark.searchBy(@search, "title") 
+        elsif @search_option == "BookmarkID"
+            @search_results = Bookmark.searchBy(@search, "bookmarkId")
+        elsif @search_option == "UserID"
+            @search_results = Bookmark.searchBy(@search, "userId")
+        elsif @search_option == "source"
+            @search_results = Bookmark.searchBy(@search, "resource")
         end
     end
     erb :"Bookmarks/search"  
