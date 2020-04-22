@@ -37,7 +37,8 @@ end
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    erb :"Bookmark/search"
+    @bookmarks = Bookmark.getAll()
+    erb :"Bookmarks/search"
 end
 
 #post search form data and perform search using values
@@ -62,7 +63,7 @@ post '/bookmarks/search' do
             @search_results = Bookmark.searchByUserId(@search)
         end
     end
-    erb :"Bookmarks/search_results"  
+    erb :"Bookmarks/search"  
 end
 
 # return edit page for defined bookmark paramter
