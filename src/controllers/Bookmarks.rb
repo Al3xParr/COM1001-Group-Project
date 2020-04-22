@@ -37,13 +37,15 @@ end
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    @bookmarks = Bookmark.getAll()
+    
+    @search_results = Bookmark.getAll()
     erb :"Bookmarks/search"
 end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
 
+    
     session[:search] = params[:search]
 
     @search_option = params[:search_option]
@@ -53,10 +55,10 @@ post '/bookmarks/search' do
     #if search form is not empty
     if @search != ''
         if @search_option == "Title"
-            
+
             @search_results = Bookmark.searchByTitle(@search) 
-#         elsif @search_option == "Tags"
-#             @search_results = Bookmark.searchByTags(@search)
+        elsif @search_option == "Tags"
+            @search_results = Bookmark.searchByTags(@search)
         elsif @search_option == "Bookmark ID"
             @search_results = Bookmark.searchByBookmarkId(@search)
         elsif @search_option == "User ID"

@@ -2,7 +2,10 @@
 # date      27/02/20
 # author    Luke Suckling
 
+
+
 require 'sinatra'
+#require 'sinatra/reloader'
 require 'sqlite3'
 
 require_relative 'controllers/Admin'

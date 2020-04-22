@@ -6,23 +6,23 @@
     <body>
         <%= erb :"Shared/header" %>
         <h1>bookmarks search</h1>
-        <form method="get" action="/bookmarks/search">
-            <input type="text" name="<%= session[:search] %>"  placeholder="Search bookmarks...">
-            
+        <form method="POST" action="/bookmarks/search">
+            <input type="text" name="search"  placeholder="Search bookmarks...">
             
             <label>Search By... </label>
             
-            <select name="<%= session[:search_option] %>">
-            <option value="Title">Title</option>
-            <option value="Tag">Tag</option>
-            <option value="BookmarkID">Bookmark ID</option>
-            <option value="UserID">User ID</option>
+            
+            <select name="search_option">
+                <option value="Title">Title</option>
+                <option value="Tag">Tag</option>
+                <option value="BookmarkID">Bookmark ID</option>
+                <option value="UserID">User ID</option>
             </select>
             
             <input type="submit" value="Search">
             
         </form>
-        <% if @bookmarks.length > 0 then %>
+        <% if @search_results.length > 0 then %>
         <div class="container">
             <table>
                 <tr>
@@ -31,12 +31,12 @@
                     <th>Description</th>
                     <th>View</th>
                 </tr>
-                <% for i in (0..(@bookmarks.length - 1)) %>
+                <% for i in (0..(@search_results.length - 1)) %>
                     <tr>
                         <td><%= (i + 1) %></td>
-                        <td><%= @bookmarks[i].title %></td>
-                        <td><%= @bookmarks[i].description %></td>
-                        <td class="btn-col"><a href="/bookmarks/view/<%= @bookmarks[i].bookmarkId %>">goto</a></td>
+                        <td><%= @search_results[i].title %></td>
+                        <td><%= @search_results[i].description %></td>
+                        <td class="btn-col"><a href="/bookmarks/view/<%= @search_results[i].bookmarkId %>">goto</a></td>
                     </tr>
                 <% end %>
             </table>
