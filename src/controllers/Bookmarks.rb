@@ -9,8 +9,6 @@ require_relative '../models/Bookmark'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
 
-@search_options = ['Ti' => 'Title', 'Ta' => 'Tags', 'B' => 'Bookmark ID', 'U' => 'User ID']
-
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
 get '/bookmarks/all' do
@@ -119,14 +117,35 @@ post '/bookmarks/new' do
     erb :"Bookmarks/new"
   end
 end
+    
+get '/bookmarks/report/:bookmarkId' do
+      
+    @bookmark = Bookmark.getById(params[:bookmarkId])
+    @tags = Tag.getByBookmarkId(params[:bookmarkId])
+    
 
-# view the bookmarks own page
-# /bookmarks/view?id={bookmark id}
-get '/bookmarks/view/:bookmarkId' do
-    @view_bookmark_row_titles = ["Created at: ", "Title: ", "Description: ", "Resource: ", "Archived: ", "User ID: "]
-    @view_bookmark = Bookmark.getInfo(params[:bookmarkId])
-    @view_bookmark_length = (0...@view_bookmark.length).to_a
-    erb :"Bookmarks/view"
+    erb :"Bookmarks/report"
+end
+    
+post '/bookmarks/report/:bookmarkId' do
+    @bookmark = Bookmark.getById(params[:bookmarkId])
+    @tags = Tag.getByBookmarkId(params[:bookmarkId])
+    
+ 
+    
+    if session[:loggedIn] 
+        if params[:report_option] == '' && params[:issue] == '' || params[:reason] == ''
+            @blankError = "Please properly complete the form."
+        else
+            @reportSuccess = "Report successfully submitted"
+            @report_option = params[:report_option]
+            @issue = params[:issue]
+            @description = params[:reason]
+        end
+    else
+        @reportError = "User not logged in."
+    end
+    erb :"Bookmarks/report"
 end
 
 # create a comment on the bookmark
