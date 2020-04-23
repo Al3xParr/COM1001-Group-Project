@@ -9,8 +9,6 @@ require_relative '../models/Bookmark'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
 
-@search_options = ['Ti' => 'Title', 'Ta' => 'Tags', 'B' => 'Bookmark ID', 'U' => 'User ID']
-
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
 get '/bookmarks/all' do

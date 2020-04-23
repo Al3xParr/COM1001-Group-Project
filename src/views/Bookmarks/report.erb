@@ -32,20 +32,15 @@
 
     </div>
     
-    <br>
-    
+    <br>    
     <p>Please give a short description of why this is an issue</p>
     <textarea name="reason" rows="5"></textarea>
-            <br>
+    <br>
     <input type="submit" value="Report" onclick="submitForms">
     <p class="error-message"><%= @reportError %></p>
     <p class="success-message"><%= @reportSuccess %></p>
+    </form>
 
-    </form>
-    <form method="post" action="mailto:yding41@sheffield.ac.uk" name="email">
-        <input type="hidden" value="Issue reported is: <%= @report_option %> <%= @issue %>">
-        <input type="hidden" value="Description is: <%= @description %>">
-    </form>
 
     
 
@@ -67,9 +62,5 @@
 
         dropElem.classList.toggle('active');
     };
-    
-    submitForms = function(){
-        document.forms["report-form"].submit();
-        document.forms["email"].submit();
-    ;}
+
 </script>
