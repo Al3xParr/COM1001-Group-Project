@@ -123,6 +123,7 @@ get '/bookmarks/report/:bookmarkId' do
       
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
+    
 
     erb :"Bookmarks/report"
 end
@@ -130,8 +131,18 @@ end
 post '/bookmarks/report/:bookmarkId' do
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
-    if session[:loggedIn]
-        @reportSuccess = "Report successfully submitted"
+    
+ 
+    
+    if session[:loggedIn] 
+        if params[:report_option] == '' && params[:issue] == '' || params[:reason] == ''
+            @blankError = "Please properly complete the form."
+        else
+            @reportSuccess = "Report successfully submitted"
+            @report_option = params[:report_option]
+            @issue = params[:issue]
+            @description = params[:reason]
+        end
     else
         @reportError = "User not logged in."
     end

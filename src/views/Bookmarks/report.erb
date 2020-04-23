@@ -7,17 +7,18 @@
 <hr/>
 
 <div class="comment">
-        
     
-<form method="post" name="report-form" action="bookmarks/report/<%= params[:bookmarkId] %>">
+<p class="error-message"><%= @blankError %></p>
+    
+<form method="post" name="report-form" action="/bookmarks/report/<%= params[:bookmarkId] %>">
     <p>Select the relevant areas of issue</p>
-    <input type="radio" name="title">
+    <input type="radio" name="report_option" value="title">
     <label for="title">Title</label>
-    <input type="radio" name="description">
+    <input type="radio" name="report_option" value="description">
     <label for="description">Description</label>
-    <input type="radio" name="resource">
+    <input type="radio" name="report_option" value="resource">
     <label for="resource">Resource</label>
-    <input type="radio" name="tags">
+    <input type="radio" name="report_option" value="resource">
     <label for="tags">Tags</label>
     
     <a class="btn" id="toggle-dropdown">Other</a>
@@ -35,11 +36,17 @@
     
     <p>Please give a short description of why this is an issue</p>
     <textarea name="reason" rows="5"></textarea>
-    <br>
-    <input type="submit" value="Report">
+            <br>
+    <input type="submit" value="Report" onclick="submitForms">
     <p class="error-message"><%= @reportError %></p>
     <p class="success-message"><%= @reportSuccess %></p>
+
     </form>
+    <form method="post" action="mailto:yding41@sheffield.ac.uk" name="email">
+        <input type="hidden" value="Issue reported is: <%= @report_option %> <%= @issue %>">
+        <input type="hidden" value="Description is: <%= @description %>">
+    </form>
+
     
 
     
@@ -60,4 +67,9 @@
 
         dropElem.classList.toggle('active');
     };
+    
+    submitForms = function(){
+        document.forms["report-form"].submit();
+        document.forms["email"].submit();
+    ;}
 </script>
