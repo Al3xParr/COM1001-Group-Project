@@ -103,6 +103,8 @@ class User
         return toReturn 
     end
 
+    # Get a user by their userId
+    # Returns: A user object if successful or nil if not
     def self.getById(userId)
 
         query = "SELECT * FROM users WHERE userId = ?;"
@@ -119,6 +121,8 @@ class User
         return nil
     end
 
+    # Get a user by their username
+    # Returns: A user object if successful or nil if not
     def self.getByUsername(username)
 
         query = "SELECT * FROM users WHERE username = ?;"

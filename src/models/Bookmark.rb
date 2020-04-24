@@ -83,7 +83,9 @@ class Bookmark
     def to_s
         return "Bookmark ID: #{@bookmarkId} | Created at: #{@createdAt} | Title: #{@title} | Description: #{@description} | Resource: #{@resource} | Archived: #{@archived} | User ID: #{@userId}"
     end
-            
+
+    # Create a new bookmark in the databse
+    # Returns: bool if operation was successful or not
     def self.newBookmark(title, description, resource, archived, userId)
 
         query = "INSERT INTO bookmarks('title', 'description', 'resource', 'archived', 'userId', 'createdAt') VALUES(?, ?, ?, ?, ?, ?);"      
