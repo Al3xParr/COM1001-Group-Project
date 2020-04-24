@@ -99,6 +99,36 @@ class Bookmark
         return true
     end
     
+    def self.searchBy(searchTerm, searchType)
+        toReturn = []
+        
+        if searchType == "title" then
+            query = "SELECT * FROM bookmarks WHERE title LIKE ? ;"
+            result = DB.execute query, "%" + searchTerm + "%"
+        elsif searchType == "resource" then
+            query = "SELECT * FROM bookmarks WHERE resource LIKE ? ;"
+            result = DB.execute query, "%" + searchTerm + "%"
+            
+        elsif searchType == "bookmarkId" then
+            query = "SELECT * FROM bookmarks WHERE bookmarkId LIKE ? ;"
+            result = DB.execute query, searchTerm
+        elsif searchType == "userId" then
+            query = "SELECT * FROM bookmarks WHERE userId LIKE ? ;"
+            result = DB.execute query, searchTerm
+        end
+       
+        for bookmark in result do
+            bookmarkObj = Bookmark.new(bookmark[0], bookmark[1], bookmark[2], bookmark[3], bookmark[4], bookmark[5], bookmark[6])
+            toReturn.push(bookmarkObj)
+        end
+        
+        return toReturn
+    end
+            
+    
+            
+    
+    
     # Return all the known bookmarks in the database as Bookmark objects
     # Returns: an array of Bookmark objects
     def self.getAll
