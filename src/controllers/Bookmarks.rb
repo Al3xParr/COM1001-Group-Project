@@ -83,19 +83,19 @@ post '/bookmarks/edit/:bookmarkId' do
         @bookmarkError = "User not logged in."
         erb :"Bookmarks/edit"
     else
-        if params[:title] != ''
-            @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
-        end
+       # if params[:title] != ''
+        #    @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+       # end
         if params[:edit] != ''
             @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
         end
-        if params[:resource] != ''
-            @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
-        end
+       # if params[:resource] != ''
+        #    @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
+       # end
         
         @bookmarkSuccess = "Bookmark updated."
-        #erb :"Bookmark/edit_results"
-        redirect "bookmarks/all"
+        erb :"Bookmarks/edit"
+        #redirect "bookmarks/all"
     end
 end
 
