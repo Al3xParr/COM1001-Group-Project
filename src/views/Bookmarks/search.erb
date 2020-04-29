@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bookmarks Search</title>
+    </head>
+    <body>
+        <%= erb :"Shared/header" %>
+        <h1>bookmarks search</h1>
+        <form method="POST" action="/bookmarks/search">
+            <input type="text" name="search"  placeholder="Search bookmarks...">
+            
+            <label>Search By... </label>
+            
+            
+            <select name="search_option">
+                <option value="Title">Title</option>
+                <option value="source">URL</option>
+                <option value="BookmarkID">Bookmark ID</option>
+                <option value="UserID">User ID</option>
+            </select>
+            
+            <input type="submit" value="Search">
+            
+        </form>
+        <nav class = "right-align">
+        <label>Sort By:</label>
+        <select name="sort_option">
+            <option value="view">Popularity</option>
+            <option value="new">Newest</option>
+            <option value="old">Oldest</option>
+        </select>
+        </nav>
+        <br><br>
+        <% if @search_results.length > 0 then %>
+        <div class="container">
+            <table>
+                <tr>
+                    <th>Count</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>View</th>
+                </tr>
+                <% for i in (0..(@search_results.length - 1)) %>
+                    <tr>
+                        <td><%= (i + 1) %></td>
+                        <td><%= @search_results[i].title %></td>
+                        <td><%= @search_results[i].description %></td>
+                        <td class="btn-col"><a href="/bookmarks/view/<%= @search_results[i].bookmarkId %>">goto</a></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+        <% else %>
+
+            <p class="error-message">No bookmarks exist.</p>
+
+        <% end %>
+        <%= erb :"Shared/footer" %>        
+    </body>
+</html>
