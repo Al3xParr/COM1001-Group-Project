@@ -204,17 +204,26 @@ class Bookmark
     # Updates bookmark column by setting the description based on bookmarkId
     # Returns: an array of Bookmark object(s)
     def self.updateDescription(desc, bookId)
-        toReturn = []
         
         query =  "UPDATE bookmarks SET description = ? WHERE bookmarkId = ?;"
-        result = DB.execute query, '%' + desc + '%', '%' + bookId + '%'
-
-        for bookmark in result do
-            
-            bookmarkObj = Bookmark.new(bookmark[0], nil, nil, bookmark[3], nil, nil, nil)
-            toReturn.push(bookmarkObj)
-            
-        end
-        return toReturn
+        result = DB.execute query, desc, bookId
+        
+        return result
+    end
+        
+    def self.updateTitle(tit, bookId)
+        
+        query = "UPDATE bookmarks SET title = ? WHERE bookmarkId = ?;"
+        result = DB.execute query, tit, bookId
+        
+        return result
+    end
+        
+    def self.updateResource(res, bookId)
+        
+        query = "UPDATE bookmarks SET resource = ? WHERE bookmarkId = ?;"
+        result = DB.execute query, res, bookId
+        
+        return result
     end
 end

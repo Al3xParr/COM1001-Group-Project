@@ -6,7 +6,7 @@
 
 <hr/>
 
-<form method="post" action="/bookmarks/edit/">
+<form method="post" action="/bookmarks/edit/<%= params[:bookmarkId] %>">
   <label for="title"><h4>New Title</h4></label>
   <input type="text" name="title" required="required"><br><br>
   <label for="edit"><h4>New Description</h4></label>
