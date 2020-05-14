@@ -55,3 +55,21 @@ bookmarkId INTEGER NOT NULL,
 userId INTEGER NOT NULL,
 PRIMARY KEY (commentId)
 );
+
+CREATE TABLE ratings (
+
+ratingId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+rating INTEGER NOT NULL,
+PRIMARY KEY(ratingId)
+);
+
+CREATE TABLE bookmark_reports (
+
+reportId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+issue TEXT NOT NULL,
+description TEXT,
+PRIMARY KEY(reportId)
+);

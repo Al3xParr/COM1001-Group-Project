@@ -140,8 +140,6 @@ post '/bookmarks/report/:bookmarkId' do
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
- 
-    
     if session[:loggedIn] 
         if params[:report_option] == '' && params[:issue] == '' || params[:reason] == ''
             @blankError = "Please properly complete the form."
@@ -155,12 +153,4 @@ post '/bookmarks/report/:bookmarkId' do
         @reportError = "User not logged in."
     end
     erb :"Bookmarks/report"
-end
-
-# create a comment on the bookmark
-# returns:
-#   the individual view page of the bookmark i.e.
-#   /bookmarks/view?id={bookmark id}
-post '/bookmarks/comment' do
-
 end
