@@ -69,6 +69,7 @@ CREATE TABLE bookmark_reports (
 
 reportId INTEGER NOT NULL,
 bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
 issue TEXT NOT NULL,
 description TEXT,
 PRIMARY KEY(reportId)
