@@ -8,13 +8,31 @@ require 'sqlite3'
 require_relative '../models/Bookmark'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
+require_relative '../models/Rating'
 
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
 get '/bookmarks/all' do
     # gets all info about the bookmark
     @bookmarks = Bookmark.getAll()
-
+    @ratings = []
+  
+    for i in (0..(@bookmarks.length - 1))
+      totalRating = 0
+      count = 0
+      totalRatings = Rating.getByBookmarkId(@bookmarks[i].bookmarkId)
+      for j in (0..(totalRatings.length - 1))
+        totalRating += totalRatings[i]
+        count += 1
+      end
+      if totalRating = 0 or count = 0 then
+        @ratings[i] = 0
+      else
+        @ratings[i] = totalRating/count
+      end
+    end
+  
+  
     erb :"Bookmarks/index"
 end
 
@@ -28,7 +46,7 @@ get '/bookmarks/view/:bookmarkId' do
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
-
+  
     erb :"/Bookmarks/view"
 end
 

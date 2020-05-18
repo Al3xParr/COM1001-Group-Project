@@ -65,7 +65,7 @@ class Rating
         
         toReturn = []
         
-        query = "SELECT FROM ratings WHERE bookmarkId=?;"
+        query = "SELECT * FROM ratings WHERE bookmarkId= ? ;"
         
         result = DB.execute query, bookmarkId
         
