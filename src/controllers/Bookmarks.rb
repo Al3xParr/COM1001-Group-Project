@@ -119,11 +119,12 @@ post '/bookmarks/new' do
 
     if success then
       @bookmarkSuccess = "Bookmark successfully created"
+      erb :"Bookmarks/index"
     else
       @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
+      erb :"Bookmarks/new"
     end
 
-    erb :"Bookmarks/new"
   end
 end
     
