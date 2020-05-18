@@ -124,7 +124,7 @@ nav li a:hover {
     margin-bottom: 25px;
 }
 
-form input[type="text"], input[type="password"], input[type="url"], input[type="email"] {
+form input[type="text"], input[type="password"], input[type="url"] {
     font-size: 14px;
     padding: 5px 0;
     background: transparent;
