@@ -9,7 +9,7 @@ class User
     
     DB = SQLite3::Database.new 'database.db'
     
-    def initialize(userId = nil, username = nil, password = nil, admin = nil)
+    def initialize(userId = nil, username = nil, password = nil, admin = nil, deleted = nil)
        
         @userId = userId
         @username = username
@@ -23,6 +23,14 @@ class User
             @admin = true
         else
             @admin = admin
+        end
+            
+        if deleted == 0 then
+            @deleted = false
+        elsif deleted == 1 then
+            @deleted = true
+        else
+            @deleted = deleted
         end
     end
     
@@ -59,10 +67,17 @@ class User
     def admin 
         return @admin
     end
+            
+    def deleted= deleted
+        @deleted = deleted
+    end
+    def deleted
+        return @deleted
+    end
     
     # Returns: a string represnting the current state of the object
     def toString
-        return "#{@userId} #{@username} #{@password} #{@admin}"
+        return "#{@userId} #{@username} #{@password} #{@admin} #{@deleted}"
     end
     
     # Parse username and associated plane text password
@@ -88,19 +103,10 @@ class User
     # Returns: an array of User objects
     def self.getAll
         
-        toReturn = []
-        
         result = DB.execute "SELECT * FROM users;"
         
-        for user in result do
-            
-            toObj = User.new(user[0], user[1], user[2], user[3])
-            
-            toReturn.push(toObj)
-            
-        end
+        return packageUsers(result)
         
-        return toReturn 
     end
 
     # Get a user by their userId
@@ -111,14 +117,8 @@ class User
 
         result = DB.execute query, userId
 
-        if result == "" || result == nil || result[0] == nil then
-            return nil
-        else
-            result = result[0]
-            return User.new(result[0], result[1], result[2], result[3])
-        end
-
-        return nil
+        return packageUser(result)
+        
     end
 
     # Get a user by their username
@@ -129,15 +129,54 @@ class User
 
         result = DB.execute query, username
 
-        if result == "" || result == nil || result[0] == nil then
-            return nil
-        else
-            result = result[0]
-            return User.new(result[0], result[1], result[2], result[3])
-        end
-
-        return nil
+        return packageUser(result)
+        
     end
+    
+    # Get all known deleted users
+    # Returns: An array of user objects who've been deleted
+    def self.getDeletedUsers()
+        
+        query = "SELECT * FROM users WHERE deleted = 1;"
+        
+        return packageUsers(DB.execute query)
+    end
+            
+    def self.deleteUser(userId)
+        
+        query = "UPDATE users SET deleted=1 WHERE userId=?"
+        
+        begin
+            DB.execute query, userId
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+    end
+            
+    def self.setAdminState(userId, admin)
+        
+        if admin == true then
+            admin = 1
+        elsif admin == false then
+            admin = 0
+        else
+            return
+        end
+        
+        query = "UPDATE users SET admin=? WHERE userId=?"
+        
+        begin
+            DB.execute query, admin, userId
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+        
+    end
+            
     
     # Add a new user to the database
     # Returns: boolean representing success
@@ -157,6 +196,36 @@ class User
     # all methods below are private to class User
     private
     
+    # Return array of user objects 
+    def self.packageUsers(dbArray)
+        
+        toReturn = []
+        
+        for user in dbArray do
+            
+            toObj = User.new(user[0], user[1], user[2], user[3], user[4])
+            
+            toReturn.push(toObj)
+            
+        end
+        
+        return toReturn
+    end
+    
+    # Return single user from db result
+    def self.packageUser(dbArray)
+        
+        if dbArray == "" || dbArray == nil || dbArray[0] == nil then
+            return nil
+        else
+            dbArray = dbArray[0]
+            return User.new(dbArray[0], dbArray[1], dbArray[2], dbArray[3], dbArray[4])
+        end
+
+        return nil
+        
+    end
+        
     # Use BCrypt to hash a password
     # Returns: string of hashed password
     def self.passwordHash(toHash)

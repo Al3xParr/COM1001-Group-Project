@@ -76,5 +76,37 @@ class UserTests < Minitest::Test
         assert_equal false, bill.admin
 
     end
-
+    
+    def test_delete_user
+        
+        bob = User.getByUsername("Adam")
+        
+        result = User.deleteUser(bob.userId)
+        
+        assert_equal true, result
+        
+        users = User.getDeletedUsers()
+        
+        adam = users[0]
+        
+        assert_equal true, adam.deleted
+        assert_equal "Adam", adam.username
+        
+    end
+    
+    def test_set_admin_state
+        
+        jeff = User.getByUsername("Jeff")
+        
+        assert_equal false, jeff.admin
+        
+        result = User.setAdminState(jeff.userId, true)
+        
+        assert_equal true, result
+        
+        jeffTwo = User.getByUsername("Jeff")
+        
+        assert_equal true, jeffTwo.admin
+        
+    end
 end

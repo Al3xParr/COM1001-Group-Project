@@ -37,4 +37,63 @@ class Favourite
         return @userId
     end
     
+    # Get all favourited bookmarks associated with the userId
+    # Returns: array of bookmark objects
+    def self.getByUserId(userId)
+        
+        query = "SELECT
+                    favourites.userId,
+                    favourites.bookmarkId,
+                    bookmarks.title,
+                    bookmarks.description
+                FROM
+                    favourites
+                INNER JOIN bookmarks ON favourites.bookmarkId = bookmarks.bookmarkId
+                WHERE
+                    favourites.userId = ?;"
+        
+        result = DB.execute query, userId
+        
+        toReturn = []
+        
+        for fav in result
+            
+            bookmarkObj = Bookmark.new(fav[1], nil, fav[2], fav[3], nil, nil, fav[0])
+            
+            toReturn.push(bookmarkObj)
+            
+        end
+        
+        return toReturn
+    end
+    
+    # Create a favourite between a user and a bookmark
+    # Returns: if operation was successful
+    def self.newFavourite(bookmarkId, userId)
+        
+        query =  "INSERT INTO favourites('bookmarkId', 'userId') VALUES(?,?);"
+        
+        begin
+            DB.execute query, bookmarkId, userId
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+    end
+    
+    # Remove a favourite between a bookmark and a userId
+    # Returns: if operation was successful
+    def self.removeFavourite(bookmarkId, userId)
+        
+        query =  "DELETE FROM favourites WHERE bookmarkId=? AND userId=?;"
+        
+        begin
+            DB.execute query, bookmarkId, userId
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+    end 
 end

@@ -200,6 +200,10 @@ a.btn {
     background: black;
     color: white;
     border: solid 1px black;
+    text-decoration: none;
+}
+a.btn.disabled {
+    cursor-events: none;
 }
 a.btn:hover {
     transition: 0.2s;
@@ -207,8 +211,8 @@ a.btn:hover {
     background-color: white;
 }
 a.btn.edit:hover {
-    background-color: #77dd77;
-    border: solid 1px #77dd77;
+    background-color: #59bfff;
+    border: solid 1px #59bfff;
     color: white;
 }
 a.btn.favourite:hover {
