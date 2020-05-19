@@ -164,7 +164,7 @@ post '/bookmarks/report/:bookmarkId' do
             success = BookmarkReport.newReport(@bookmark.bookmarkId, session[:userId], finalIssue, params[:reason])
 
             if success then
-                
+                BookmarkReport.newReport(@bookmark.bookmarkId, session[:userId], finalIssue, params[:reason])                
                 redirect "bookmarks/view/#{@bookmark.bookmarkId}"
 
             else
