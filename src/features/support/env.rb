@@ -1,7 +1,6 @@
 require 'capybara'
 require 'rspec'
 require 'capybara/cucumber'
-require 'selenium-webdriver'
 
 ## Uncomment to enable SimpleCov
 require 'simplecov'
