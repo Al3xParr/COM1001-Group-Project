@@ -25,9 +25,10 @@ end
 
 When /^(?:|I )follow "([^\"]*)"(?: within "([^\"]*)")?$/ do |link, selector|
   with_scope(selector) do
-    click_link(link)
+    first(:link, link).click
   end
 end
+
 
 When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, value, selector|
   with_scope(selector) do
@@ -210,3 +211,4 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
