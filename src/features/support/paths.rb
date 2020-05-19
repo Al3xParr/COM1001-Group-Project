@@ -16,7 +16,7 @@ module NavigationHelpers
         '/login/logout'
     when /the bookmark\shomepage/
         '/bookmarks/all'
-    when /the view\sbookmark\s?page/
+    when /the view\sbookmark\spage/
         '/bookmarks/view/1'
     when /the search\spage/
         '/bookmarks/search'

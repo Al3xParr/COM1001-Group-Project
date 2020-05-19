@@ -1,6 +1,7 @@
 require 'capybara'
 require 'rspec'
 require 'capybara/cucumber'
+require 'selenium-webdriver'
 
 ## Uncomment to enable SimpleCov
 require 'simplecov'
@@ -14,12 +15,13 @@ require_relative '../../app'
 
 ENV['RACK_ENV'] = 'test'
 
+
 Capybara.app = Sinatra::Application
 
 class Sinatra::ApplicationWorld
   include RSpec::Expectations
   include RSpec::Matchers
-  include Capybara::DSL
+  include Capybara::DSL  
 end
 
 World do

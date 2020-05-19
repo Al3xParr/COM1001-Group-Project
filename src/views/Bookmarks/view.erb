@@ -64,12 +64,14 @@
         <%
             if @loggedIn then
         %>
+        
         <form method="post" action="/comments/create">
             <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
             <textarea name="comment" rows="5"></textarea>
             <br>
             <input type="submit" value="Comment">
         </form>
+        
         <%
             end
         %>
@@ -128,8 +130,6 @@
     </div>
 </div>
 
-<%= erb :"Shared/footer" %>
-
 <script>
     var elem = document.getElementById('toggle-dropdown');
 
@@ -140,3 +140,6 @@
         dropElem.classList.toggle('active');
     };
 </script>
+
+<%= erb :"Shared/footer" %>
+

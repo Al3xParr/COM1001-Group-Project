@@ -1,5 +1,6 @@
 require 'uri'
 require 'cgi'
+require 'selenium-webdriver'
 require_relative '../support/paths'
 
 module WithinHelpers
