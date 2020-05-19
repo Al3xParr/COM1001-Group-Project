@@ -202,9 +202,6 @@ a.btn {
     border: solid 1px black;
     text-decoration: none;
 }
-a.btn.disabled {
-    cursor-events: none;
-}
 a.btn:hover {
     transition: 0.2s;
     color: black;
@@ -225,6 +222,16 @@ a.btn.report:hover {
     border: solid 1px #f86e8e;
     color: white;
 }
+a.btn.disabled {
+    background: rgb(177, 177, 177);
+    border-color: rgb(177, 177, 177);
+    cursor: not-allowed;
+}
+a.btn.disabled:hover {
+    background-color: rgb(177, 177, 177);
+    border: solid 1px rgb(177, 177, 177);
+}
+
 
 #title {
   font-size: 2em;

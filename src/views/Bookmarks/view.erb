@@ -13,7 +13,7 @@
         </h4>
 
         <h4>
-            Resource <span class="right-align sub-font"><%= @bookmark.resource %></span>
+            Resource <span class="right-align sub-font"><a href="<%= @bookmark.resource %>"><%= @bookmark.resource %></a></span>
         </h4>
         <h3>
             Tags
@@ -38,10 +38,15 @@
             <%
                 end
             %>
-
+            <%
+                if @loggedIn then
+            %>
             <div class="chip new right-align">
                 <a id="toggle-dropdown">New tag</a>
             </div>
+            <%
+                end
+            %>
         </div>
         
         <div class="new-tags-container">
@@ -56,12 +61,18 @@
         <br>
         <h3>Comments</h3>
         <hr />
+        <%
+            if @loggedIn then
+        %>
         <form method="post" action="/comments/create">
             <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
             <textarea name="comment" rows="5"></textarea>
             <br>
             <input type="submit" value="Comment">
         </form>
+        <%
+            end
+        %>
         
         <%
             if @comments.length > 0 then
@@ -93,9 +104,21 @@
 
         <br>
         <ul>
+            <%
+            if @loggedIn then
+            %>
             <li><a class="btn favourite">Favourite</a></li>
             <li><a href="/bookmarks/report/<%= @bookmark.bookmarkId %>"class="btn report">Report</a></li>
             <li><a href="/bookmarks/edit/<%= @bookmark.bookmarkId %>" class="btn edit">Edit</a></li>
+            <%
+            else
+            %>
+            <li><a class="btn favourite disabled">Favourite</a></li>
+            <li><a class="btn report disabled">Report</a></li>
+            <li><a class="btn edit disabled">Edit</a></li>
+            <%
+            end
+            %>
         </ul>
     </div>
 </div>
