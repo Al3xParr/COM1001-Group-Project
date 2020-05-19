@@ -7,17 +7,17 @@
     </head>
     <body>
         <header class="black-bg">
-            <div class="container">
-                <h1 class="white-fg center-align">bookmarks</h1>
-            </div>
+            <h1 class="white-fg center-align">ACME resources</h1>
         </header>
         <nav class="black-bg">
             <div class="container">
                 <ul class="white-fg">
                     <li><a href="/bookmarks/all">All</a></li>
                     <li><a href="/bookmarks/search">Search</a></li>
-                    <li><a href="/bookmarks/search">Tags</a></li>
-                    <li><a href="/bookmarks/new">New</a></li>
+                    <% if session[:loggedIn] then %>
+                        <li><a href="/bookmarks/new">New</a></li>
+                        <li><a href="/favourites">Favourites</a></li>
+                    <% end %>
                     <% if session[:admin] == true then%>
                         <li><a href="/admin">Admin</a></li>
                     <% end %>
@@ -26,6 +26,7 @@
                         <li class="right-align"><a href="/login/logout">Logout</a></li>
                     <% else %> 
                         <li class="right-align"><a href="/login">Log In</a></li>
+                        <li class="right-align"><a href="/signup">Sign Up</a></li>
                     <% end %>
                 </ul>
             </div>

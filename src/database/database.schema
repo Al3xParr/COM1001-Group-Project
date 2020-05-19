@@ -4,6 +4,7 @@ userId INTEGER NOT NULL,
 username TEXT NOT NULL,
 password TEXT NOT NULL,
 admin INTEGER NOT NULL,
+deleted INTEGER,
 PRIMARY KEY (userId),
 UNIQUE(username)
 );
@@ -54,4 +55,32 @@ content TEXT NOT NULL,
 bookmarkId INTEGER NOT NULL,
 userId INTEGER NOT NULL,
 PRIMARY KEY (commentId)
+);
+
+CREATE TABLE ratings (
+
+ratingId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+rating INTEGER NOT NULL,
+PRIMARY KEY(ratingId)
+);
+
+CREATE TABLE bookmark_reports (
+
+reportId INTEGER NOT NULL,
+bookmarkId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+issue TEXT NOT NULL,
+description TEXT,
+PRIMARY KEY(reportId)
+);
+
+CREATE TABLE signup_requests (
+
+requestId INTEGER NOT NULL,
+userId INTEGER NOT NULL,
+reason TEXT NOT NULL,
+time TEXT NOT NULL,
+PRIMARY KEY(requestId)
 );

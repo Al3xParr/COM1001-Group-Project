@@ -45,6 +45,8 @@ class Comment
         return @userId
     end
 
+    # Create a new comment in the database
+    # Returns: a bool if operation was successful or not
     def self.newComment(content, bookmarkId, userId)
         
         query = "INSERT INTO comments('content', 'bookmarkId', 'userId') VALUES(?, ?, ?);"
@@ -59,6 +61,8 @@ class Comment
 
     end
 
+    # Get all the comments currently in the database
+    # Returns: an array of bookmark objects
     def self.getAll()
 
         toReturn = []
@@ -76,6 +80,8 @@ class Comment
 
     end
 
+    # Get comments which are linked to a set bookmarkId
+    # Returns: An array of comment objects
     def self.getByBookmarkId(bookmarkId)
 
         toReturn = []

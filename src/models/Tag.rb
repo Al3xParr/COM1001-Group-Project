@@ -29,6 +29,8 @@ class Tag
         return @tag
     end
 
+    # Get the tags associated with the parsed bookmarkId
+    # Returns: an array of Tag objects
     def self.getByBookmarkId(bookmarkId)
 
         toReturn = []
@@ -55,6 +57,8 @@ class Tag
         return toReturn
     end
 
+    # Append a tag to the specified bookmark
+    # Returns: bool if successful or not
     def self.newTag(tag, bookmarkId)
 
         tagId = Tag.doesTagExist(tag)
@@ -81,6 +85,8 @@ class Tag
         return true
     end
 
+    # Remove an associated tag from the specified bookmark
+    # Returns: bool if successful or not
     def self.removeTag(bookmarkId, tagId)
         
         query = "DELETE FROM bookmarks_to_tags WHERE bookmarkId = ? AND tagId = ?;"
@@ -94,8 +100,11 @@ class Tag
         return true
     end
 
+    # All methods below are private to class Tag
     private
 
+    # Creats a tag in the tags table w/o linking it to a bookmark in the bookmarks_to_tags table
+    # Returns: bool if successful
     def self.createTag(tag)
 
         query = "INSERT INTO tags('tag') VALUES(?);"
@@ -109,6 +118,8 @@ class Tag
         return true
     end
 
+    # Creates link between a bookmarkId and tagId in the bookmarks_to_tags table for many to many relationship
+    # Returns bool if successful
     def self.createLink(bookmarkId, tagId)
 
         query = "INSERT INTO bookmarks_to_tags('bookmarkId', 'tagId') VALUES(?, ?);"
@@ -122,6 +133,8 @@ class Tag
         return true
     end
 
+    # Verifies if a tag exists in the tags table
+    # Returns bool definiing if tag exists
     def self.doesTagExist(tag)
 
         query = "SELECT * FROM tags WHERE tag=?;"
@@ -136,6 +149,8 @@ class Tag
 
     end
 
+    # Verifies if a link exists between a tag and a bookmark
+    # Returns bool defining if link exists
     def self.doesLinkExist(bookmarkId, tagId)
         
         query = "SELECT * FROM bookmarks_to_tags WHERE bookmarkId = ? AND tagId = ?;"

@@ -1,0 +1,24 @@
+<%= erb :"Shared/header" %>
+
+<h1>Enter details to sign up for an account.</h1>
+
+<form method="post" action="/signup">
+    
+    
+    <p>Username</p>
+    <input type="text" name="username"><br><br>
+    
+    <p>Password</p>
+    <input type="password" name="password"><br><br>
+    
+    <p>Re-enter Password</p>
+    <input type="password" name="repassword"><br><br>
+       
+    <p class="error-message"><%= @signupError %></p>
+    <p class="success-message"><%= @signupSuccess %></p>
+    
+    <input type="submit" value="Sign Up">
+    
+</form><br>
+
+<%= erb :"Shared/footer" %>

@@ -83,7 +83,9 @@ class Bookmark
     def to_s
         return "Bookmark ID: #{@bookmarkId} | Created at: #{@createdAt} | Title: #{@title} | Description: #{@description} | Resource: #{@resource} | Archived: #{@archived} | User ID: #{@userId}"
     end
-            
+
+    # Create a new bookmark in the databse
+    # Returns: bool if operation was successful or not
     def self.newBookmark(title, description, resource, archived, userId)
 
         query = "INSERT INTO bookmarks('title', 'description', 'resource', 'archived', 'userId', 'createdAt') VALUES(?, ?, ?, ?, ?, ?);"      
@@ -96,6 +98,36 @@ class Bookmark
         
         return true
     end
+    
+    def self.searchBy(searchTerm, searchType)
+        toReturn = []
+        
+        if searchType == "title" then
+            query = "SELECT * FROM bookmarks WHERE title LIKE ? ;"
+            result = DB.execute query, "%" + searchTerm + "%"
+        elsif searchType == "resource" then
+            query = "SELECT * FROM bookmarks WHERE resource LIKE ? ;"
+            result = DB.execute query, "%" + searchTerm + "%"
+            
+        elsif searchType == "bookmarkId" then
+            query = "SELECT * FROM bookmarks WHERE bookmarkId LIKE ? ;"
+            result = DB.execute query, searchTerm
+        elsif searchType == "userId" then
+            query = "SELECT * FROM bookmarks WHERE userId LIKE ? ;"
+            result = DB.execute query, searchTerm
+        end
+       
+        for bookmark in result do
+            bookmarkObj = Bookmark.new(bookmark[0], bookmark[1], bookmark[2], bookmark[3], bookmark[4], bookmark[5], bookmark[6])
+            toReturn.push(bookmarkObj)
+        end
+        
+        return toReturn
+    end
+            
+    
+            
+    
     
     # Return all the known bookmarks in the database as Bookmark objects
     # Returns: an array of Bookmark objects
@@ -172,17 +204,26 @@ class Bookmark
     # Updates bookmark column by setting the description based on bookmarkId
     # Returns: an array of Bookmark object(s)
     def self.updateDescription(desc, bookId)
-        toReturn = []
         
         query =  "UPDATE bookmarks SET description = ? WHERE bookmarkId = ?;"
-        result = DB.execute query, '%' + desc + '%', '%' + bookId + '%'
-
-        for bookmark in result do
-            
-            bookmarkObj = Bookmark.new(bookmark[0], nil, nil, bookmark[3], nil, nil, nil)
-            toReturn.push(bookmarkObj)
-            
-        end
-        return toReturn
+        result = DB.execute query, desc, bookId
+        
+        return result
+    end
+        
+    def self.updateTitle(tit, bookId)
+        
+        query = "UPDATE bookmarks SET title = ? WHERE bookmarkId = ?;"
+        result = DB.execute query, tit, bookId
+        
+        return result
+    end
+        
+    def self.updateResource(res, bookId)
+        
+        query = "UPDATE bookmarks SET resource = ? WHERE bookmarkId = ?;"
+        result = DB.execute query, res, bookId
+        
+        return result
     end
 end

@@ -6,8 +6,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Bookmark'
+require_relative '../models/BookmarkReport'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
+
 
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
@@ -29,36 +31,44 @@ get '/bookmarks/view/:bookmarkId' do
     
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
 
+    if session[:loggedIn] then
+
+        @isFavourite = Favourite.isFavourite(params[:bookmarkId], session[:userId])
+        @loggedIn = session[:loggedIn]
+        
+    end
+
     erb :"/Bookmarks/view"
 end
 
 # search bookmarks using parameters
 # return the form to allow user to search
 get '/bookmarks/search' do
-    @bookmarks = Bookmark.getAll()
+    
+    @search_results = Bookmark.getAll()
     erb :"Bookmarks/search"
 end
 
 #post search form data and perform search using values
 post '/bookmarks/search' do
 
+    
     session[:search] = params[:search]
 
     @search_option = params[:search_option]
 
     @search = session[:search] #takes the search work from the search form
-
+    @search_results = []
     #if search form is not empty
-    if @search != ''
+    if @search != '' then
         if @search_option == "Title"
-            
-            @search_results = Bookmark.searchByTitle(@search) 
-#         elsif @search_option == "Tags"
-#             @search_results = Bookmark.searchByTags(@search)
-        elsif @search_option == "Bookmark ID"
-            @search_results = Bookmark.searchByBookmarkId(@search)
-        elsif @search_option == "User ID"
-            @search_results = Bookmark.searchByUserId(@search)
+            @search_results = Bookmark.searchBy(@search, "title") 
+        elsif @search_option == "BookmarkID"
+            @search_results = Bookmark.searchBy(@search, "bookmarkId")
+        elsif @search_option == "UserID"
+            @search_results = Bookmark.searchBy(@search, "userId")
+        elsif @search_option == "source"
+            @search_results = Bookmark.searchBy(@search, "resource")
         end
     end
     erb :"Bookmarks/search"  
@@ -72,22 +82,30 @@ get '/bookmarks/edit/:bookmarkId' do
     erb :"Bookmarks/edit"
 end
 
+
 # update the defined bookmark with the parsed post data
 # /bookmarks/edit
-post '/bookmarks/edit' do
+post '/bookmarks/edit/:bookmarkId' do
     # assigned to variable in case we want to display edited
     # somewhere in the future as confirmation page
-    if params[:title] != ''
-        @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+    if session[:loggedIn] != true then
+        @bookmarkError = "User not logged in."
+        erb :"Bookmarks/edit"
+    else
+        if params[:title] != ''
+            @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+        end
+        if params[:edit] != ''
+            @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
+        end
+        if params[:resource] != ''
+            @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
+        end
+        
+        @bookmarkSuccess = "Bookmark updated."
+        erb :"Bookmarks/edit"
+        #redirect "bookmarks/all"
     end
-    if params[:edit] != ''
-        @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
-    end
-    if params[:resource] != ''
-        @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
-    end
-    #erb :"Bookmark/edit_results"
-    redirect "bookmarks/all"
 end
 
 #creating a new bookmark page
@@ -110,11 +128,12 @@ post '/bookmarks/new' do
 
     if success then
       @bookmarkSuccess = "Bookmark successfully created"
+      erb :"Bookmarks/index"
     else
       @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
+      erb :"Bookmarks/new"
     end
 
-    erb :"Bookmarks/new"
   end
 end
     
@@ -131,27 +150,30 @@ post '/bookmarks/report/:bookmarkId' do
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
- 
-    
     if session[:loggedIn] 
-        if params[:report_option] == '' && params[:issue] == '' || params[:reason] == ''
+        if ((params[:report_option] == nil && params[:issue] == '') || params[:reason] == '')
             @blankError = "Please properly complete the form."
         else
-            @reportSuccess = "Report successfully submitted"
-            @report_option = params[:report_option]
-            @issue = params[:issue]
-            @description = params[:reason]
+           
+            if params[:report_option] == nil then
+                finalIssue = params[:issue]
+            else
+                finalIssue = params[:report_option]
+            end
+
+            success = BookmarkReport.newReport(@bookmark.bookmarkId, session[:userId], finalIssue, params[:reason])
+
+            if success then
+                
+                redirect "bookmarks/view/#{@bookmark.bookmarkId}"
+
+            else
+                @reportError = "Internal server error when registering bookmark report."
+            end
         end
     else
         @reportError = "User not logged in."
     end
+
     erb :"Bookmarks/report"
-end
-
-# create a comment on the bookmark
-# returns:
-#   the individual view page of the bookmark i.e.
-#   /bookmarks/view?id={bookmark id}
-post '/bookmarks/comment' do
-
 end

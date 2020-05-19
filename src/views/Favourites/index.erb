@@ -1,0 +1,35 @@
+<%= erb :"Shared/header" %>
+
+<h1>Your favourites</h1>
+<hr/>
+
+<% if @favourites.length > 0 then%>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Count</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>View</th>
+            <th>Unfavourite</th>
+        </tr>
+        <% for i in (0..(@favourites.length - 1)) %>
+            <tr>
+                <td><%= (i + 1) %></td>
+                <td><%= @favourites[i].title %></td>
+                <td><%= @favourites[i].description %></td>
+                <td class="btn-col"><a href="/bookmarks/view/<%= @favourites[i].bookmarkId %>">&#10132;</a></td>
+                <td class="btn-col"><a href="/favourites/remove/<%= @favourites[i].bookmarkId %>">&#10006;</a></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+<% else %>
+
+    <p align="center">No favourites yet.</p>
+
+<% end %>
+
+<%= erb :"Shared/footer" %>
