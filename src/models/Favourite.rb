@@ -95,5 +95,19 @@ class Favourite
         end
         
         return true
-    end 
+    end
+
+    def self.isFavourite(bookmarkId, userId)
+
+        query = "SELECT * FROM favourites WHERE bookmarkId=? AND userId=?;"
+
+        result = DB.execute query, bookmarkId, userId
+        
+        if result.length == 0 then
+            return false
+        else
+            return true
+        end
+
+    end
 end
