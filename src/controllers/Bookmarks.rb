@@ -55,6 +55,22 @@ end
 get '/bookmarks/search' do
     
     @search_results = Bookmark.getAll()
+    @ratings = []
+  
+    for i in (0..(@search_results.length - 1))
+      totalRating = 0
+      count = 0
+      totalRatings = Rating.getByBookmarkId(@search_results[i].bookmarkId)
+      for j in (0..(totalRatings.length - 1))
+        totalRating += totalRatings[i]
+        count += 1
+      end
+      if totalRating == 0 or count == 0 then
+        @ratings[i] = 0
+      else
+        @ratings[i] = totalRating/count
+      end
+    end
     erb :"Bookmarks/search"
 end
 

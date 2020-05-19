@@ -17,11 +17,7 @@
                 <td><%= (i + 1) %></td>
                 <td><%= @bookmarks[i].title %></td>
                 <td><%= @bookmarks[i].description %></td>
-                <% if @ratings[i] = 0 then %>
-                  <td>No rating available</td>
-                <% else %>
-                  <td>@ratings[i]</td>
-                <% end %>
+                <td><%= @ratings[i] %></td>
                 <td class="btn-col"><a href="/bookmarks/view/<%= @bookmarks[i].bookmarkId %>">&#10132;</a></td>
             </tr>
         <% end %>
