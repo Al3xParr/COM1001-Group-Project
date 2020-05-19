@@ -6,8 +6,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Bookmark'
+require_relative '../models/BookmarkReport'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
+
 
 # show all avaliable bookmarks
 # /bookBookmark.getTitle in order of date of creation
@@ -28,6 +30,8 @@ get '/bookmarks/view/:bookmarkId' do
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
+
+    @loggedIn = session[:loggedIn]
 
     erb :"/Bookmarks/view"
 end
@@ -142,16 +146,29 @@ post '/bookmarks/report/:bookmarkId' do
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
     if session[:loggedIn] 
-        if params[:report_option] == '' && params[:issue] == '' || params[:reason] == ''
+        if ((params[:report_option] == nil && params[:issue] == '') || params[:reason] == '')
             @blankError = "Please properly complete the form."
         else
-            @reportSuccess = "Report successfully submitted"
-            @report_option = params[:report_option]
-            @issue = params[:issue]
-            @description = params[:reason]
+           
+            if params[:report_option] == nil then
+                finalIssue = params[:issue]
+            else
+                finalIssue = params[:report_option]
+            end
+
+            success = BookmarkReport.newReport(@bookmark.bookmarkId, session[:userId], finalIssue, params[:reason])
+
+            if success then
+                
+                redirect "bookmarks/view/#{@bookmark.bookmarkId}"
+
+            else
+                @reportError = "Internal server error when registering bookmark report."
+            end
         end
     else
         @reportError = "User not logged in."
     end
+
     erb :"Bookmarks/report"
 end

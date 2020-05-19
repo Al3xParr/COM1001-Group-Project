@@ -8,7 +8,11 @@ require_relative '../models/Tag'
 
 post '/tags/add' do
 
-    result = Tag.newTag(params[:tag], params[:bookmarkId])
+    if session[:loggedIn] then
+
+        result = Tag.newTag(params[:tag], params[:bookmarkId])
+
+    end
 
     redirect "/bookmarks/view/#{params[:bookmarkId]}"
 
@@ -16,7 +20,11 @@ end
 
 get '/tags/delete/:tagId/:bookmarkId' do
 
-    result = Tag.removeTag(params[:bookmarkId], params[:tagId])
+    if session[:loggedIn] then
+
+        result = Tag.removeTag(params[:bookmarkId], params[:tagId])
+
+    end
 
     redirect "/bookmarks/view/#{params[:bookmarkId]}"
 
