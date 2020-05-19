@@ -128,11 +128,11 @@ class Bookmark
     #Returning the rating for a specifix bookmark
     #Returns: the average rating and number of times it has been rated
    
-    def self.getRatingByBookmarkId(bookmark)
+    def self.getRatingByBookmarkId(bookmarkId)
       rating = []
       totalRating = 0
       count = 0
-      totalRatings = Rating.getByBookmarkId(bookmark.bookmarkId)
+      totalRatings = Rating.getByBookmarkId(bookmarkId)
       for j in (0..(totalRatings.length - 1))
         totalRating += totalRatings[j]
         count += 1

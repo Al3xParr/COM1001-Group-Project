@@ -18,7 +18,7 @@ get '/bookmarks/all' do
     @ratings = []
   
     for i in (0..(@bookmarks.length - 1))
-      @ratings[i] = Bookmark.getRatingByBookmarkId(@bookmarks[i])
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@bookmarks[i].bookmarkId)
     end
   
   
@@ -35,6 +35,8 @@ get '/bookmarks/view/:bookmarkId' do
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
+  
+    @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
   
     erb :"/Bookmarks/view"
 end
