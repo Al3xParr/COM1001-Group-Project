@@ -18,6 +18,7 @@ get '/bookmarks/all' do
     @ratings = []
   
     for i in (0..(@bookmarks.length - 1))
+      rating = []
       totalRating = 0
       count = 0
       totalRatings = Rating.getByBookmarkId(@bookmarks[i].bookmarkId)
@@ -25,11 +26,13 @@ get '/bookmarks/all' do
         totalRating += totalRatings[i]
         count += 1
       end
-      if totalRating = 0 or count = 0 then
-        @ratings[i] = 0
+      if count == 0 then
+        rating[0] = 0
       else
-        @ratings[i] = totalRating/count
+        rating[0] = totalRating/count
       end
+      rating[1] = count
+      @ratings[i] = rating
     end
   
   
@@ -60,16 +63,19 @@ get '/bookmarks/search' do
     for i in (0..(@search_results.length - 1))
       totalRating = 0
       count = 0
+      rating = []
       totalRatings = Rating.getByBookmarkId(@search_results[i].bookmarkId)
       for j in (0..(totalRatings.length - 1))
         totalRating += totalRatings[i]
         count += 1
       end
-      if totalRating == 0 or count == 0 then
-        @ratings[i] = 0
+      if count == 0 then
+        rating[0] = 0
       else
-        @ratings[i] = totalRating/count
+        rating[0] = totalRating/count
       end
+        rating[1] = count
+        @ratings[i] = rating
     end
     erb :"Bookmarks/search"
 end

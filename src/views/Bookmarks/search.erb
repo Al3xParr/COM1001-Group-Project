@@ -46,11 +46,7 @@
                         <td><%= (i + 1) %></td>
                         <td><%= @search_results[i].title %></td>
                         <td><%= @search_results[i].description %></td>
-                        <% if @ratings[i] = 0 then %>
-                          <td>No rating available</td>
-                        <% else %>
-                          <td>@ratings[i]</td>
-                        <% end %>
+                        <td><%= @ratings[i][0] %> (<%= @ratings[i][1] %>)</td>
                         <td class="btn-col"><a href="/bookmarks/view/<%= @search_results[i].bookmarkId %>">goto</a></td>
                     </tr>
                 <% end %>
