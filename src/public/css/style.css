@@ -6,6 +6,9 @@ header {
     width: 100vw;
     height: 125px;
 }
+header h1 {
+    transform: translate(0, 110%);
+}
 
 .black-bg {
     background: black;
@@ -210,6 +213,11 @@ a.btn:hover {
 a.btn.edit:hover {
     background-color: #59bfff;
     border: solid 1px #59bfff;
+    color: white;
+}
+a.btn.favourited {
+    background-color: #FBC02D;
+    border: solid 1px #FBC02D;
     color: white;
 }
 a.btn.favourite:hover {

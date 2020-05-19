@@ -107,7 +107,12 @@
             <%
             if @loggedIn then
             %>
-            <li><a class="btn favourite">Favourite</a></li>
+                <% if @isFavourite %>
+                    <li><a href="/favourites/remove/<%= @bookmark.bookmarkId %>" class="btn favourited">Unfavourite</a></li>
+                <% else %>
+                    <li><a href="/favourites/add/<%= @bookmark.bookmarkId %>" class="btn favourite">Favourite</a></li>
+                <% end %>
+
             <li><a href="/bookmarks/report/<%= @bookmark.bookmarkId %>"class="btn report">Report</a></li>
             <li><a href="/bookmarks/edit/<%= @bookmark.bookmarkId %>" class="btn edit">Edit</a></li>
             <%

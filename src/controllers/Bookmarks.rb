@@ -31,7 +31,12 @@ get '/bookmarks/view/:bookmarkId' do
     
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
 
-    @loggedIn = session[:loggedIn]
+    if session[:loggedIn] then
+
+        @isFavourite = Favourite.isFavourite(params[:bookmarkId], session[:userId])
+        @loggedIn = session[:loggedIn]
+        
+    end
 
     erb :"/Bookmarks/view"
 end
