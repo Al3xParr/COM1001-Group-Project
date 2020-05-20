@@ -63,6 +63,8 @@ post '/bookmarks/search' do
     session[:search] = params[:search]
 
     @search_option = params[:search_option]
+    
+    @sort_option = params[:sort_option]
 
     @search = session[:search] #takes the search work from the search form
     @search_results = []
@@ -78,8 +80,12 @@ post '/bookmarks/search' do
             @search_results = Bookmark.searchBy(@search, "resource")
         end
     end
+    if @search != '' then
+        if @sort_option == "rate" then
+            @search_results = Bookmark.sortBy(@search_results,"rate")
+        end
+    end
     @ratings = []
-  
     for i in (0..(@search_results.length - 1))
       @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
     end
