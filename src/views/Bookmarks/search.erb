@@ -19,17 +19,18 @@
                 <option value="UserID">User ID</option>
             </select>
             
+            <label>Sort By:</label>
+            
+            
+            <select name="sort_option">
+                <option value="rate">Rating</option>
+                <option value="new">Newest</option>
+                <option value="old">Oldest</option>
+            </select>
             <input type="submit" value="Search">
             
         </form>
-        <nav class = "right-align">
-        <label>Sort By:</label>
-        <select name="sort_option">
-            <option value="view">Popularity</option>
-            <option value="new">Newest</option>
-            <option value="old">Oldest</option>
-        </select>
-        </nav>
+
         <br><br>
         <% if @search_results.length > 0 then %>
         <div class="container">
