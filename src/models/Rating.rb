@@ -79,4 +79,16 @@ class Rating
         return toReturn
     end
     
+    def self.checkOtherRatings(bookmarkId)
+      
+      query = "SELECT * FROM ratings WHERE bookmarkId= ? ;"
+      
+      result = DB.execute query, bookmarkId
+      
+      if result == "" || result == nil || result[0] == nil then
+      
+      end
+
+    end
+    
 end

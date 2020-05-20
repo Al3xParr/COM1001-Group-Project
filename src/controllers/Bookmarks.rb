@@ -38,6 +38,8 @@ get '/bookmarks/view/:bookmarkId' do
   
     @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
   
+    @ratingError = ""
+  
     erb :"/Bookmarks/view"
 end
 
@@ -49,7 +51,7 @@ get '/bookmarks/search' do
     @ratings = []
   
     for i in (0..(@search_results.length - 1))
-      @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i])
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
     end
     erb :"Bookmarks/search"
 end
@@ -168,4 +170,16 @@ post '/bookmarks/report/:bookmarkId' do
         @reportError = "User not logged in."
     end
     erb :"Bookmarks/report"
+end
+
+post 'bookmarks/ratings/add' do
+
+    if session[:loggedIn] != true then
+      @ratingError = "User not logged in"
+      redirect "/bookmarks/view/#{params[:bookmarkId]}"
+    else
+      result = Rating.newRating(params[:bookmarkId], session[:userId], params[:rate])
+
+      redirect "/bookmarks/view/#{params[:bookmarkId]}"
+    end
 end
