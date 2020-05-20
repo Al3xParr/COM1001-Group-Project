@@ -10,6 +10,7 @@
             <th>Issue</th>
             <th>Description</th>
             <th>View</th>
+            <th>Delete</th>
         </tr>
         <% for i in (0..(@bookmarksreports.length - 1)) %>
             <tr>
@@ -17,6 +18,7 @@
                 <td><%= @bookmarksreports[i].issue %></td>
                 <td><%= @bookmarksreports[i].description %></td>
                 <td class="btn-col"><a href="/bookmarks/view/<%= @bookmarksreports[i].reportId %>">&#10132;</a></td>
+                <td>Delete</td>
             </tr>
         <% end %>
     </table>

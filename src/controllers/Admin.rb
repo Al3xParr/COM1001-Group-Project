@@ -1,6 +1,7 @@
 # Admin.rb
 # Author: Luke Suckling
-# Date: 09/03/2020
+# Author: Ramona Ana-Maria Petre
+# Date: 20/05/2020
 
 require 'sinatra'
 require 'sinatra/reloader'
@@ -10,7 +11,7 @@ require_relative '../models/BookmarkReport'
 
 # fetch the admin 'homepage'
 # /admin
-get '/admin' do
+get '/reports' do
     
     if session[:admin] then
         @bookmarksreports = BookmarkReport.getAll()
@@ -20,7 +21,7 @@ get '/admin' do
     end
 end
     
-get '/admin/view:reportId' do
+get '/reports/view:reportId' do
     #fetch bookmark object
     @reportId = BookmarkReport.getById(params[:bookmarkId])
 

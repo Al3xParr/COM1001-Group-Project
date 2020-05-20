@@ -19,7 +19,8 @@
                         <li><a href="/favourites">Favourites</a></li>
                     <% end %>
                     <% if session[:admin] == true then%>
-                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="/reports">Reports</a></li>
+                        <li><a href="/user">Users</a></li>
                     <% end %>
                     <% if session[:loggedIn] == true then %>
                         <li class="right-align"><a href="">Logged in as: <%= session[:username] %></a></li>
