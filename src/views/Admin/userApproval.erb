@@ -2,4 +2,28 @@
 
 <h1>For approving new accounts</h1>
 
+        <% if @deleted_users.length > 0 then %>
+        <div class="container">
+            <table>
+                <tr>
+                    <th>UserId</th>
+                    <th>Username</th>
+                </tr>
+                <% for i in (0..(@deleted_users.length - 1)) %>
+                    <tr>
+                        
+                        <td><%= @deleted_users[i].userId %></td>
+                        <td><%= @deleted_users[i].username %></td>
+                        
+                        
+                    </tr>
+                <% end %>
+            </table>
+        </div>
+        <% else %>
+
+            <p class="error-message">No new accounts to approve.</p>
+
+        <% end %>
+
 <%= erb :"Shared/footer" %>

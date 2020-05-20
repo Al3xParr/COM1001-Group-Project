@@ -27,7 +27,7 @@ post '/signup' do
         @signupError = "Username already exists"
         
     else
-        if User.newUser(@username, @password, 0, 0) 
+        if User.newUser(@username, @password, 0, 1) 
             
             
             newAccount = User.getByUsername(@username)
