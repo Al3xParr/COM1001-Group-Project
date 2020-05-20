@@ -10,6 +10,7 @@ require_relative '../models/Rating'
 post '/ratings/add' do
   
     puts "test"
+    
     if session[:loggedIn] != true then
       @ratingError = "User not logged in"
       redirect "/bookmarks/view/#{params[:bookmarkId]}"

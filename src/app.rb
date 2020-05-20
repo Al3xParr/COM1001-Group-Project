@@ -5,7 +5,7 @@
 
 
 require 'sinatra'
-#require 'sinatra/reloader'
+require 'sinatra/reloader'
 require 'sqlite3'
 
 require_relative 'controllers/Admin'
@@ -15,6 +15,7 @@ require_relative 'controllers/Login'
 require_relative 'controllers/Errors'
 require_relative 'controllers/Comments'
 require_relative 'controllers/Tags'
+require_relative 'controllers/Ratings'
 
 set :bind, '0.0.0.0'
 enable :sessions
