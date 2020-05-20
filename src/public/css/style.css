@@ -275,3 +275,29 @@ a.btn.report:hover {
 .new-tags-container.active {
     max-height: 128px;
 }
+.rating {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    cursor:pointer;
+    font-size:1.75em;
+    color:lightgray;
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #fad728;    
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #e8b910;  
+}

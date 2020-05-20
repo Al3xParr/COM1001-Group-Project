@@ -134,7 +134,7 @@ class Bookmark
       count = 0
       totalRatings = Rating.getByBookmarkId(bookmarkId)
       for j in (0..(totalRatings.length - 1))
-        totalRating += totalRatings[j]
+        totalRating += totalRatings[j].rating.to_i
         count += 1
       end
       if count == 0 then
