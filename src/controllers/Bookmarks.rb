@@ -9,6 +9,7 @@ require_relative '../models/Bookmark'
 require_relative '../models/BookmarkReport'
 require_relative '../models/Comment'
 require_relative '../models/Tag'
+require_relative '../models/Rating'
 
 
 # show all avaliable bookmarks
@@ -16,7 +17,13 @@ require_relative '../models/Tag'
 get '/bookmarks/all' do
     # gets all info about the bookmark
     @bookmarks = Bookmark.getAll()
-
+    @ratings = []
+  
+    for i in (0..(@bookmarks.length - 1))
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@bookmarks[i].bookmarkId)
+    end
+  
+  
     erb :"Bookmarks/index"
 end
 
@@ -38,6 +45,11 @@ get '/bookmarks/view/:bookmarkId' do
         
     end
 
+  
+    @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
+  
+    @ratingError = ""
+  
     erb :"/Bookmarks/view"
 end
 
@@ -46,6 +58,11 @@ end
 get '/bookmarks/search' do
     
     @search_results = Bookmark.getAll()
+    @ratings = []
+  
+    for i in (0..(@search_results.length - 1))
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
+    end
     erb :"Bookmarks/search"
 end
 
@@ -70,6 +87,11 @@ post '/bookmarks/search' do
         elsif @search_option == "source"
             @search_results = Bookmark.searchBy(@search, "resource")
         end
+    end
+    @ratings = []
+  
+    for i in (0..(@search_results.length - 1))
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
     end
     erb :"Bookmarks/search"  
 end
@@ -174,4 +196,16 @@ post '/bookmarks/report/:bookmarkId' do
     end
 
     erb :"Bookmarks/report"
+end
+
+post 'bookmarks/ratings/add' do
+
+    if session[:loggedIn] != true then
+      @ratingError = "User not logged in"
+      redirect "/bookmarks/view/#{params[:bookmarkId]}"
+    else
+      result = Rating.newRating(params[:bookmarkId], session[:userId], params[:rate])
+
+      redirect "/bookmarks/view/#{params[:bookmarkId]}"
+    end
 end

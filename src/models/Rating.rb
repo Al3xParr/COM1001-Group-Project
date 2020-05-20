@@ -47,8 +47,18 @@ class Rating
     
     def self.newRating(bookmarkId, userId, rating)
         
+        #deleting the current rating if the user has one for this bookmark
+        if Rating.checkOtherRatings(bookmarkId,userId) == true then
+          query = "DELETE FROM ratings WHERE bookmarkId = ? AND userId = ?;"
+          begin
+            DB.execute query, bookmarkId, userId
+          rescue SQLite3::Exception
+            return false
+          end
+        end
+          
         query = "INSERT INTO ratings('bookmarkId', 'userId', 'rating') VALUES(?,?,?);"
-        
+
         begin
             DB.execute query, bookmarkId, userId, rating
         rescue SQLite3::Exception
@@ -65,7 +75,7 @@ class Rating
         
         toReturn = []
         
-        query = "SELECT FROM ratings WHERE bookmarkId=?;"
+        query = "SELECT * FROM ratings WHERE bookmarkId= ? ;"
         
         result = DB.execute query, bookmarkId
         
@@ -77,6 +87,19 @@ class Rating
         end
         
         return toReturn
+    end
+    
+    def self.checkOtherRatings(bookmarkId,userId)
+      
+      query = "SELECT * FROM ratings WHERE bookmarkId= ? AND userId= ?;"
+      
+      result = DB.execute query, bookmarkId, userId
+      
+      if result == "" || result == nil || result[0] == nil then
+        return false
+      end
+      
+      return true
     end
     
 end

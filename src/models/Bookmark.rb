@@ -125,8 +125,26 @@ class Bookmark
         return toReturn
     end
             
-    
-            
+    #Returning the rating for a specifix bookmark
+    #Returns: the average rating and number of times it has been rated
+   
+    def self.getRatingByBookmarkId(bookmarkId)
+      rating = []
+      totalRating = 0
+      count = 0
+      totalRatings = Rating.getByBookmarkId(bookmarkId)
+      for j in (0..(totalRatings.length - 1))
+        totalRating += totalRatings[j].rating.to_f
+        count += 1
+      end
+      if count == 0 then
+        rating[0] = 0
+      else
+        rating[0] = totalRating/count
+      end
+      rating[1] = count
+      return rating
+    end
     
     
     # Return all the known bookmarks in the database as Bookmark objects
