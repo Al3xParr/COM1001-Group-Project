@@ -1,3 +1,7 @@
+#Bookmarbs.feature
+#Author: .Aryan
+#Date: 15/05/20
+
 Feature: All Bookmark
 
      Scenario: body of the page
@@ -16,7 +20,6 @@ Feature: All Bookmark
          Then I should see "Tags"
          Then I should see "Comments"
          Then I should see "Author"
-    
     
     Scenario: Adding a new tag to the bookmark
         Given I am on the login page
@@ -38,8 +41,43 @@ Feature: All Bookmark
         When I follow "➔" within "table"
         Then I should be on the view bookmark page
         When I fill in "comment" with "noice" 
-        When I press "Comment"
-        Then I should see "noice"
+        #When I press "Comment"
+        #Then I should see "noice"
+        
+    Scenario: Reporting the bookmarks 
+        Given I am on the login page
+        When I fill in "username" with "luke"
+        When I fill in "password" with "password"
+        When I press "Login" within "form"
+        Then I should be on the bookmark homepage
+        When I follow "➔" within "table"
+        Then I should be on the view bookmark page
+        When I follow "Report"
+        Then I should be on the report page
+        Then I should see "Report Bookmark"
+        When I choose "Title" 
+        When I fill in "reason" with "faulty bookmark"
+        When I press "Report"
+        #continue once addition has been made to this page
+        
+    Scenario: Editing the bookmarks 
+        Given I am on the login page
+        When I fill in "username" with "luke"
+        When I fill in "password" with "password"
+        When I press "Login" within "form"
+        Then I should be on the bookmark homepage
+        When I follow "➔" within "table"
+        Then I should be on the view bookmark page
+        When I follow "Edit"
+        Then I should be on the edit page
+        Then I should see "Edit the Bookmark"
+        Then I should see "New Title"
+       # When I fill "title" with "Staff payroll 2019"
+        
+        
+        
+        
+        
         
          
        
