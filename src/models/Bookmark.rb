@@ -125,6 +125,35 @@ class Bookmark
         return toReturn
     end
             
+            
+            
+    def self.sortBy(search_result,sortType)
+        temp = []
+        out = []
+        if sortType == "rate" then
+            for i in 0..(search_result.length-1) do
+                temp.append(self.getRatingByBookmarkId((search_result[i].bookmarkId))[0])        #i[1] equivilent to i.count
+            end
+            print temp
+            puts
+            temp = temp.sort
+            print temp
+            for i in (0..temp.length-1) do
+                for j in (0..temp.length-1) do
+                    if temp[i] == (self.getRatingByBookmarkId((search_result[j].bookmarkId))[0]) then
+                        out.append((search_result[j]))
+                    end
+                end
+            end
+            return out
+        elsif sortType == "new" then
+            return search_result
+        elsif sortType == "old" then
+            return search_result
+        end
+     
+    end
+            
     #Returning the rating for a specifix bookmark
     #Returns: the average rating and number of times it has been rated
    
