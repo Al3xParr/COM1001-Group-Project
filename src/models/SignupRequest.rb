@@ -4,7 +4,7 @@
 
 require 'sqlite3'
 
-class Rating
+class SignupRequest
     
     DB = SQLite3::Database.new 'database.db'
     
