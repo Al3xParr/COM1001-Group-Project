@@ -24,6 +24,8 @@ module NavigationHelpers
         '/bookmarks/edit/1'
     when /the report\spage/
         '/bookmarks/report/1'
+    when /the favourites\spage/
+        '/favourites'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

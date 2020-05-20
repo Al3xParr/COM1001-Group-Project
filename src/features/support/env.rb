@@ -26,6 +26,3 @@ end
 World do
 	Sinatra::ApplicationWorld.new  
 end
-
-
-
