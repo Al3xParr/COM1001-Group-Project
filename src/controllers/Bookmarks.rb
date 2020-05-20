@@ -78,6 +78,11 @@ post '/bookmarks/search' do
             @search_results = Bookmark.searchBy(@search, "resource")
         end
     end
+    @ratings = []
+  
+    for i in (0..(@search_results.length - 1))
+      @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
+    end
     erb :"Bookmarks/search"  
 end
 
