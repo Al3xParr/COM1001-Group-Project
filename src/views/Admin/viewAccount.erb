@@ -1,0 +1,31 @@
+<%= erb :"Admin/index" %>
+
+<div class="row">
+    <div class="col three-quart">
+        <h1>
+            <%= @username%>
+        </h1>
+        <hr />
+        <h4>
+            UserId: <span class="right-align sub-font"><%= @userId %></span>
+        </h4>
+        <h4>
+            RequestId: <span class="right-align sub-font"><%= @requestId %></span>
+        </h4>
+        <h3>
+            Time: <span class="right-align sub-font"><%= @time %></span>
+        </h3>
+        
+        
+    </div>
+    <div class="col three-quart">
+    <h3>
+        Reason <span class="right-align sub-font"><%= @reason %></span>
+    </h3>
+        <a href="/admin/approveAccount/<%= @userId %>" class="btn accept">Accept</a>
+        <a href="/admin/declineAccount/<%= @userId %>" class="btn report">Decline</a>
+    </div>
+
+</div>
+
+<%= erb :"Shared/footer" %>
