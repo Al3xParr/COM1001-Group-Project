@@ -100,5 +100,18 @@ class Comment
         return toReturn
 
     end
+
+    def self.deleteComment(commentId)
+
+        query = "DELETE FROM comments WHERE commentId=?;"
+
+        begin
+            DB.execute query
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
+    end
     
 end

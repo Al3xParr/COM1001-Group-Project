@@ -59,4 +59,18 @@ class CommentTests < Minitest::Test
 
     end
 
+    def test_delete_comment
+
+        comments = Comment.getAll()
+
+        for comment in comments
+
+            result = Comment.deleteComment(comment.commentId)
+
+            assert_equal true, result
+            
+        end
+
+    end
+
 end

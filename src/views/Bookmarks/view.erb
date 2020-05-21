@@ -84,7 +84,10 @@
                 <p><%= comment.content %></p>
                 <hr />
                 <div align="right">
-                    <a class="btn report">Delete</a>
+                    <form method="post" action="/comments/delete">
+                        <input type="text" name="commentId" value="<%= comment.commentId%>" hidden>
+                        <input type="submit" class="btn report" value="Delete">
+                    </form>
                 </div>
             </div>
         <%

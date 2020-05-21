@@ -20,10 +20,17 @@ post '/comments/create' do
 
 end
 
-post '/comments/edit/:commentId' do
+post '/comments/delete' do
 
-end
+    puts params[:commentId]
 
-post '/comments/delete/:commentId' do
+    result = Comment.deleteComment(params[:commentId])
 
+    puts result
+
+    if result then
+        redirect back
+    else
+        status 500
+    end
 end
