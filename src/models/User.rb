@@ -155,7 +155,7 @@ class User
         query = "UPDATE users SET deleted=? WHERE userId=?"
         
         begin
-            DB.execute query, deleted, userId
+            DB.execute query, delete, userId
         rescue SQLite3::Exception
             return false
         end

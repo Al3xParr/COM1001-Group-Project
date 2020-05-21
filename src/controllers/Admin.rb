@@ -35,6 +35,9 @@ get '/admin/userApproval' do
         
         @new_accounts = SignupRequest.getAll()
         @deleted_users = User.getDeletedUsers()
+
+        puts @new_accounts.length
+        puts @deleted_users.length
         
         @display_users = []
         
@@ -84,7 +87,7 @@ get '/admin/approveAccount/:userId' do
         User.setDeleteState(params[:userId], false)
         SignupRequest.deleteById(params[:userId])
     end
-    redirect :"bookmarks/all"
+    redirect back
     
 end
     
