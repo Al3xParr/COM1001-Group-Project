@@ -1,0 +1,37 @@
+<%= erb :"Shared/header" %>
+
+<h1>All reports regarding the bookmarks</h1>
+<hr />
+<% if @bookmarksreports.length > 0 then %>
+<div class="container">
+    <table>
+        <tr>
+            <th>Count</th>
+            <th>Issue</th>
+            <th>Description</th>
+            <th>View</th>
+            <th>Delete</th>
+        </tr>
+        <% for i in (0..(@bookmarksreports.length - 1)) %>
+            <tr>
+                <td><%= (i + 1) %></td>
+                <td><%= @bookmarksreports[i].issue %></td>
+                <td><%= @bookmarksreports[i].description %></td>
+                <td class="btn-col"><a href="/bookmarks/view/<%= @bookmarksreports[i].reportId %>">&#10132;</a></td>
+                <td class="btn-col">
+                <form method="post" action="/reports/delete">
+                    <input type="hidden" name="report" value="<%= @bookmarksreports[i].bookmarkId %>">
+                    <%= @bookmarksreports[i].bookmarkId %> is in <%= @bookmarksreports[i].reportId %><input type="submit" value="delete">
+                </form>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+<% else %>
+
+    <p class="error-message">No reports exist.</p>
+
+<% end %>
+
+<%= erb :"Shared/footer" %>

@@ -88,11 +88,31 @@ class BookmarkReport
         return toReturn
     end
     
+    def self.getById(bookmarkId)
+        
+        query =  "SELECT * FROM bookmark_reports WHERE bookmarkId=?;"
+
+        result = DB.execute query, bookmarkId
+        
+        if result == "" || result == nil || result[0] == nil then
+
+            return nil
+        else
+
+            result = result[0]
+
+            return BookmarkReport.new(result[0], result[1], result[2], result[3], result[4])
+        end
+
+        return nil
+    end
+    
     # Remove a bookmark report from the database
     # Returns: boolean representing success
     def self.deleteReport(reportId)
         
-        query "REMOVE FROM bookmark_reports WHERE reportId=?;"
+        
+        query = "DELETE FROM bookmark_reports WHERE reportId=?;"
         
         begin
             DB.execute query, reportId

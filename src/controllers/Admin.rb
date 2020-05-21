@@ -1,13 +1,16 @@
 # Admin.rb
-# Alex Parr
-# 20/05/2020
+# Author: Luke Suckling
+# Author: Ramona Ana-Maria Petre
+# Author: Alex Parr
+# Date: 20/05/2020
 
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+require_relative '../models/Bookmark'
+require_relative '../models/BookmarkReport'
 require_relative '../models/SignupRequest'
 require_relative '../models/User'
-
-
 
 # /admin
 get '/admin' do
@@ -71,6 +74,11 @@ get '/admin/viewAccount/:userId' do
         @reason = @userRequest.reason
         @username = @userDetails.username
         erb :"Admin/viewAccount"
+get '/reports' do
+    
+    if session[:admin] then
+        @bookmarksreports = BookmarkReport.getAll()
+        erb :"Admin/reports"
     else
         redirect :"bookmarks/all"
     end 
@@ -96,3 +104,10 @@ end
 
 
 
+end
+    
+post '/reports/delete' do
+    @bookmarksreports = params[:reportId]
+    BookmarkReport.deleteReport(@bookmarksreports)
+    redirect '/reports'
+end
