@@ -5,6 +5,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+#error messages if the internal methods fail and there is no error message in place
 not_found do
     @errorMessage = "Looks like the resource you asked for can't be found."
 

@@ -22,6 +22,7 @@ post '/login' do
     
     success = User.authenticate(@username, @password)
     
+    #setting up the sescion variables
     if success then
         user = User.getByUsername(@username)
 

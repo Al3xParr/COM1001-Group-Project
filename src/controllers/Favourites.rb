@@ -6,6 +6,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require_relative '../models/Favourite'
 
+#getting the favourites for that user
 get '/favourites' do
 
     @favourites = Favourite.getByUserId(session[:userId])
@@ -13,6 +14,7 @@ get '/favourites' do
     erb :"Favourites/index"
 end
 
+#adding a favourites to that bookmark list
 get '/favourites/add/:bookmarkId' do
 
     if session[:loggedIn] then
@@ -25,6 +27,7 @@ get '/favourites/add/:bookmarkId' do
 
 end
 
+#removing a favourite from the list
 get '/favourites/remove/:bookmarkId' do
 
     if session[:loggedIn] then
