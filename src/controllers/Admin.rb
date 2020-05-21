@@ -21,9 +21,8 @@ get '/reports' do
     end
 end
     
-get '/reports/view:reportId' do
-    #fetch bookmark object
-    @reportId = BookmarkReport.getById(params[:bookmarkId])
-
-    erb :"/Admin/view"
+post '/reports/delete' do
+    @bookmarksreports = params[:reportId]
+    BookmarkReport.deleteReport(@bookmarksreports)
+    redirect '/reports'
 end
