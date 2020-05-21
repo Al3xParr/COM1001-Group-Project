@@ -101,6 +101,7 @@ class Comment
 
     end
 
+    #deleting a comment for from a bookmark
     def self.deleteComment(commentId)
 
         query = "DELETE FROM comments WHERE commentId=?;"

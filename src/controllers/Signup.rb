@@ -8,11 +8,12 @@ require_relative '../models/User'
 require_relative '../models/SignupRequest'
 
 
-
+#signing up for the user
 get '/signup' do
     erb :"Signup/index"
 end
 
+#submitting the signup
 post '/signup' do
     
     @password = params[:password]
@@ -20,6 +21,7 @@ post '/signup' do
     @username = params[:username]
     @reason = params[:reason]
     
+    #validation checks for the sign up
     if @password != @repassword then
         @signupError = "Passwords don't match"
         
@@ -27,6 +29,7 @@ post '/signup' do
         @signupError = "Username already exists"
         
     else
+      #creating the user
         if User.newUser(@username, @password, 0, 1) 
             
             

@@ -6,8 +6,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require_relative '../models/Tag'
 
+#adding a tag to the bookmark
 post '/tags/add' do
 
+    #validation
     if session[:loggedIn] then
         
         if params[:tag] != "" then
@@ -19,6 +21,7 @@ post '/tags/add' do
     end
 end
 
+#removing a tag from the cross
 get '/tags/delete/:tagId/:bookmarkId' do
 
     if session[:loggedIn] then

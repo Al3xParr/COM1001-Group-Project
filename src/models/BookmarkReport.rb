@@ -88,6 +88,7 @@ class BookmarkReport
         return toReturn
     end
     
+    #returning the bookmarks by Id
     def self.getById(bookmarkId)
         
         query =  "SELECT * FROM bookmark_reports WHERE bookmarkId=?;"

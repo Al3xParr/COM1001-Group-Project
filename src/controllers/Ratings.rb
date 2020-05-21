@@ -7,12 +7,15 @@ require 'sinatra/reloader'
 require 'sqlite3'
 require_relative '../models/Rating'
 
+#adding ratings to the bookmarks
 post '/ratings/add' do
     
+    #checking the rate has a value
     if params[:rate] == nil then
       redirect "/bookmarks/view/#{params[:bookmarkId]}"
     end
       
+    #adding a rate to the bookmark
     rate = Integer(params[:rate])
     if session[:loggedIn] != true then
       @ratingError = "User not logged in"

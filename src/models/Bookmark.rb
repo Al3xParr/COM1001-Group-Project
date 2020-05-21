@@ -99,9 +99,11 @@ class Bookmark
         return true
     end
     
+    #searching function for the bookmarks
     def self.searchBy(searchTerm, searchType)
         toReturn = []
         
+        #changing the query dependant on the search
         if searchType == "title" then
             query = "SELECT * FROM bookmarks WHERE title LIKE ? ;"
             result = DB.execute query, "%" + searchTerm + "%"
@@ -125,7 +127,7 @@ class Bookmark
         return toReturn
     end
             
-    #Returning the rating for a specifix bookmark
+    #Returning the rating for a specific bookmark
     #Returns: the average rating and number of times it has been rated
    
     def self.getRatingByBookmarkId(bookmarkId)
@@ -228,7 +230,8 @@ class Bookmark
         
         return result
     end
-        
+       
+    #returning the new title from the edited bookmark
     def self.updateTitle(tit, bookId)
         
         query = "UPDATE bookmarks SET title = ? WHERE bookmarkId = ?;"
@@ -237,6 +240,7 @@ class Bookmark
         return result
     end
         
+    #updating the resource for the bookmarks after edits
     def self.updateResource(res, bookId)
         
         query = "UPDATE bookmarks SET resource = ? WHERE bookmarkId = ?;"
