@@ -57,11 +57,32 @@ end
 
 get '/admin/userDisable' do
     if session[:admin] then
+        
+        @users = User.getAll()
+        
         erb :"Admin/userDisable"
     else
         redirect :"bookmarks/all"
     end
     
+end
+    
+post '/admin/userDisable/approve' do
+    
+    result = User.setAdminState(params[:userId], 1)
+    
+    puts result
+    
+    redirect :"admin/userDisable"
+end
+
+post '/admin/userDisable/delete' do
+    
+    result = User.setDeleteState(params[:userId], 1)
+    
+    puts result
+    
+    redirect :"admin/userDisable"
 end
  
 get '/admin/viewAccount/:userId' do

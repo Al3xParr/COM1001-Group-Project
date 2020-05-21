@@ -2,5 +2,33 @@
 <%= erb :"Shared/header" %>
 
 <h1>For disabling accounts</h1>
+<div class="container">
+    <table>
+        <tr>
+            <th>Count</th>
+            <th>Username</th>
+            <th>Make an admin</th>
+            <th>Delete account</th>
+        </tr>
+        <% for i in (0..(@users.length - 1)) %>
+            <tr>
+                <td><%= (i + 1) %></td>
+                <td><%= @users[i].username %></td>
+                <td class="btn-col">
+                    <form method="post" action="admin/userDisable/approve">
+                        <input type="hidden" name="userId" value="<%= @users[i].userId %>">
+                        <%= @users[i].userId %> is in <%= @users[i].username %><input type="submit" value="approve">
+                    </form>
+                </td>
+                <td class="btn-col">
+                   <form method="post" action="admin/userDisable/delete">
+                    <input type="hidden" name="userId" value="<%= @users[i].userId %>">
+                    <%= @users[i].userId %> is in <%= @users[i].username %><input type="submit" value="delete">
+                </form>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
 
 <%= erb :"Shared/footer" %>
