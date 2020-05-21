@@ -9,6 +9,10 @@ require_relative '../models/Rating'
 
 post '/ratings/add' do
     
+    if params[:rate] == nil then
+      redirect "/bookmarks/view/#{params[:bookmarkId]}"
+    end
+      
     rate = Integer(params[:rate])
     if session[:loggedIn] != true then
       @ratingError = "User not logged in"
@@ -19,7 +23,7 @@ post '/ratings/add' do
       if result then
           redirect "/bookmarks/view/#{params[:bookmarkId]}"
       else
-          #status 500
+          status 500
       end
     end
     
