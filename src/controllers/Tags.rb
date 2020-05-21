@@ -9,13 +9,14 @@ require_relative '../models/Tag'
 post '/tags/add' do
 
     if session[:loggedIn] then
-
-        result = Tag.newTag(params[:tag], params[:bookmarkId])
-
-    end
+        
+        if params[:tag] != "" then
+          result = Tag.newTag(params[:tag], params[:bookmarkId])
+        end
 
     redirect "/bookmarks/view/#{params[:bookmarkId]}"
-
+    
+    end
 end
 
 get '/tags/delete/:tagId/:bookmarkId' do
