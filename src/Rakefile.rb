@@ -15,10 +15,10 @@ require_relative 'app'
 # ... code to delete the database ....
 #end
 
-desc "Run tests"
-Rake::TestTask.new do |t|
-    t.pattern = "*_test.rb"
-end
+#desc "Run tests"
+#Rake::TestTask.new do |t|
+#    t.pattern = "*_test.rb"
+#end
 
 #desc "Upload all files to the server"
 #task :upload => [:test, :clean] do
