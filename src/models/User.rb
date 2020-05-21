@@ -142,12 +142,20 @@ class User
         return packageUsers(DB.execute query)
     end
             
-    def self.deleteUser(userId)
+    def self.setDeleteState(userId, delete)
         
-        query = "UPDATE users SET deleted=1 WHERE userId=?"
+        if delete == true then
+            delete = 1
+        elsif delete == false then
+            delete = 0
+        else
+            return
+        end    
+        
+        query = "UPDATE users SET deleted=? WHERE userId=?"
         
         begin
-            DB.execute query, userId
+            DB.execute query, deleted, userId
         rescue SQLite3::Exception
             return false
         end
