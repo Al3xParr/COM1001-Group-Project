@@ -147,20 +147,6 @@ class Bookmark
             end
             return out
         elsif sortType == "new" then
-            for i in 0..(search_result.length-1) do
-                temp.append(self.getRatingByBookmarkId((search_result[i].bookmarkId))[0])        #i[1] equivilent to i.count
-            end
-            temp = temp.sort #need to change to sort by date
-            for i in (0..temp.length-1) do
-                for j in (0..placeholder.length-1) do
-                    if temp[i] == (self.getRatingByBookmarkId((placeholder[j].bookmarkId))[0]) then
-                        out.append((placeholder[j]))
-                        placeholder.delete_at(j)
-                        break
-                    end
-                end
-            end
-            return out
             return search_result
         elsif sortType == "old" then
             return search_result
