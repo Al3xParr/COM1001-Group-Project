@@ -317,3 +317,24 @@ a.btn.disabled:hover {
 .rating:not(:checked) > label:hover ~ label {
     color: #e8b910;  
 }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+
+
