@@ -180,12 +180,12 @@ class User
     
     # Add a new user to the database
     # Returns: boolean representing success
-    def self.newUser(username, password, admin)
+    def self.newUser(username, password, admin, deleted)
         
-        query = "INSERT INTO users('username', 'password', 'admin') VALUES(?, ?, ?);"
+        query = "INSERT INTO users('username', 'password', 'admin', 'deleted') VALUES(?, ?, ?, ?);"
         
         begin
-            DB.execute query, username, User.passwordHash(password), admin
+            DB.execute query, username, User.passwordHash(password), admin, deleted
         rescue SQLite3::Exception
             return false
         end
