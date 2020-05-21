@@ -25,6 +25,10 @@ require_relative 'app'
 #    puts "Uploading files to the server"
 # ... code to upload any files ...
 #end
+desc "run acceptance test"
+task :feature do
+    sh "cucumber"
+end
 
 desc "Run the Sinatra app locally"
 task :run do
