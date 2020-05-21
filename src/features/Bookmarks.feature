@@ -1,6 +1,3 @@
-#Bookmarbs.feature
-#Author: .Aryan
-#Date: 15/05/20
 
 Feature: All Bookmark
 
