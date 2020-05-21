@@ -19,6 +19,7 @@ get '/bookmarks/all' do
     @bookmarks = Bookmark.getAll()
     @ratings = []
   
+    #ratings for the bookmarks
     for i in (0..(@bookmarks.length - 1))
       @ratings[i] = Bookmark.getRatingByBookmarkId(@bookmarks[i].bookmarkId)
     end
@@ -32,12 +33,12 @@ get '/bookmarks/view/:bookmarkId' do
     #fetch bookmark object
     @bookmark = Bookmark.getById(params[:bookmarkId])
 
+    #details for each bookmark
     @user = User.getById(@bookmark.userId)
-
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
-    
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
 
+    #checking the user is logged in for to see if the bookmark is a favourite
     if session[:loggedIn] then
 
         @isFavourite = Favourite.isFavourite(params[:bookmarkId], session[:userId])
@@ -46,9 +47,7 @@ get '/bookmarks/view/:bookmarkId' do
     end
 
     @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
-  
-    @ratingError = ""
-  
+    
     erb :"/Bookmarks/view"
 end
 
@@ -135,11 +134,12 @@ get '/bookmarks/new' do
 end
 
 post '/bookmarks/new' do
-  
+  #checking if a user is loaged in
   if session[:loggedIn] != true then
     @bookmarkError = "User not logged in"
     erb :"Bookmarks/new"
   else
+    #getting the bookmark information for the new bookmark
     @title = params[:title]
     @resource = params[:resource]
     @description = params[:description]
@@ -156,9 +156,10 @@ post '/bookmarks/new' do
 
   end
 end
-    
+
+#report form for a bookmark
 get '/bookmarks/report/:bookmarkId' do
-      
+     
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
@@ -166,10 +167,12 @@ get '/bookmarks/report/:bookmarkId' do
     erb :"Bookmarks/report"
 end
     
+#submitting a report form to the admins
 post '/bookmarks/report/:bookmarkId' do
     @bookmark = Bookmark.getById(params[:bookmarkId])
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     
+    #parameters aren't empty
     if session[:loggedIn] 
         if ((params[:report_option] == nil && params[:issue] == '') || params[:reason] == '')
             @blankError = "Please properly complete the form."
@@ -181,6 +184,7 @@ post '/bookmarks/report/:bookmarkId' do
                 finalIssue = params[:report_option]
             end
 
+            #submitting the report
             success = BookmarkReport.newReport(@bookmark.bookmarkId, session[:userId], finalIssue, params[:reason])
 
             if success then
@@ -196,10 +200,11 @@ post '/bookmarks/report/:bookmarkId' do
     erb :"Bookmarks/report"
 end
 
+#adding the ratings to the bookmark for each user
 post 'bookmarks/ratings/add' do
 
+    #checks before submitting the report
     if session[:loggedIn] != true then
-      @ratingError = "User not logged in"
       redirect "/bookmarks/view/#{params[:bookmarkId]}"
     else
       result = Rating.newRating(params[:bookmarkId], session[:userId], params[:rate])
