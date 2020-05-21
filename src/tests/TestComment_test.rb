@@ -21,6 +21,8 @@ class CommentTests < Minitest::Test
         
     end
 
+    #Add two comments into the database, one which has all the fields completed as expected and the other with a "nil" field
+    #Should return true for the first comment and false for the other
     def test_new_comment
 
         success = Comment.newComment("hello", 1, 1);
@@ -33,6 +35,8 @@ class CommentTests < Minitest::Test
         
     end
 
+    #Gets the first comment from the database, with ID = 1, content = "This is a comment.", bookmarkId = 1, userId = 1
+    #Should return true for all the tests
     def test_get_all
 
         comments = Comment.getAll
@@ -46,6 +50,8 @@ class CommentTests < Minitest::Test
 
     end
 
+    #Gets the first comment from an array of comments that are under the bookmark with ID = 1
+    #Should return true for all of the tests
     def test_get_by_bookmark_id
 
         comments = Comment.getByBookmarkId(1)
@@ -59,6 +65,8 @@ class CommentTests < Minitest::Test
 
     end
 
+    #Gets all the comments from the database and deletes all the comments
+    #Should return true for all of the comments
     def test_delete_comment
 
         comments = Comment.getAll()
