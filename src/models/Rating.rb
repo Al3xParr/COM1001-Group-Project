@@ -45,6 +45,7 @@ class Rating
         return @rating
     end
     
+    #creating a new rating for each bookmark
     def self.newRating(bookmarkId, userId, rating)
         
         #deleting the current rating if the user has one for this bookmark
@@ -56,7 +57,8 @@ class Rating
             return false
           end
         end
-          
+        
+        #creating the the new rating
         query = "INSERT INTO ratings('bookmarkId', 'userId', 'rating') VALUES(?,?,?);"
 
         begin
@@ -89,6 +91,7 @@ class Rating
         return toReturn
     end
     
+    #checking if there is a rating for that bookmark and user
     def self.checkOtherRatings(bookmarkId,userId)
       
       query = "SELECT * FROM ratings WHERE bookmarkId= ? AND userId= ?;"

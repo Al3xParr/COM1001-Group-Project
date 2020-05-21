@@ -97,6 +97,7 @@ class Favourite
         return true
     end
 
+    #checking if the bookmark is a favowrite for that user
     def self.isFavourite(bookmarkId, userId)
 
         query = "SELECT * FROM favourites WHERE bookmarkId=? AND userId=?;"

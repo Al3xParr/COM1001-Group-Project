@@ -45,6 +45,7 @@ class SignupRequest
         return @time
     end
     
+    #creating a new sign up request
     def self.newRequest(userId, reason)
         
         query = "INSERT INTO signup_requests('userId', 'reason', 'time') VALUES(?,?,?);"
@@ -58,6 +59,7 @@ class SignupRequest
         return true
     end
     
+    #getting the sign up request for a user
     def self.getByUserId(userId)
         
         query = "SELECT * FROM signup_requests WHERE userId = ?;"
@@ -70,6 +72,7 @@ class SignupRequest
         
     end
     
+    #getting all the sign up requests
     def self.getAll()
         
         toReturn = []
@@ -88,6 +91,7 @@ class SignupRequest
         return toReturn
     end
     
+    #delating a certain sign up request by the id
     def self.deleteById(userId)
         
         query = "DELETE FROM signup_requests WHERE userId = ?;"

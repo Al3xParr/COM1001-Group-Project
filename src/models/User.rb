@@ -162,7 +162,9 @@ class User
         
         return true
     end
-            
+          
+    #setting an admin state for a user
+    #can change from admin to non admin or the other way around
     def self.setAdminState(userId, admin)
         
         if admin == true then
