@@ -81,7 +81,7 @@
                 for comment in @comments 
         %>
             <div class="comment">
-                <p><%= comment.content %></p>
+                <p><%= comment.content %> <span class="right-align">By <%= User.getById(comment.userId).username%></span></p>
                 <hr />
                 <div align="right">
                     <form method="post" action="/comments/delete">

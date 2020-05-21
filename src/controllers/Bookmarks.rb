@@ -45,7 +45,6 @@ get '/bookmarks/view/:bookmarkId' do
         
     end
 
-  
     @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
   
     @ratingError = ""
