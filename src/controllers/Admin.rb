@@ -79,17 +79,6 @@ get '/admin/viewAccount/:userId' do
     end 
     
 end
-  
-get '/reports' do
-    
-    if session[:admin] then
-        @bookmarksreports = BookmarkReport.getAll()
-        erb :"Admin/reports"
-    else
-        redirect :"bookmarks/all"
-    end 
-    
-end
     
 get '/admin/approveAccount/:userId' do
     if session[:admin] then    
@@ -107,9 +96,22 @@ get '/admin/declineAccount/:userId' do
     redirect :"bookmarks/all"
      
 end
+
+get '/admin/reports' do
     
-post '/reports/delete' do
-    @bookmarksreports = params[:reportId]
-    BookmarkReport.deleteReport(@bookmarksreports)
-    redirect '/reports'
+    if session[:admin] then
+        @bookmarksreports = BookmarkReport.getAll()
+        erb :"Admin/reports"
+    else
+        redirect :"bookmarks/all"
+    end 
+    
+end
+
+post '/admin/reports/delete' do
+    result = BookmarkReport.deleteReport(params[:reportId])
+
+    puts result
+
+    redirect '/admin/reports'
 end

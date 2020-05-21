@@ -110,9 +110,10 @@ class BookmarkReport
     # Remove a bookmark report from the database
     # Returns: boolean representing success
     def self.deleteReport(reportId)
-        
-        
+
         query = "DELETE FROM bookmark_reports WHERE reportId=?;"
+
+        puts reportId
         
         begin
             DB.execute query, reportId
@@ -121,5 +122,6 @@ class BookmarkReport
         end
         
         return true
+
     end
 end
