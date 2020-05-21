@@ -230,6 +230,12 @@ a.btn.report:hover {
     border: solid 1px #f86e8e;
     color: white;
 }
+
+a.btn.accept:hover {
+    background-color: #6ef873;
+    border: solid 1px #6ef873;
+    color: white;
+}
 a.btn.disabled {
     background: rgb(177, 177, 177);
     border-color: rgb(177, 177, 177);

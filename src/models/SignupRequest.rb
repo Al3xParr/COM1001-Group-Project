@@ -39,7 +39,7 @@ class SignupRequest
     end
     
     def time= time
-        @rating = time
+        @time = time
     end
     def time
         return @time
@@ -58,6 +58,17 @@ class SignupRequest
         return true
     end
     
+    def self.getByUserId(userId)
+        
+        query = "SELECT * FROM signup_requests WHERE userId = ?;"
+
+        result = DB.execute query, userId
+
+        result = result[0]
+        return SignupRequest.new(result[0], result[1], result[2], result[3])
+        
+    end
+    
     def self.getAll()
         
         toReturn = []
@@ -74,6 +85,19 @@ class SignupRequest
         end
         
         return toReturn
+    end
+    
+    def self.deleteById(userId)
+        
+        query = "DELETE FROM signup_requests WHERE userId = ?;"
+        
+        begin
+            DB.execute query, userId
+        rescue SQLite3::Exception
+            return false
+        end
+        
+        return true
     end
     
 end

@@ -11,7 +11,7 @@ require_relative '../models/User'
 
 # /admin
 get '/admin' do
-    if session[:admin] 
+    if session[:admin] then
         erb :"Admin/index"
     else
         redirect :"bookmarks/all"
@@ -19,15 +19,17 @@ get '/admin' do
 end
 
 get '/admin/bookmarkReport' do
-    if session[:admin] 
+    if session[:admin] then
         erb :"Admin/bookmarkReport"
     else
         redirect :"bookmarks/all"
     end
 end
 
+
+
 get '/admin/userApproval' do
-    if session[:admin]
+    if session[:admin] then
         
         @new_accounts = SignupRequest.getAll()
         @deleted_users = User.getDeletedUsers()
@@ -49,10 +51,48 @@ get '/admin/userApproval' do
 end
 
 get '/admin/userDisable' do
-    if session[:admin]
+    if session[:admin] then
         erb :"Admin/userDisable"
     else
         redirect :"bookmarks/all"
     end
+    
 end
-  
+ 
+get '/admin/viewAccount/:userId' do
+    @userId = params[:userId]
+    @userRequest = SignupRequest.getByUserId(@userId)
+    @userDetails = User.getById(@userId)
+    
+    if session[:admin] then
+        puts @userRequest.time
+        @requestId = @userRequest.requestId
+        @time = @userRequest.time
+        @reason = @userRequest.reason
+        @username = @userDetails.username
+        erb :"Admin/viewAccount"
+    else
+        redirect :"bookmarks/all"
+    end 
+    
+end
+    
+get '/admin/approveAccount/:userId' do
+    if session[:admin] then    
+        User.setDeleteState(params[:userId], 0)
+        SignupRequest.deleteById(params[:userId])
+    end
+    redirect :"bookmarks/all"
+    
+end
+    
+get '/admin/declineAccount/:userId' do
+    if session[:admin] then    
+        SignupRequest.deleteById(params[:userId])
+    end
+    redirect :"bookmarks/all"
+     
+end
+
+
+
