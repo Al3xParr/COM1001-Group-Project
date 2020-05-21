@@ -69,7 +69,7 @@ end
     
 post '/admin/userDisable/approve' do
     
-    result = User.setAdminState(params[:userId], 1)
+    result = User.setAdminState(params[:userId], true)
     
     puts result
     
@@ -78,7 +78,7 @@ end
 
 post '/admin/userDisable/delete' do
     
-    result = User.setDeleteState(params[:userId], 1)
+    result = User.setDeleteState(params[:userId], true)
     
     puts result
     
