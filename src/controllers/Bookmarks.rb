@@ -83,6 +83,12 @@ post '/bookmarks/search' do
     if @search != '' then
         if @sort_option == "rate" then
             @search_results = Bookmark.sortBy(@search_results,"rate")
+        elsif @sort_option == "rate_rev" then
+            @search_results = Bookmark.sortBy(@search_results,"rate_rev")
+        elsif @sort_option == "new" then
+            @search_results = Bookmark.sortBy(@search_results,"new")
+        elsif @sort_option == "old" then
+            @search_results = Bookmark.sortBy(@search_results,"old")
         end
     end
     @ratings = []
