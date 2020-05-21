@@ -9,15 +9,18 @@ require_relative '../models/Comment'
 
 post '/comments/create' do
 
-    result = Comment.newComment(params[:comment], params[:bookmarkId], session[:userId])
+    if session[:loggedIn] then
 
+        if params[:comment].length >= 4 && params[:comment].length < 1000 then
+            Comment.newComment(params[:comment], params[:bookmarkId], session[:userId])
+        else
+            @commentsError = "Comment needs at be between 4 and 1000 characters."
+        end
 
-    if result then
         redirect "/bookmarks/view/#{params[:bookmarkId]}"
-    else
-        status 500
     end
 
+    redirect "/bookmarks/view/#{params[:bookmarkId]}"
 end
 
 post '/comments/delete' do

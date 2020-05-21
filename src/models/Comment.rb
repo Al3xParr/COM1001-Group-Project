@@ -106,7 +106,7 @@ class Comment
         query = "DELETE FROM comments WHERE commentId=?;"
 
         begin
-            DB.execute query
+            DB.execute query, commentId
         rescue SQLite3::Exception
             return false
         end

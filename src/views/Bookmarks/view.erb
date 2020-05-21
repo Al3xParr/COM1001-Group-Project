@@ -71,7 +71,7 @@
             <br>
             <input type="submit" value="Comment">
         </form>
-        
+        <p class="error-message"><%= @commentsError %></p>
         <%
             end
         %>
@@ -86,7 +86,11 @@
                 <div align="right">
                     <form method="post" action="/comments/delete">
                         <input type="text" name="commentId" value="<%= comment.commentId%>" hidden>
-                        <input type="submit" class="btn report" value="Delete">
+                        <% if @loggedIn then %>
+                            <input type="submit" class="btn report" value="Delete">
+                        <% else %>
+                            <input type="submit" class="btn disabled" value="Delete">
+                        <% end %>
                     </form>
                 </div>
             </div>
@@ -104,14 +108,18 @@
         <h5>
             Information
         </h5>
+        <hr>
         <p>Author <span class="right-align"><%= @user.username %></span></p>
-        <p>Date <span class="right-align"><%= @bookmark.createdAt %></span></p>
+        <p>Date <span class="right-align"><%= Time.parse(@bookmark.createdAt).strftime('%F %T') %></span></p>
 
         <br>
         <h5>Rating</h5>
-        <p><%= @rating[0] %> /5 (<%= @rating[1] %>)</p> <br>
+        <hr>
+        <p><%= @rating[0] %> /5 (<%= @rating[1] %>)</p> 
+        <br>
+        <% if @loggedIn then %>
         <h5>Your rating</h5>
-      
+        <hr>
         <form method="post" action="/ratings/add">
           <div class="rating">
             <input type="radio" id="star5" name="rate" value="5" >
@@ -125,16 +133,12 @@
             <input type="radio" id="star1" name="rate" value="1" >
             <label for="star1"></label>
           </div>
-          
           <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
-        
-          <input type="submit" value="Submit">
+          <input type="submit" value="Rate" align="right">
         </form>
-        
-
         <br>
         <p class="error"><%=@ratingError%></p>
-        <br>
+        <% end %>
         <ul>
             <%
             if @loggedIn then
