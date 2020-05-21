@@ -149,8 +149,7 @@ post '/bookmarks/new' do
     success = Bookmark.newBookmark(@title,@description,@resource,0,@userId)
 
     if success then
-      @bookmarkSuccess = "Bookmark successfully created"
-      erb :"Bookmarks/index"
+      redirect "/bookmarks/all"
     else
       @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
       erb :"Bookmarks/new"
