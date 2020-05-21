@@ -2,11 +2,11 @@ Feature: login
 
     Scenario: Login
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
-        Then I should see "Logged in as: luke" within "body"
+        Then I should see "Logged in as: admin" within "body"
     
     Scenario: Incorrect username
         Given I am on the login page
@@ -18,7 +18,7 @@ Feature: login
     
     Scenario: Incorrect password
         Given I am on the login page
-        When I fill in "username" with "luke"
+        When I fill in "username" with "admin"
         When I fill in "password" with "blah"
         When I press "Login" within "form"
         Then I should be on the login page
@@ -26,8 +26,8 @@ Feature: login
         
    Scenario: Logout
        Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         When I follow "Logout"
         Then I should be on the login page
