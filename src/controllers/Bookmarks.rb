@@ -86,6 +86,8 @@ post '/bookmarks/search' do
             @search_results = Bookmark.searchBy(@search, "userId")
         elsif @search_option == "source"
             @search_results = Bookmark.searchBy(@search, "resource")
+        elsif @search_option == "Tags"
+            @search_results = Bookmark.searchByTag(@search.split(", "))
         end
     end
     @ratings = []
