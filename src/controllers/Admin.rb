@@ -74,6 +74,12 @@ get '/admin/viewAccount/:userId' do
         @reason = @userRequest.reason
         @username = @userDetails.username
         erb :"Admin/viewAccount"
+    else
+        redirect :"bookmarks/all"
+    end 
+    
+end
+  
 get '/reports' do
     
     if session[:admin] then
@@ -100,10 +106,6 @@ get '/admin/declineAccount/:userId' do
     end
     redirect :"bookmarks/all"
      
-end
-
-
-
 end
     
 post '/reports/delete' do
