@@ -65,6 +65,7 @@ class SignupRequest
         result = DB.execute query, userId
 
         result = result[0]
+        
         return SignupRequest.new(result[0], result[1], result[2], result[3])
         
     end

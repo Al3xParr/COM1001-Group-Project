@@ -1,27 +1,28 @@
-<%= erb :"Admin/index" %>
+<%= erb :"Shared/header" %>
 
 <div class="row">
     <div class="col three-quart">
         <h1>
-            <%= @username%>
+            New signup request
         </h1>
         <hr />
         <h4>
-            UserId: <span class="right-align sub-font"><%= @userId %></span>
+            Username <span class="right-align sub-font"><%= @username %></span>
         </h4>
         <h4>
-            RequestId: <span class="right-align sub-font"><%= @requestId %></span>
+            Request id <span class="right-align sub-font"><%= @requestId %></span>
         </h4>
-        <h3>
-            Time: <span class="right-align sub-font"><%= @time %></span>
-        </h3>
+        <h4>
+            Time <span class="right-align sub-font"><%= Time.parse(@time).strftime('%F %T') %></span>
+        </h4>
         
         
     </div>
-    <div class="col three-quart">
-    <h3>
-        Reason <span class="right-align sub-font"><%= @reason %></span>
-    </h3>
+    <div class="col quart">
+        <h3>Reason</h3>
+        <hr>
+        <p><%= @reason %></p>
+        <br>
         <a href="/admin/approveAccount/<%= @userId %>" class="btn accept">Accept</a>
         <a href="/admin/declineAccount/<%= @userId %>" class="btn report">Decline</a>
     </div>

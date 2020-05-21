@@ -1,5 +1,4 @@
 # Admin.rb
-# Author: Luke Suckling
 # Author: Ramona Ana-Maria Petre
 # Author: Alex Parr
 # Date: 20/05/2020
@@ -82,7 +81,7 @@ end
     
 get '/admin/approveAccount/:userId' do
     if session[:admin] then    
-        User.setDeleteState(params[:userId], 0)
+        User.setDeleteState(params[:userId], false)
         SignupRequest.deleteById(params[:userId])
     end
     redirect :"bookmarks/all"
@@ -104,7 +103,7 @@ get '/admin/reports' do
         erb :"Admin/reports"
     else
         redirect :"bookmarks/all"
-    end 
+    end
     
 end
 
