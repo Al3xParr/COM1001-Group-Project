@@ -28,12 +28,16 @@ end
 
 #action on deleting a comment
 post '/comments/delete' do
+        
+    if session[:loggedIn] then
 
-    result = Comment.deleteComment(params[:commentId])
+        result = Comment.deleteComment(params[:commentId])
 
-    if result then
-        redirect back
-    else
-        status 500
+        if result then
+            redirect back
+        else
+            status 500
+        end
+        
     end
 end
