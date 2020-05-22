@@ -46,7 +46,7 @@ class BookmarksTests < Minitest::Test
 
     end
 
-    #Adds bookmarks into the database, one that respects the field requiremenets and one that is "archived"
+    #Adds bookmarks into the database, one that respects the field requiremenets and one that is "archived" and does not have a valid URL
     #Should return true for the first bookmark because it respects the requiremenets and false for the second one
     def test_new_bookmark
 

@@ -23,6 +23,11 @@ class FavouriteTests < Minitest::Test
         
     end
     
+    #Creates a favourite between the user "Adam" and the first bookmark and should return true
+    #Gets the first bookmark that is marked favourite under the ID for user "Adam"
+    #Should return true if the title is "amazon" and their IDs match
+    #Removes the favourite between the bookmark with ID = 1 and the ID for the user "Adam"
+    #Should return true
     def test_new_favourite_and_remove_favourite
         
         user = User.getByUsername("Adam")

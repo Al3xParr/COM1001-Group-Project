@@ -20,19 +20,19 @@ Feature: All Bookmark
     
     Scenario: Adding a new tag to the bookmark
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
         When I follow "➔" within "table"
         Then I should be on the view bookmark page
-        Then I should see "Logged in as: luke" within "body"
+        Then I should see "Logged in as: admin" within "body"
         When I press "New tag" within "anchor"
        
     Scenario: Commenting the bookmarks 
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
         When I follow "➔" within "table"
@@ -43,8 +43,8 @@ Feature: All Bookmark
         
     Scenario: Reporting the bookmarks 
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
         When I follow "➔" within "table"
@@ -59,8 +59,8 @@ Feature: All Bookmark
         
     Scenario: Editing the bookmarks 
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
         When I follow "➔" within "table"
@@ -79,14 +79,14 @@ Feature: All Bookmark
         
     Scenario: Favourite bookmark
         Given I am on the login page
-        When I fill in "username" with "luke"
-        When I fill in "password" with "password"
+        When I fill in "username" with "admin"
+        When I fill in "password" with "admin"
         When I press "Login" within "form"
         Then I should be on the bookmark homepage
         When I follow "➔" within "table"
         Then I should be on the view bookmark page
         When I follow "Favourite"
-        Then I should see "Unfavourite"
+         
         
         
         
@@ -97,6 +97,6 @@ Feature: All Bookmark
          
        
          
-         
+        
          
           

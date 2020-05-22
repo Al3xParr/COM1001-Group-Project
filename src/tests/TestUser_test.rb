@@ -19,6 +19,8 @@ class UserTests < Minitest::Test
         
     end
 
+    #Adds new user into the database
+    #Should return true because they match the field requirements
     def test_new_user
         
         resultBob = User.newUser("Bob", "secure", 0);
@@ -31,6 +33,8 @@ class UserTests < Minitest::Test
 
     end
 
+    #Adds new user into the database
+    #Should return true if the user matches the password in the database, and false otherwise or if the fields are not completed as expected
     def test_authenticate_user
         
         resultBob = User.newUser("Bob", "secure12", 0);
@@ -49,6 +53,8 @@ class UserTests < Minitest::Test
 
     end
 
+    #Gets all users from the database
+    #Should return 2 because there are only 2 users 
     def test_get_all_users
 
         users = User.getAll()
@@ -63,6 +69,8 @@ class UserTests < Minitest::Test
 
     end
 
+    #Gets an user by their username
+    #Returns true if the username matches and if the user is an admin
     def test_get_user_by_username
 
         bob = User.getByUsername("Adam")
@@ -77,6 +85,9 @@ class UserTests < Minitest::Test
 
     end
     
+    #Gets an user from the database by their username, and then deletes the user based on its ID
+    #Gets an array of all deleted users
+    #Should return true if the first user in the array is deleted and if the username matches
     def test_delete_user
         
         bob = User.getByUsername("Adam")
@@ -94,6 +105,9 @@ class UserTests < Minitest::Test
         
     end
     
+    #Gets an user by their username and checks if the user is an admin
+    #Makes the user an admin
+    #Should return true if the user is now an admin 
     def test_set_admin_state
         
         jeff = User.getByUsername("Jeff")
