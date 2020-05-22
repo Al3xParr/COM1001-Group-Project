@@ -166,6 +166,36 @@ class Bookmark
             return out
         elsif sortType == "old" then
             return search_result
+        elsif sortType == "alpha" then
+            for i in 0..(search_result.length-1) do
+                temp.append(search_result[i].title)        #i[1] equivilent to i.count
+            end
+            temp = temp.sort
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == placeholder[j].title then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
+        elsif sortType == "alpha_rev" then
+            for i in 0..(search_result.length-1) do
+                temp.append(search_result[i].title)        #i[1] equivilent to i.count
+            end
+            temp = temp.sort.reverse
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == placeholder[j].title then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
         end
      
     end
