@@ -6,10 +6,11 @@
     <body>
         <%= erb :"Shared/header" %>
         <h1>Search bookmarks</h1>
+        <hr>
         <form method="POST" action="/bookmarks/search">
-            <input type="text" name="search"  placeholder="Search bookmarks...">
+            <input type="text" name="search"  placeholder="Search">
             
-            <label>Search By... </label>
+            <label>Search By:</label>
             
             
             <select name="search_option">
