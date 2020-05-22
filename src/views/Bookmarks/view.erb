@@ -51,12 +51,29 @@
         
         <div class="new-tags-container">
             <hr />
-            <form method="post" action="/tags/add" >
-                <label for="tag">New tag</label><br>
-                <input type="text" name="tag">
-                <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
-                <input type="submit" value="Add">
-            </form>
+            <div class="row">
+                <div class="col quart">
+
+                    <form method="post" action="/tags/add" >
+                        <label for="tag">New tag</label><br>
+                        <input type="text" name="tag">
+                        <input type="text" name="bookmarkId" value="<%= @bookmark.bookmarkId %>" hidden>
+                        <input type="submit" value="Add">
+                    </form>
+
+                </div>
+                <div class="col three-quart tags-container">
+                    <% for tag in @common_tags %>
+
+                        <div class="chip">
+                            <%= tag.tag %>
+                            <a class="right-align" href="/tags/add/<%= tag.tagId %>/<%= tag.tag %>/<%= @bookmark.bookmarkId %>">&#10010;</a>
+                        </div>
+
+                    <% end %>
+                </div>
+            </div>
+            
         </div>
         <br>
         <h3>Comments</h3>

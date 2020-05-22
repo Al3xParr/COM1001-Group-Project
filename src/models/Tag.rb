@@ -31,6 +31,22 @@ class Tag
 
     # Get the tags associated with the parsed bookmarkId
     # Returns: an array of Tag objects
+    def self.getAll()
+        toReturn = []
+
+        query = "SELECT * FROM tags;"
+
+        result = DB.execute query
+
+        for tag in result do
+
+            newTag = Tag.new(tag[0], tag[1])
+            toReturn.push(newTag)
+
+        end
+
+        return trimTagArray(toReturn, 10)
+    end
     def self.getByBookmarkId(bookmarkId)
 
         toReturn = []
@@ -100,6 +116,33 @@ class Tag
         return true
     end
 
+    # Remove all unused tags.
+    # Only called when a new tag is added
+    def self.clearUnusedtags()
+
+        query = "SELECT * FROM tags;"
+
+        result = DB.execute query
+
+        # iterate all tags and check for link in many to many table; if not delete
+        for tag in result do
+
+            tagId = tag[0]
+
+            queryTag = "SELECT * FROM bookmarks_to_tags WHERE tagId=?;"
+
+            result = DB.execute queryTag, tagId
+
+            if result.length < 1 then
+                
+                deleteQuery = "DELETE FROM tags WHERE tagId=?;"
+                DB.execute deleteQuery, tagId
+
+            end
+        end
+
+    end
+
     # All methods below are private to class Tag
     private
 
@@ -163,6 +206,15 @@ class Tag
             return true
         end
 
+    end
+
+    def self.trimTagArray(array, maxLength)
+
+        if array.length > maxLength then
+            array = array.first(maxLength)
+        end
+
+        return array
     end
     
 end

@@ -37,6 +37,8 @@ get '/bookmarks/view/:bookmarkId' do
     @user = User.getById(@bookmark.userId)
     @tags = Tag.getByBookmarkId(params[:bookmarkId])
     @comments = Comment.getByBookmarkId(params[:bookmarkId])
+    @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
+    @common_tags = Tag.getAll()
 
     #checking the user is logged in for to see if the bookmark is a favourite
     if session[:loggedIn] then
@@ -46,8 +48,6 @@ get '/bookmarks/view/:bookmarkId' do
         
     end
 
-    @rating = Bookmark.getRatingByBookmarkId(params[:bookmarkId])
-    
     erb :"/Bookmarks/view"
 end
 
