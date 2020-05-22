@@ -1,7 +1,7 @@
 # Team 12 
 
 ## How to run the application
-In order to run the program, you need to write in the terminal: `cd project/src`, and then `ruby app.rb`.
+In order to run the program, you need to write in the terminal: `cd project/src`, and then `ruby app.rb` or *rake run*.
 
 ## How to log in to the website
 In order to log in to the website, we have the following details: if you wish to log in as an admin, the username and password are both 
