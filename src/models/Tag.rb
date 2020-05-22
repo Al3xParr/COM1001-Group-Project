@@ -31,6 +31,22 @@ class Tag
 
     # Get the tags associated with the parsed bookmarkId
     # Returns: an array of Tag objects
+    def self.getAll()
+        toReturn = []
+
+        query = "SELECT * FROM tags;"
+
+        result = DB.execute query
+
+        for tag in result do
+
+            newTag = Tag.new(tag[0], tag[1])
+            toReturn.push(newTag)
+
+        end
+
+        return toReturn
+    end
     def self.getByBookmarkId(bookmarkId)
 
         toReturn = []
