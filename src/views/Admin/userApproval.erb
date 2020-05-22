@@ -16,7 +16,7 @@
                         
                         <td><%= @display_users[i].userId %></td>
                         <td><%= @display_users[i].username %></td>
-                        <td class="btn-col"><a href="/admin/viewAccount/<%= @deleted_users[i].userId %>">&#10132;</a></td>
+                        <td class="btn-col"><a href="/admin/viewAccount/<%= @display_users[i].userId %>">&#10132;</a></td>
                         
                     </tr>
                 <% end %>
