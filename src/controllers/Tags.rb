@@ -13,7 +13,7 @@ post '/tags/add' do
     if session[:loggedIn] then
         
         if params[:tag] != "" && !params[:tag].match(/\s+/) then
-          result = Tag.newTag(params[:tag].downcase.trim, params[:bookmarkId])
+          result = Tag.newTag(params[:tag].downcase, params[:bookmarkId])
         end
 
     redirect "/bookmarks/view/#{params[:bookmarkId]}"
