@@ -35,9 +35,6 @@ get '/admin/userApproval' do
         
         @new_accounts = SignupRequest.getAll()
         @deleted_users = User.getDeletedUsers()
-
-        puts @new_accounts.length
-        puts @deleted_users.length
         
         @display_users = []
         
@@ -70,7 +67,6 @@ get '/admin/viewAccount/:userId' do
     @userDetails = User.getById(@userId)
     
     if session[:admin] then
-        puts @userRequest.time
         @requestId = @userRequest.requestId
         @time = @userRequest.time
         @reason = @userRequest.reason
