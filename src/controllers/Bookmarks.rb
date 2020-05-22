@@ -79,18 +79,24 @@ post '/bookmarks/search' do
         elsif @search_option == "source"
             @search_results = Bookmark.searchBy(@search, "resource")
         end
+    else
+        @search_results = Bookmark.getAll()
     end
-    if @search != '' then
-        if @sort_option == "rate" then
-            @search_results = Bookmark.sortBy(@search_results,"rate")
-        elsif @sort_option == "rate_rev" then
-            @search_results = Bookmark.sortBy(@search_results,"rate_rev")
-        elsif @sort_option == "new" then
-            @search_results = Bookmark.sortBy(@search_results,"new")
-        elsif @sort_option == "old" then
-            @search_results = Bookmark.sortBy(@search_results,"old")
-        end
+    if @sort_option == "rate" then
+        @search_results = Bookmark.sortBy(@search_results,"rate")
+    elsif @sort_option == "rate_rev" then
+        @search_results = Bookmark.sortBy(@search_results,"rate_rev")
+    elsif @sort_option == "new" then
+        @search_results = Bookmark.sortBy(@search_results,"new")
+    elsif @sort_option == "old" then
+        @search_results = Bookmark.sortBy(@search_results,"old")
+    elsif @sort_option == "alpha" then
+        @search_results = Bookmark.sortBy(@search_results,"alpha")
+    elsif @sort_option == "alpha_rev" then
+        @search_results = Bookmark.sortBy(@search_results,"alpha_rev")
     end
+    
+    
     @ratings = []
     for i in (0..(@search_results.length - 1))
       @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
