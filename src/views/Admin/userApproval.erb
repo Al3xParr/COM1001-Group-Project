@@ -3,7 +3,7 @@
 <h1>For approving new accounts</h1>
 <hr/>
 
-        <% if @deleted_users.length > 0 then %>
+        <% if @display_users.length > 0 then %>
         <div class="container">
             <table>
                 <tr>
@@ -11,11 +11,11 @@
                     <th>Username</th>
                     <th>View</th>
                 </tr>
-                <% for i in (0..(@deleted_users.length - 1)) %>
+                <% for i in (0..(@display_users.length - 1)) %>
                     <tr>
                         
-                        <td><%= @deleted_users[i].userId %></td>
-                        <td><%= @deleted_users[i].username %></td>
+                        <td><%= @display_users[i].userId %></td>
+                        <td><%= @display_users[i].username %></td>
                         <td class="btn-col"><a href="/admin/viewAccount/<%= @deleted_users[i].userId %>">&#10132;</a></td>
                         
                     </tr>
