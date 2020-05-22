@@ -23,11 +23,11 @@ class UserTests < Minitest::Test
     #Should return true because they match the field requirements
     def test_new_user
         
-        resultBob = User.newUser("Bob", "secure", 0);
+        resultBob = User.newUser("Bob", "secure", 0, 0);
 
         assert_equal true, resultBob
 
-        resultBill = User.newUser("Bill", "password", 1)
+        resultBill = User.newUser("Bill", "password", 1, 0)
 
         assert_equal true, resultBill
 
@@ -37,7 +37,7 @@ class UserTests < Minitest::Test
     #Should return true if the user matches the password in the database, and false otherwise or if the fields are not completed as expected
     def test_authenticate_user
         
-        resultBob = User.newUser("Bob", "secure12", 0);
+        resultBob = User.newUser("Bob", "secure12", 0, 0);
         
         successExpected = User.authenticate("Bob", "secure12")
 
@@ -62,13 +62,7 @@ class UserTests < Minitest::Test
         assert_equal 2, users.length
 
     end
-
-    def test_get_user_by_id
-
-        skip "To do..."
-
-    end
-
+    
     #Gets an user by their username
     #Returns true if the username matches and if the user is an admin
     def test_get_user_by_username
@@ -92,7 +86,7 @@ class UserTests < Minitest::Test
         
         bob = User.getByUsername("Adam")
         
-        result = User.deleteUser(bob.userId)
+        result = User.setDeleteState(bob.userId, true)
         
         assert_equal true, result
         

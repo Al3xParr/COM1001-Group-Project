@@ -53,7 +53,7 @@ class Rating
           query = "DELETE FROM ratings WHERE bookmarkId = ? AND userId = ?;"
           begin
             DB.execute query, bookmarkId, userId
-          rescue SQLite3::Exception
+          rescue SQLite3::Exception 
             return false
           end
         end
