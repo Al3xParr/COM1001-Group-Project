@@ -16,9 +16,10 @@ post '/tags/add' do
           result = Tag.newTag(params[:tag].downcase, params[:bookmarkId])
         end
 
-    redirect "/bookmarks/view/#{params[:bookmarkId]}"
-    
+        Tag.clearUnusedtags()
     end
+
+    redirect "/bookmarks/view/#{params[:bookmarkId]}"
 end
 # add tag from most common tags section
 get '/tags/add/:tagId/:tag/:bookmarkId' do
