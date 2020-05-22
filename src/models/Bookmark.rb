@@ -142,7 +142,8 @@ class Bookmark
       if count == 0 then
         rating[0] = 0
       else
-        rating[0] = totalRating/count
+        temp = (totalRating/count*100).to_i
+        rating[0] = temp.to_f/100
       end
       rating[1] = count
       return rating
