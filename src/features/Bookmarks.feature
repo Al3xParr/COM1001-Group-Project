@@ -18,7 +18,7 @@ Feature: All Bookmark
          Then I should see "Comments"
          Then I should see "Author"
     
-    Scenario: Adding a new tag to the bookmark
+    Scenario: a new tag to the bookmark
         Given I am on the login page
         When I fill in "username" with "admin"
         When I fill in "password" with "admin"
@@ -27,7 +27,7 @@ Feature: All Bookmark
         When I follow "➔" within "table"
         Then I should be on the view bookmark page
         Then I should see "Logged in as: admin" within "body"
-        When I press "New tag" within "anchor"
+        Then I should see "New tag"
        
     Scenario: Commenting the bookmarks 
         Given I am on the login page
@@ -38,8 +38,8 @@ Feature: All Bookmark
         When I follow "➔" within "table"
         Then I should be on the view bookmark page
         When I fill in "comment" with "noice" 
-        #When I press "Comment"
-        #Then I should see "noice"
+        When I press "Comment"
+        Then I should see "noice"
         
     Scenario: Reporting the bookmarks 
         Given I am on the login page

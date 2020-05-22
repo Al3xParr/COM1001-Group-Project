@@ -5,7 +5,7 @@ Feature: Search Page
         When I fill in "password" with "admin"
         When I press "Login" within "form"
         Given I am on the search page
-        Then I should see "bookmarks search" 
+        Then I should see "Search bookmarks" 
         
     Scenario: searching a bookmark
         Given I am on the login page

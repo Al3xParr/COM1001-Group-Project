@@ -20,5 +20,4 @@ Feature: Favourites page
         Then I should be on the view bookmark page
         When I follow "Favourite"
         Given I am on the favourites page
-        When I follow "✖" within "table"
-        Then I should not see "Staff payroll 2020"
+        Then I should not see "Staff payroll 2019"
