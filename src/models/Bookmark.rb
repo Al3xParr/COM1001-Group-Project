@@ -98,6 +98,37 @@ class Bookmark
         
         return true
     end
+            
+    def self.searchByTag(tags)
+        toReturn = []
+        tagIds = []
+        tags.each do |t|
+            query = "SELECT tagId FROM tags WHERE tag LIKE ? ;"
+            result = DB.execute query, "%" + t + "%"
+            tagIds.push(result)
+        end
+            
+        bookmarkIds = []
+            
+        tagIds.each do |b|
+            query = "SELECT bookmarkId FROM bookmarks_to_tags WHERE tagId=? ;"
+            result = DB.execute query, b
+            bookmarkIds.push(result) 
+        end
+        
+        bookmarkIds = bookmarkIds.uniq
+        
+        bookmarkIds.each do |i|
+            result = getById(i)
+            if result != nil && result != "" then
+                toReturn.push(result) 
+            end
+
+        end
+                
+        return toReturn
+        
+    end
     
     #searching function for the bookmarks
     def self.searchBy(searchTerm, searchType)
