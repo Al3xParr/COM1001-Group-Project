@@ -1,7 +1,7 @@
 # Team 12 
 
 ## How to run the application
-In order to run the program, you need to write in the terminal: cd project/src, and then ruby app.rb.
+In order to run the program, you need to write in the terminal: `cd project/src`, and then `ruby app.rb`.
 
 ## How to log in to the website
 In order to log in to the website, we have the following details: if you wish to log in as an admin, the username and password are both 
@@ -16,6 +16,6 @@ bookmark reports.
 
 ## Running tests
 ### Cucumber 
-navigate to /src and run `rake feature`
+navigate to `/src` and run `rake feature`
 ### Minitest
-navigate to /src/tests and run `ruby alltest.rb`
+navigate to `/src/tests` and run `ruby alltest.rb`
