@@ -112,17 +112,23 @@ post '/bookmarks/edit/:bookmarkId' do
         @bookmarkError = "User not logged in."
         erb :"Bookmarks/edit"
     else
-        if params[:title] != ''
+        if params[:title] != '' && !params[:title].match(/\s+/)
             @title = Bookmark.updateTitle(params[:title], $BOOKMARK_ID)
+        else
+            @bookmarkError = "Please enter the form properly."
         end
-        if params[:edit] != ''
+        if params[:edit] != '' && !params[:edit].match(/\s+/)
             @description = Bookmark.updateDescription(params[:edit], $BOOKMARK_ID)
+         else
+            @bookmarkError = "Please enter the form properly."    
         end
         if params[:resource] != ''
             @resource = Bookmark.updateResource(params[:resource], $BOOKMARK_ID)
         end
         
-        @bookmarkSuccess = "Bookmark updated."
+        if !@bookmarkError
+            @bookmarkSuccess = "Bookmark updated."
+        end
         erb :"Bookmarks/edit"
         #redirect "bookmarks/all"
     end
@@ -145,12 +151,19 @@ post '/bookmarks/new' do
     @description = params[:description]
     @userId = session[:userId]
 
-    success = Bookmark.newBookmark(@title,@description,@resource,0,@userId)
+    if !@title.match(/\s+/) && !@description.match(/\s+/)
+      success = Bookmark.newBookmark(@title,@description,@resource,0,@userId)
+    else
+        @bookmarkError = "Please do not leave any fields blank."
+    end
+        
 
     if success then
       redirect "/bookmarks/all"
     else
-      @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
+      if !@bookmarkError
+        @bookmarkError = "Unable to create bookmark. Bookmark may already exist"
+      end
       erb :"Bookmarks/new"
     end
 
@@ -174,7 +187,7 @@ post '/bookmarks/report/:bookmarkId' do
     
     #parameters aren't empty
     if session[:loggedIn] 
-        if ((params[:report_option] == nil && params[:issue] == '') || params[:reason] == '')
+        if ((params[:report_option] == nil && params[:issue] == '' || params[:issue].match(/\s+/)) || (params[:reason] = '' && params[:reason].match(/\s+/)))
             @blankError = "Please properly complete the form."
         else
            
