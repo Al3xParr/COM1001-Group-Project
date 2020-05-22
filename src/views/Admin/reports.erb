@@ -18,10 +18,10 @@
                 <td><%= @bookmarksreports[i].issue %></td>
                 <td><%= @bookmarksreports[i].description %></td>
                 <td class="btn-col"><a href="/bookmarks/view/<%= @bookmarksreports[i].reportId %>">&#10132;</a></td>
-                <td class="btn-col">
+                <td class="btn-col form">
                 <form method="post" action="/admin/reports/delete">
                     <input type="hidden" name="reportId" value="<%= @bookmarksreports[i].reportId %>">
-                    <%= @bookmarksreports[i].bookmarkId %> is in <%= @bookmarksreports[i].reportId %><input type="submit" value="delete">
+                    <input type="submit" value="delete">
                 </form>
                 </td>
             </tr>

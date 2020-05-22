@@ -11,6 +11,16 @@ require_relative '../models/BookmarkReport'
 require_relative '../models/SignupRequest'
 require_relative '../models/User'
 
+before '/admin/*' do
+    
+    if !session[:admin] then
+
+        redirect :"bookmarks/all"
+
+    end
+
+end
+
 # /admin
 get '/admin' do
     if session[:admin] then
@@ -66,22 +76,18 @@ end
     
 post '/admin/userDisable/approve' do
     
-    @admin = params[:admin]
+    user = User.getById(params[:userId])
     
-    result = User.setAdminState(params[:userId], !@admin)
-    
-    puts result
+    result = User.setAdminState(params[:userId], !user.admin)
     
     redirect :"admin/userDisable"
 end
 
 post '/admin/userDisable/delete' do
     
-    @deleted = params[:deleted]
+    user = User.getById(params[:userId])
     
-    result = User.setDeleteState(params[:userId], !@deleted)
-    
-    puts result
+    result = User.setDeleteState(params[:userId], !user.deleted)
     
     redirect :"admin/userDisable"
 end
