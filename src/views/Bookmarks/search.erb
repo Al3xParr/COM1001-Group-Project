@@ -20,17 +20,21 @@
                 <option value="Tags">Tags</option>
             </select>
             
+            <label>Sort By:</label>
+            
+            
+            <select name="sort_option">
+                <option value="alpha">Alphabitical(title) a-z</option>
+                <option value="alpha_rev">Alphabitical(title) z-a</option>
+                <option value="rate">Rating low - high</option>
+                <option value="rate_rev">Rating high - low</option>
+                <option value="new">Date new - old</option>
+                <option value="old">Date old - new</option>
+            </select>
             <input type="submit" value="Search">
             
         </form>
-        <nav class = "right-align">
-        <label>Sort By:</label>
-        <select name="sort_option">
-            <option value="view">Popularity</option>
-            <option value="new">Newest</option>
-            <option value="old">Oldest</option>
-        </select>
-        </nav>
+
         <br><br>
         <% if @search_results.length > 0 then %>
         <div class="container">

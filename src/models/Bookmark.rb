@@ -159,6 +159,80 @@ class Bookmark
     end
             
     #Returning the rating for a specific bookmark
+    def self.sortBy(search_result,sortType)
+        temp = []
+        placeholder = search_result
+        out = []
+        if sortType == "rate" then
+            for i in 0..(search_result.length-1) do
+                temp.append(self.getRatingByBookmarkId((search_result[i].bookmarkId))[0])        #i[1] equivilent to i.count
+            end
+            temp = temp.sort
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == (self.getRatingByBookmarkId((placeholder[j].bookmarkId))[0]) then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
+        elsif sortType == "rate_rev" then
+            for i in 0..(search_result.length-1) do
+                temp.append(self.getRatingByBookmarkId((search_result[i].bookmarkId))[0])        #i[1] equivilent to i.count
+            end
+            temp = temp.sort.reverse
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == (self.getRatingByBookmarkId((placeholder[j].bookmarkId))[0]) then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
+        elsif sortType == "new" then
+            out = placeholder.reverse
+            return out
+        elsif sortType == "old" then
+            return search_result
+        elsif sortType == "alpha" then
+            for i in 0..(search_result.length-1) do
+                temp.append(search_result[i].title)        #i[1] equivilent to i.count
+            end
+            temp = temp.sort
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == placeholder[j].title then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
+        elsif sortType == "alpha_rev" then
+            for i in 0..(search_result.length-1) do
+                temp.append(search_result[i].title)        #i[1] equivilent to i.count
+            end
+            temp = temp.sort.reverse
+            for i in (0..temp.length-1) do
+                for j in (0..placeholder.length-1) do
+                    if temp[i] == placeholder[j].title then
+                        out.append((placeholder[j]))
+                        placeholder.delete_at(j)
+                        break
+                    end
+                end
+            end
+            return out
+        end
+     
+    end
+            
+    #Returning the rating for a specifix bookmark
     #Returns: the average rating and number of times it has been rated
    
     def self.getRatingByBookmarkId(bookmarkId)

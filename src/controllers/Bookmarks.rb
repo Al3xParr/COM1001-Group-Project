@@ -71,6 +71,8 @@ post '/bookmarks/search' do
     session[:search] = params[:search]
 
     @search_option = params[:search_option]
+    
+    @sort_option = params[:sort_option]
 
     @search = session[:search] #takes the search work from the search form
     @search_results = []
@@ -87,9 +89,25 @@ post '/bookmarks/search' do
         elsif @search_option == "Tags"
             @search_results = Bookmark.searchByTag(@search.split(", "))
         end
+    else
+        @search_results = Bookmark.getAll()
     end
+    if @sort_option == "rate" then
+        @search_results = Bookmark.sortBy(@search_results,"rate")
+    elsif @sort_option == "rate_rev" then
+        @search_results = Bookmark.sortBy(@search_results,"rate_rev")
+    elsif @sort_option == "new" then
+        @search_results = Bookmark.sortBy(@search_results,"new")
+    elsif @sort_option == "old" then
+        @search_results = Bookmark.sortBy(@search_results,"old")
+    elsif @sort_option == "alpha" then
+        @search_results = Bookmark.sortBy(@search_results,"alpha")
+    elsif @sort_option == "alpha_rev" then
+        @search_results = Bookmark.sortBy(@search_results,"alpha_rev")
+    end
+    
+    
     @ratings = []
-  
     for i in (0..(@search_results.length - 1))
       @ratings[i] = Bookmark.getRatingByBookmarkId(@search_results[i].bookmarkId)
     end
