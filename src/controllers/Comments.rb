@@ -13,8 +13,9 @@ post '/comments/create' do
     if session[:loggedIn] then
         
         #validation checks on the comments
-        if params[:comment].length >= 4 && params[:comment].length < 1000  && !params[:comment].match(/\s+/) then
-            Comment.newComment(params[:comment], params[:bookmarkId], session[:userId])
+        if params[:comment].length >= 4 && params[:comment].length < 1000 then
+            
+            Comment.newComment(params[:comment].strip, params[:bookmarkId], session[:userId])
         else
             @commentsError = "Comment needs at be between 4 and 1000 characters."
         end
