@@ -12,8 +12,8 @@ post '/tags/add' do
     #validation
     if session[:loggedIn] then
         
-        if params[:tag] != "" then
-          result = Tag.newTag(params[:tag].downcase, params[:bookmarkId])
+        if params[:tag] != "" && !params[:tag].match(/\s+/) then
+          result = Tag.newTag(params[:tag].downcase.trim, params[:bookmarkId])
         end
 
     redirect "/bookmarks/view/#{params[:bookmarkId]}"
