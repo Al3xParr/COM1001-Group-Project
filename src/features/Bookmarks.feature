@@ -75,7 +75,7 @@ Feature: All Bookmark
         Then I should see "New Resource"
         When I fill in "resource" with "https://some.internal.server/payroll/2020.xlsx/"
         When I press "Update Bookmark"
-        Then I should see "Bookmark updated."
+        Then I should see "Please enter the form properly."
         
     Scenario: Favourite bookmark
         Given I am on the login page
